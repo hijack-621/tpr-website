@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5C-Search</title>
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../TPRindex/css/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./css/5c.css">
+    <script src="./js/xm-select.js"></script>
+    <script src="../../../js/jquery-3.2.1.js"></script>
+    <script src="./js/laydate.js"></script>
+    <script src='./js/main.js' type="module"></script>
+   
+    
+</head>
+<style>
+    body {
+        background-image: url(../../../../images/bg.png)!important;
+    }
+    .mt{
+        
+        width:1180px;
+        margin:120px auto;
+    }
+    .table td, .table th {
+        padding:8px;
+        text-align: center;
+    }
+    .table thead tr td{
+        background-color: #F4987F;
+    }
+    .table-bordered thead>tr>td {
+        border:1px solid #F4987F; 
+    }
+    .table-bordered tbody>tr>td {
+        border:2px solid #cfd5d8;
+    }
+    td>a{
+        color:blue!important;
+    }
+    a:link, a:visited {
+        color:white;
+    }
+    .wd{
+        width: 90%;
+    }
+   
+</style>
+<body>
+    <div id="header-wrap" style="position: relative;top:-5px">
+        <header>
+            <hgroup>
+            </hgroup>
+            <nav style="">
+                <div >
+                    <ul id="dh">
+                        <li><a href="../../../../index.php">Home</a></li>
+                        <li><a href="../../../../total_system_sop.html">SOP</a></li>
+                        <li><a href="#portfolio">Our Works</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <form id='fm'>
+    <section class="sgrid">
+        <div>
+            <label for="">TPR</label>
+            <div class="wd" id='txl'>
+
+            </div>
+            <!-- <select class='form-control sel'>
+                <option value="" >None selected</option>
+                <option value="RLC_SH" >RLC_SH</option>
+                <option value="CEP" >CEP</option>
+                <option value="CEB" >CEB</option>
+                <option value="IGS" >IGS</option>
+                <option value="IVY" >IVY</option>
+                <option value="Bizcom" >Bizcom</option>
+                <option value="ICC-RLG" >ICC-RLG</option>
+                <option value="CTDI" >CTDI</option>
+            </select> -->
+        </div>
+        <div>
+            <label for="">Model</label>
+            <div class="wd" id='mxl'>
+
+            </div>
+        </div>
+        <div >
+            <label for="">IssueTime</label>
+            <input type="text" class='form-control base-center' id='laydate-range' name='rtime' placeholder="请选择日期范围">
+        </div>
+        <div class="p-left">
+            <label for="">Status</label>
+            <div class="wd" id='sxl'>
+
+            </div>
+            <!-- <select name="" id="" class='form-control sel'>
+                <option value="" >None selected</option>
+                <option value="open" >Open</option>
+                <option value="on-go" >On-Going</option>
+                <option value="close" >Close</option>
+            </select> -->
+        </div>
+    </section>
+    </form>
+    <div class="btns">
+        <button class='btn btn-success' onclick="searched()">Search</button>
+        <button class='btn btn-primary' style="margin-left: 20px;"><a href="./Create.html">Create</a></button>
+        <button class='btn btn-danger' style="margin-left: 20px;" onclick="toexcel()">To Excel(all filename)</button>
+        <button class='btn btn-info' style="margin-left: 20px;" onclick="dar()">Download(all report)</button>
+    </div>
+
+    <div class="mt">
+        <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <td>TPR</td>
+                <td>Filename</td>
+                <td>Date</td>
+                <td>Owner</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+               <td colspan="4">no data yet</td>
+            </tr>
+            <!-- <tr>
+                <td>CGS</td>
+                <td><a href="#">Filename</a></td>
+                <td>2021-01-01</td>
+                <td>Gavin</td>
+            </tr> -->
+        </tbody>  
+        </table>
+    </div>
+</body>
+<SCript src="./JS/xlsx.core.min.js"></SCript>
+<script>
+    function searched(){
+        import('./js/main.js').then(v=>{
+            v.search();
+        })
+    }
+    function toexcel(){
+        import('./js/main.js').then(v=>{
+            console.log(v.name_arr);
+            var aoa = [
+                ['filename'],
+                [v.name_arr]
+            ];
+            var sheet = XLSX.utils.aoa_to_sheet(aoa);
+            openDownloadDialog(sheet2blob(sheet), 'filename.xlsx');
+        })
+    }
+    function dar(){
+        import('./js/main.js').then(v=>{
+            v.dar();
+        })
+    }
+
+    /**
+ * 通用的打开下载对话框方法，没有测试过具体兼容性
+ * @param url 下载地址，也可以是一个blob对象，必选
+ * @param saveName 保存文件名，可选
+ */
+function openDownloadDialog(url, saveName)
+{
+	if(typeof url == 'object' && url instanceof Blob)
+	{
+		url = URL.createObjectURL(url); // 创建blob地址
+	}
+	var aLink = document.createElement('a'); //创建一个超链接 动态添加href和download属性实现文件下载
+	aLink.href = url;
+	aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+	var event;
+	if(window.MouseEvent) event = new MouseEvent('click');
+	else
+	{
+		event = document.createEvent('MouseEvents');
+		event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+	}
+	aLink.dispatchEvent(event);
+}
+
+// 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
+function sheet2blob(sheet, sheetName) {
+	sheetName = sheetName || 'sheet1';
+	var workbook = {
+		SheetNames: [sheetName],
+		Sheets: {}
+	};
+	workbook.Sheets[sheetName] = sheet;
+	// 生成excel的配置项
+	var wopts = {
+		bookType: 'xlsx', // 要生成的文件类型
+		bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+		type: 'binary'
+	};
+	var wbout = XLSX.write(workbook, wopts);
+	var blob = new Blob([s2ab(wbout)], {type:"application/octet-stream"});
+	// 字符串转ArrayBuffer
+	function s2ab(s) {
+		var buf = new ArrayBuffer(s.length);
+		var view = new Uint8Array(buf);
+		for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+		return buf;
+	}
+	return blob;
+}
+
+</script>
+</html>

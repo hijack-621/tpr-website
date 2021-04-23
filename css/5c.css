@@ -1,0 +1,30 @@
+.sgrid{
+    
+    width:1180px;
+    margin:50px auto;
+    display:grid;
+    grid-template-rows: 1fr ;
+    grid-template-columns: repeat(4 ,25%);
+}
+.p-left{
+    padding-left: 40px;
+}
+.sel{
+    width:auto;
+    padding:0 20%;
+    margin:0;
+}
+.sel option {
+    
+    text-align: center;
+}
+.base-center{
+    text-align: center;
+}
+.btns {
+    position: absolute;
+    left:11%;
+    width:600px;
+    height:60px;
+    line-height: 3em;
+}
