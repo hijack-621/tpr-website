@@ -1,0 +1,244 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Program System Create</title>
+<link rel="stylesheet" href="./css/update.css">
+<link rel="stylesheet" href="./css/create.css">
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+
+
+<style type="text/css">
+body {
+	background-image: url(../../../images/beijin.jpg);
+}
+</style>
+</head>
+
+<body onLoad="load()">
+<nav class="nav" style="margin-left:30px;">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link active" href="Shownpi.html" style="background-color: #cc6633">home</a>
+		</li>
+	</ul>
+</nav>
+
+<div id="hidebox" onClick="hide();" class="loading">Send mail……</div>
+
+<div class="main-frame">
+   
+        <div style="display: -webkit-flex;display: flex;flex-direction: row;align-items:center;height: 65px;border: 1px solid #dee2e6;background-color: #ECECEC;width: 80%;border-bottom:none;">
+            <div style=" border:1px solid #C6C6C6;border-radius: 3px;display: flex;justify-content: center;align-items: center;text-align: center;background-color: #E9ECEF;margin: 0 15px 0 15px;width: 60px;height: 35px;">
+                <label style="color: #000;">Type</label>
+            </div>
+            <div class="sdiv">
+               
+                <div id="st-up">
+                </div>
+                <div  id="st-series" onChange="" style="margin-left: 30px">
+                </div>
+                <div  id="st-model" onChange="show_hint()" style="margin-left: 30px">
+                </div>
+            </div>
+    
+        </div>
+        <div style="display: flex;display: -webkit-flex;flex-direction: row;align-items:center;height: 85px;justify-content: space-between;border: 1px solid #dee2e6;background-color: #ECECEC;width: 80%;">
+            <div style="display: flex;display: -webkit-flex;height: 100%;width: 10%;align-items:center;">
+                <div style=" border:1px solid #C6C6C6;border-radius: 3px;display: flex;justify-content: center;align-items: center;text-align: center;background-color: #E9ECEF;margin: 0 15px 0 15px;width: 60px;height: 35px;">
+                    <label style="color: #000;">
+                        Reason
+                    </label>
+                </div>
+            </div>
+            <div style="height: 100%;width: 30%;text-align: center">
+                <textarea  style="resize:none;border-radius: 3px;margin-right: 5px;width: 100%;height: 100%;" id="reason"></textarea>
+            </div>
+            <div style="display: flex;display: -webkit-flex;height: 100%;width: 10%;align-items:center;">
+                <div style=" border:1px solid #C6C6C6;border-radius: 3px;display: flex;justify-content: center;align-items: center;text-align: center;background-color: #E9ECEF;margin: 0 15px 0 15px;width: 60px;height: 35px;">
+    
+                    <label style="color: #000;">
+                        TPR
+                    </label>
+                </div>
+            </div>
+            <div style="display: flex;display: -webkit-flex;height: 100%;width: 50%;align-items:center;">
+                <div style="display: flex;flex-direction: column;align-items:center;justify-content: space-between;width: 80%;height: 100%;flex-grow: 1;">
+                    <div id="se1" >
+                        <input type="checkbox"  name="tpr-box" value="CGS">CGS</input>
+                        <input type="checkbox" name="tpr-box" value="RLC_SH">RLC_SH</input>
+                        <input type="checkbox" name="tpr-box" value="CEP">CEP</input>
+                        <input type="checkbox" name="tpr-box" value="IGS">IGS</input>
+                  </div>
+                    <div >
+                        <input type="checkbox" name="tpr-box" value="CEB">CEB</input>
+                        <input type="checkbox" name="tpr-box" value="CSAT">TSI</input>
+                        <input type="checkbox" name="tpr-box" value="RLC_INDIA">ICC-RLG</input>
+                        <input type="checkbox" name="tpr-box" value="Regenersis_INDIA">CTDI</input>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    
+        <div style="display: flex;display: -webkit-flex;flex-direction: row;align-items:center;border: 1px solid #dee2e6;background-color: #ECECEC;width: 80%;border-top: none;border-bottom: none;height: 230px;">
+    
+            <div style="width: 60%;border-right: 1px solid #BBB;display: flex;display: -webkit-flex;flex-direction: row;">
+    
+                <div style="width: 350%;display: flex;display: -webkit-flex;flex-direction: column;">
+                    <div style="display: flex;display: -webkit-flex;flex-direction: row;margin-top: 10px">
+                        <div style=" border:1px solid #C6C6C6;border-radius: 3px;display: flex;justify-content: center;align-items: center;text-align: center;background-color: #E9ECEF;margin: 0 15px 0 15px;width: 80px;height: 35px;">
+                            <label style="color: #000;">
+                                upload
+                            </label>
+                        </div>
+                        <div style="width: 350px;margin-left: 12px">
+                            <a href="javascript:;" class="file gradient" style="text-decoration: none">选择文件
+                                <input type="file" id="sop-file" multiple="multiple" onChange="fileselect()" style="width: 100%"/>
+                                </a>
+                                <div class="showFileName1"></div>
+                        </div>
+                        <div style="width: 20%;margin-left: 26px;margin-top: 4px">
+                            <label id="file-up" class="file-msg">
+                            </label>
+                            <label>Size:/</label>
+                            <label id="file-size" class="file-msg">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="dis" id="dis1"  style="display: flex;flex-direction: row;justify-content: space-between;margin-left: 10px">
+                        <div id="label_div" >
+                            <div id="bom" class="onupload" >
+                                <div class="label_ra" id="dbom"></div>
+                                <span STYLE="margin-top:-4px;">BOM</span>
+                            </div>
+                            <div id="tp" class="onupload" >
+                                <div class="label_ra" id="dtp"></div>
+                                <span STYLE="margin-top:-4px;margin-left: 2px">Turn parts list</span>
+                            </div>
+                            <div id="ct" class="onupload" >
+                                <div class="label_ra" id="dct"></div>
+                                <span STYLE="margin-top:-4px;">Circuit</span>
+                            </div>
+                        </div>
+                        <div class="label_div" >
+                            <div id="comt" class="onupload" >
+                                <div class="label_ra" id="dcomt"></div>
+                                <span STYLE="margin-top:-4px;">Components list</span>
+                            </div>
+                            <div id="gber" class="onupload" >
+                                <div class="label_ra" id="dgber"></div>
+                                <span STYLE="margin-top:-4px;margin-left: 2px">Gerber</span>
+                            </div>
+                            <div id="scil" class="onupload" >
+                                <div class="label_ra" id="dscil"></div>
+                                <span STYLE="margin-top:-4px;">Stencil file</span>
+                            </div>
+                        </div>
+                        <div class="label_div" >
+                            <div id="profile" class="onupload" >
+                                <div class="label_ra" id="dprofile"></div>
+                                <span STYLE="margin-top:-4px;">Profile</span>
+                            </div>
+                            <div id="nudd" class="onupload" >
+                                <div class="label_ra" id="dnudd"></div>
+                                <span STYLE="margin-top:-4px;margin-left: 2px">NUDD</span>
+                            </div>
+                            <div id="npireport" class="onupload" >
+                                <div class="label_ra" id="dreport"></div>
+                                <span STYLE="margin-top:-4px;">NPI Report</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dis"  id="dis2" style="display: flex;display: -webkit-flex;flex-direction: row;width:100%;">
+                        <div id="view" style="width: 16px;height: 16px;border-radius: 50%;background-color: #DBDBDB;margin-left: 17px;margin-top: 15px"></div>
+                       <div style="margin-left: 8px;line-height: 40px">BoardviewPath:
+                           <input placeholder="" id='bdinput' onchange="bdview()" style="border:none;border-bottom:1px solid #000;background-color:#ECECEC;height: 27px;margin-left: 9px"/>
+                       </div>
+                    </div>
+                    
+    
+                </div>
+    
+                <div style="display: flex;display: -webkit-flex;flex-direction: column;align-items:center;width: 100%;margin-left: 15px">
+    
+                    <div style="width: 100%;height: 50%">
+                        <div class="progress" style="width: 90%">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:0" id="probar"></div>
+                        </div>
+                    </div>
+                    <div style="display: -webkit-flex;display: flex;flex-direction:row;width: 100%;height: 50%;margin-top: 135px">
+    
+    
+                    </div>
+    
+                </div>
+    
+    
+            </div>
+    
+            <div style="width: 20%;display: flex;display: -webkit-flex;flex-direction: row;align-items:center;justify-content: center">
+                <label id="hint-up">
+                    none
+                </label>
+            </div>
+    
+        </div>
+    
+        <table class="table table-bordered" style="width: 80%;background-color: #ECECEC;">
+            <tr>
+                <td colspan="2">
+                    <div style="display: flex;display: -webkit-flex;justify-content: space-between">
+                        <label class="form-check-label">
+                        </label>
+                        <button type="button" class="btn btn-primary" id="submit" onClick="submit()" style="margin-left: 15px">Create</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+   
+
+</div>
+</body>
+<script type="text/javascript" src="./js/xm-select.js"></script>
+<script type="text/javascript" src="./js/npi.js"></script>
+<script type="text/javascript">
+
+$(".file").on("change","input[type='file']",function(){
+        var filePath=$(this).val();
+        let files = document.getElementById('sop-file').files;
+        //console.log(filePath.length);
+        var arr=filePath.split('\\');
+        var fileName=arr[arr.length-1];
+        let tmp = filePath.split('.');
+        let suffix = tmp[1];
+        if(files.length>1&&fileName.length>30){
+            fileName = fileName.substr(0,16)+'...';
+            $(".showFileName1").html(fileName+'等文件');
+        }
+        else{
+            if(fileName.length>30){
+                fileName = fileName.substr(0,18)+'...'+suffix;
+                $(".showFileName1").html(fileName);
+            }else{
+                $(".showFileName1").html(fileName);
+            }
+        }
+    });
+
+    function bdview() {
+        let text = $('#bdinput').val();
+        if(text!==''){
+            $('#view').css('background-color','#1afa29')
+        }else{
+            $('#view').css('background-color','#DBDBDB')
+        }
+    }
+
+
+
+</script>
+</html>

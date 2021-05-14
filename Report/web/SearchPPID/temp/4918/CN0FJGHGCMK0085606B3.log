@@ -1,0 +1,799 @@
+************************************************************ 
+Test Time: 11/6/2020 5:14:20 PM 
+MB Current time:Fri 11/06/2020 17:14:20.35 
+Test Image Version:1.1.9 
+Test WPE System Version: 
+
+Microsoft Windows [Version 10.0.17763.1]
+Check_result=PASS 
+ 
+************************************************************
+MES Return File 
+SET GROUP=RUNIN2
+SET SN=5122889201349L5590
+SET PPID=CN0FJGHGCMK0085606B3
+SET PN=FJGHG
+SET MAC=1065304A2260
+SET SECOND_MAC=106530B37524
+SET STATION=RUNIN2
+SET MB_VERSION=A05
+SET MODEL=DDM80
+ 
+************************************************************
+DPN: FJGHG 
+Compal Model: DDM80 
+Dell Model: Latitude 5590 
+Platform: Breckenridge 15 MLK 
+Bios Version: 1.12.1 
+Bios A Version: A16 
+EC Version: 01.00.45 
+Local MAC: 1065304A2260 
+TPM Status: TPM 
+ 
+************************************************************
+TPM version Information: 
+
+TCG Version is:  2.0, Spec Level: 0, Revision: 1.16, Errata: 2016.265
+
+FW Version is:   7.2.0.2
+
+Command Passed
+ 
+************************************************************
+TPM NV Lock Information: 
+*********************************************
+TXT TPM 2.0 Provisioning Tool v1.0.3
+Built: Jul 21 2015 15:31:07
+Intel(r) Corporation
+Copyright (c) 2014, 2015
+*********************************************
+TPMA_NV_WRITELOCKED = 1 : Index cannot be written.
+TXT TPM2 Provision: NV Write Lock Check -- Successful
+ 
+************************************************************
+System ID Information: 
+          ssid check - version 1.0.1
+
+===============ssid check begin===============
+REVISION_AND_ID_TYPE_D0
+ DELL System ID:0xfe
+ DELL System ID Extension:0x0817
+BIOS_INFO_TYPE_0
+ vendor:Dell Inc.
+ version string:1.12.1
+ release date:11/08/2019
+===============ssid check end=================
+ 
+************************************************************
+SECOND_MAC: 
+
+PlatformConfig  -  Version 2.0.52
+Dell Manufacturing Configuration Utility based on SMBIOS Function calls.
+DELL CONFIDENTIAL INFORMATION - Disclosure to ODMs is subject to NDA
+
+Checking WMI Support ...
+WSMT Supported : Using WMI commands.
+
+
+106530B37524
+
+Returning Errorlevel 0 
+************************************************************
+ 
+DELLOA3 Status 
+
+OA30Ctrl64W.exe -- Version 4.0.30.0
+(C) Copyright 1993-2018 Dell Inc.
+
+Working with OA30 Protocol Version 2
+
+
+Preparing to reset the MSDM table.
+
+Disabling the MSDM table...SUCCESS.
+Sending disabled marker to BIOS...SUCCESS.
+
+Operation complete. MSDM table restored to factory default value.
+ 
+************************************************************
+ 
+AC Adapter and Battery Status 
+                     Battery module x64 factory release 6121.7
+  **Device**
+    DeviceName              = Primary Battery
+    DeviceMnemonic          = BATTERY:0
+    Commodity               = Battery
+    ChargeCycles            = 0
+    Temperature             = 23C
+    Voltage                 = 8072mV
+    Current                 = 257mA
+    RemainingCapacity       =  5.785Ah
+    FullCapacity            =  8.052Ah
+    RelativeCharge          =  72%
+    BatteryHealth           =  89%
+    DesignCapacity          = 67Wh,89Wh
+    ManufactureAccess       = 188
+    ManufactureDate         = 7/8/2017
+    SerialNumber            = 108b
+
+
+  **Device**
+    DeviceName              = Charger
+    DeviceMnemonic          = CHARGER:0
+    Commodity               = Charger
+    ChargerState            = Installed
+
+
+                     Battery module x64 factory release 6121.7
+
+(Testing Primary Battery)
+    Commodity               = Battery
+    ChargeCycles            = 0
+    Temperature             = 23C
+    Voltage                 = 8321mV
+    Current                 = 1787mA
+    RemainingCapacity       =  5.785Ah
+    FullCapacity            =  8.052Ah
+    RelativeCharge          =  72%
+    BatteryHealth           =  89%
+    DesignCapacity          = 67Wh,89Wh
+    ManufactureAccess       = 188
+    ManufactureDate         = 7/8/2017
+    SerialNumber            = 108b
+(Primary Battery Test Results)
+Status: Pass
+
+(Testing Charger)
+  AC Adapter Present: Yes
+  AC Adapter Power: 65 Watts
+(Charger Test Results)
+Status: Pass
+ 
+************************************************************
+Main version information: 
+ 
+************************************************************
+ 
+Memory Status 
+                     Memory module x64 factory release 6121.7
+  **Device**
+    DeviceName              = Memory Device
+    DeviceMnemonic          = MEMORY:0
+    TotalMemory             = 8192 MB
+    TotalMemorySlot         = 2
+    TotalOSPhysMemory       = 8442171392
+    MemoryAvailable         = 7353667584
+    **DIMM**
+      Instance                = 2
+      Commodity               = system_memory_module
+      Name                    = BANK 2 DIMM B
+      Size                    = 8192 MB
+      MemoryType              = DDR4
+      MemoryTypeDetail        = Synchronous,Unbuffered
+      MemoryTech              = DRAM
+      PackageType             = SODIMM
+      ErrorHandling           = NONE
+      Speed                   = 2400
+      ConfiguredSpeed         = 2400
+      TotalWidth              = 64
+      DataWidth               = 64
+      Manufacturer            = 04CB000080AD, Mfg=04CB, Reg=0000, DRAM=Hynix
+      SerialNumber            = 32DE0100
+      PartNumber              = AO1P24HC8T1-BSFS
+      Asset                   = 01181200, Date=1812, Site=01, RegRev=00
+      Rank                    = 1
+
+
+ 
+************************************************************
+ 
+Thermal Status 
+                     System Management module x64 factory release 6121.7
+
+(Testing System Management)
+  Sensor                  = CPU Thermistor
+  Current                 = 39
+  Lowest                  = 39
+  Highest                 = 39
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Ambient Thermistor
+  Current                 = 32
+  Lowest                  = 32
+  Highest                 = 32
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = SODIMM Thermistor
+  Current                 = 27
+  Lowest                  = 27
+  Highest                 = 27
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Other Thermistor
+  Current                 = 24
+  Lowest                  = 24
+  Highest                 = 24
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+
+(Testing System Management)
+  Sensor                  = CPU Thermistor
+  Current                 = 38
+  Lowest                  = 38
+  Highest                 = 39
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Ambient Thermistor
+  Current                 = 33
+  Lowest                  = 32
+  Highest                 = 33
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = SODIMM Thermistor
+  Current                 = 27
+  Lowest                  = 27
+  Highest                 = 27
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Other Thermistor
+  Current                 = 24
+  Lowest                  = 24
+  Highest                 = 24
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+
+(Testing System Management)
+  Sensor                  = CPU Thermistor
+  Current                 = 38
+  Lowest                  = 38
+  Highest                 = 39
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Ambient Thermistor
+  Current                 = 33
+  Lowest                  = 32
+  Highest                 = 33
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = SODIMM Thermistor
+  Current                 = 27
+  Lowest                  = 27
+  Highest                 = 27
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Other Thermistor
+  Current                 = 24
+  Lowest                  = 24
+  Highest                 = 24
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+
+(Testing System Management)
+  Sensor                  = CPU Thermistor
+  Current                 = 38
+  Lowest                  = 38
+  Highest                 = 39
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Ambient Thermistor
+  Current                 = 33
+  Lowest                  = 32
+  Highest                 = 33
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = SODIMM Thermistor
+  Current                 = 27
+  Lowest                  = 27
+  Highest                 = 27
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Other Thermistor
+  Current                 = 24
+  Lowest                  = 24
+  Highest                 = 24
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = CPU Thermistor
+  Current                 = 38
+  Lowest                  = 38
+  Highest                 = 39
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Ambient Thermistor
+  Current                 = 33
+  Lowest                  = 32
+  Highest                 = 33
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = SODIMM Thermistor
+  Current                 = 27
+  Lowest                  = 27
+  Highest                 = 27
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+  Sensor                  = Other Thermistor
+  Current                 = 24
+  Lowest                  = 24
+  Highest                 = 24
+  HighLimit               = 100
+  ThermalZone             = 0
+  ThermalFailingZone      = 10
+(System Management Test Results)
+Status: Pass
+ 
+************************************************************
+CPU FAN Status 
+                     Fan module x64 factory release 6121.7
+
+(Testing Processor Fan)
+  Low  Speed RPM ........: 2400
+  High Speed RPM ........: 5300
+  Max Speed RPM .........: N/A
+  BIOS required in range    0
+  BIOS maximum samples      0
+  Required samples in range 3
+  Maximum samples           20
+  Test method ...........: Box
+  Target fan RPM.........: 2400
+  Detected fan RPM.......: 2391
+  Tolerance in percent...: 40
+  Target fan RPM.........: 2400
+  Detected fan RPM.......: 2649
+  Tolerance in percent...: 40
+  Target fan RPM.........: 2400
+  Detected fan RPM.......: 2421
+  Tolerance in percent...: 40
+  BIOS required in range    0
+  BIOS maximum samples      0
+  Required samples in range 3
+  Maximum samples           20
+  Test method ...........: Box
+  Target fan RPM.........: 5300
+  Detected fan RPM.......: 2802
+  Tolerance in percent...: 40
+  Target fan RPM.........: 5300
+  Detected fan RPM.......: 3947
+  Tolerance in percent...: 40
+  Target fan RPM.........: 5300
+  Detected fan RPM.......: 4582
+  Tolerance in percent...: 40
+  Target fan RPM.........: 5300
+  Detected fan RPM.......: 4933
+  Tolerance in percent...: 40
+(Processor Fan Test Results)
+Status: Pass
+ 
+************************************************************
+TAG Value Information:
+
+PlatformTags64W.exe -- Version 4.0.30.0
+(C) Copyright 1993-2018 Dell Inc.
+
+Service Tag .... <not set>
+Asset Tag ...... <not set>
+Owner Tag ...... <not set>
+ePPID Value .... CN0FJGHGCMK0085606B3A05
+
+SUCCESS - Application return code (0x00)
+
+ 
+************************************************************
+Service_Tag Information:  
+
+PlatformConfig  -  Version 2.0.52
+Dell Manufacturing Configuration Utility based on SMBIOS Function calls.
+DELL CONFIDENTIAL INFORMATION - Disclosure to ODMs is subject to NDA
+
+Checking WMI Support ...
+WSMT Supported : Using WMI commands.
+
+SMBIOS SMI ERROR
+   The SMBIOS SMI command executed, but the BIOS returned an error (-1)
+
+
+Returning Errorlevel 1 
+************************************************************
+Asset_Tag Information:	
+
+PlatformConfig  -  Version 2.0.52
+Dell Manufacturing Configuration Utility based on SMBIOS Function calls.
+DELL CONFIDENTIAL INFORMATION - Disclosure to ODMs is subject to NDA
+
+Checking WMI Support ...
+WSMT Supported : Using WMI commands.
+
+""
+
+Returning Errorlevel 0 
+************************************************************
+Owner_Tag Information:	
+
+PlatformConfig  -  Version 2.0.52
+Dell Manufacturing Configuration Utility based on SMBIOS Function calls.
+DELL CONFIDENTIAL INFORMATION - Disclosure to ODMs is subject to NDA
+
+Checking WMI Support ...
+WSMT Supported : Using WMI commands.
+
+
+                                                                                
+
+Returning Errorlevel 0 
+************************************************************
+Eppid Information:		
+
+PlatformConfig  -  Version 2.0.52
+Dell Manufacturing Configuration Utility based on SMBIOS Function calls.
+DELL CONFIDENTIAL INFORMATION - Disclosure to ODMs is subject to NDA
+
+Checking WMI Support ...
+WSMT Supported : Using WMI commands.
+
+  ePPID - CN0FJGHGCMK0085606B3A05
+
+          Country of Origin_____CN
+          Dell part number__0FJGHG
+          Manufacturer ID____CMK00
+          Date Code____________856
+          Sequence Number_____06B3
+          Revision Level_______A05
+
+Returning Errorlevel 0 
+************************************************************
+ 
+CPU Information: 
+
+For InfoType 0
+CPUInfo[0] = 0x16
+CPUInfo[1] = 0x756e6547
+CPUInfo[2] = 0x6c65746e
+CPUInfo[3] = 0x49656e69
+
+For InfoType 1
+CPUInfo[0] = 0x806ea
+CPUInfo[1] = 0x1100800
+CPUInfo[2] = 0x7ffafbbf
+CPUInfo[3] = 0xbfebfbff
+
+For InfoType 2
+CPUInfo[0] = 0x76036301
+CPUInfo[1] = 0xf0b5ff
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0xc30000
+
+For InfoType 3
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 4
+CPUInfo[0] = 0x1c004121
+CPUInfo[1] = 0x1c0003f
+CPUInfo[2] = 0x3f
+CPUInfo[3] = 0x0
+
+For InfoType 5
+CPUInfo[0] = 0x40
+CPUInfo[1] = 0x40
+CPUInfo[2] = 0x3
+CPUInfo[3] = 0x11142120
+
+For InfoType 6
+CPUInfo[0] = 0x27f7
+CPUInfo[1] = 0x2
+CPUInfo[2] = 0x9
+CPUInfo[3] = 0x0
+
+For InfoType 7
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x29c67af
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x9c002400
+
+For InfoType 8
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 9
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 10
+CPUInfo[0] = 0x7300404
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x603
+
+For InfoType 11
+CPUInfo[0] = 0x1
+CPUInfo[1] = 0x2
+CPUInfo[2] = 0x100
+CPUInfo[3] = 0x1
+
+For InfoType 12
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 13
+CPUInfo[0] = 0x1f
+CPUInfo[1] = 0x440
+CPUInfo[2] = 0x440
+CPUInfo[3] = 0x0
+
+For InfoType 14
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 15
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 16
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 17
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 18
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 19
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 20
+CPUInfo[0] = 0x1
+CPUInfo[1] = 0xf
+CPUInfo[2] = 0x7
+CPUInfo[3] = 0x0
+
+For InfoType 21
+CPUInfo[0] = 0x2
+CPUInfo[1] = 0x96
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 22
+CPUInfo[0] = 0x708
+CPUInfo[1] = 0xd48
+CPUInfo[2] = 0x64
+CPUInfo[3] = 0x0
+
+For InfoType 80000000
+CPUInfo[0] = 0x80000008
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 80000001
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x121
+CPUInfo[3] = 0x2c100800
+
+For InfoType 80000002
+CPUInfo[0] = 0x65746e49
+CPUInfo[1] = 0x2952286c
+CPUInfo[2] = 0x726f4320
+CPUInfo[3] = 0x4d542865
+
+For InfoType 80000003
+CPUInfo[0] = 0x35692029
+CPUInfo[1] = 0x3532382d
+CPUInfo[2] = 0x43205530
+CPUInfo[3] = 0x40205550
+
+For InfoType 80000004
+CPUInfo[0] = 0x362e3120
+CPUInfo[1] = 0x7a484730
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 80000005
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 80000006
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x1006040
+CPUInfo[3] = 0x0
+
+For InfoType 80000007
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x100
+
+For InfoType 80000008
+CPUInfo[0] = 0x3027
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+
+CPU String: GenuineIntel
+
+CPU Brand String: Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+Cache Line Size = 64
+L2 Associativity = 6
+Cache Size = 256K
+Stepping ID = 10
+Model = 14
+Family = 6
+Extended model = 8
+CLFLUSH cache line size = 64
+Logical Processor Count = 16
+APIC Physical ID = 1
+
+The following features are supported:
+	SSE3
+	MONITOR/MWAIT
+	CPL Qualified Debug Store
+	Virtual Machine Extensions
+	Enhanced Intel SpeedStep Technology
+	Thermal Monitor 2
+	Supplemental Streaming SIMD Extensions 3
+	L1 Context ID
+	CMPXCHG16B Instruction
+	xTPR Update Control
+	Perf\Debug Capability MSR
+	SSE4.1 Extensions
+	SSE4.2 Extensions
+	PPOPCNT Instruction
+	x87 FPU On Chip
+	Virtual-8086 Mode Enhancement
+	Debugging Extensions
+	Page Size Extensions
+	Time Stamp Counter
+	RDMSR and WRMSR Support
+	Physical Address Extensions
+	Machine Check Exception
+	CMPXCHG8B Instruction
+	APIC On Chip
+	SYSENTER and SYSEXIT
+	Memory Type Range Registers
+	PTE Global Bit
+	Machine Check Architecture
+	Conditional Move/Compare Instruction
+	Page Attribute Table
+	36-bit Page Size Extension
+	CFLUSH Extension
+	Debug Store
+	Thermal Monitor and Clock Ctrl
+	MMX Technology
+	FXSAVE/FXRSTOR
+	SSE Extensions
+	SSE2 Extensions
+	Self Snoop
+	Multithreading Technology
+	Thermal Monitor
+	Pending Break Enable
+	LAHF/SAHF in 64-bit mode
+	LZCNT instruction
+	PREFETCH and PREFETCHW Instructions
+	SYSCALL/SYSRET in 64-bit mode
+	RDTSCP instruction
+	64 bit Technology
+ 
+************************************************************
+PCI Address Information: 
+PCI\VEN_8086&DEV_15D7&SUBSYS_08171028&REV_21\3&11583659&0&FE: Intel(R) Ethernet Connection (4) I219-LM
+PCI\VEN_8086&DEV_9D21&SUBSYS_08171028&REV_21\3&11583659&0&FA: PCI Memory Controller
+PCI\VEN_8086&DEV_5914&SUBSYS_08171028&REV_08\3&11583659&0&00: PCI standard host CPU bridge
+PCI\VEN_8086&DEV_9D60&SUBSYS_08171028&REV_21\3&11583659&0&A8: Intel(R) Serial IO I2C Host Controller - 9D60
+PCI\VEN_8086&DEV_9D71&SUBSYS_08171028&REV_21\3&11583659&0&FB: High Definition Audio Controller
+PCI\VEN_8086&DEV_1903&SUBSYS_08171028&REV_08\3&11583659&0&20: PCI Data Acquisition and Signal Processing Controller
+PCI\VEN_8086&DEV_9D2F&SUBSYS_08171028&REV_21\3&11583659&0&A0: Intel(R) USB 3.0 eXtensible Host Controller - 1.0 (Microsoft)
+PCI\VEN_8086&DEV_9D23&SUBSYS_08171028&REV_21\3&11583659&0&FC: SM Bus Controller
+PCI\VEN_10EC&DEV_525A&SUBSYS_08171028&REV_01\00000001004CE00000: PCI Device
+PCI\VEN_8086&DEV_9D31&SUBSYS_08171028&REV_21\3&11583659&0&A2: PCI Data Acquisition and Signal Processing Controller
+PCI\VEN_8086&DEV_9D4E&SUBSYS_08171028&REV_21\3&11583659&0&F8: PCI standard ISA bridge
+PCI\VEN_8086&DEV_9D3A&SUBSYS_08171028&REV_21\3&11583659&0&B0: PCI Simple Communications Controller
+PCI\VEN_8086&DEV_9D10&SUBSYS_08171028&REV_F1\3&11583659&0&E0: PCI Express Root Port
+PCI\VEN_8086&DEV_282A&SUBSYS_08171028&REV_21\3&11583659&0&B8: Intel Chipset SATA RAID Controller
+PCI\VEN_8086&DEV_5917&SUBSYS_08171028&REV_07\3&11583659&0&10: Video Controller (VGA Compatible)
+PCI\VEN_8086&DEV_9D61&SUBSYS_08171028&REV_21\3&11583659&0&A9: Intel(R) Serial IO I2C Host Controller - 9D61
+16 matching device(s) found.
+ 
+************************************************************
+USB Address Information: 
+USB\VID_0951&PID_1666\60A44C413841F321291C008D              : USB Mass Storage Device
+USBSTOR\DISK&VEN_KINGSTON&PROD_DATATRAVELER_3.0&REV_\60A44C413841F321291C008D&0: Kingston DataTraveler 3.0 USB Device
+USB\ROOT_HUB30\4&AFFBE97&0&0                                : USB Root Hub (USB 3.0)
+USB\VID_413C&PID_2113\5&946E9EB&0&2                         : USB Composite Device
+USB\VID_413C&PID_2113&MI_01\6&F6EDBE3&0&0001                : USB Input Device
+USB\VID_413C&PID_2113&MI_00\6&F6EDBE3&0&0000                : USB Input Device
+6 matching device(s) found.
+ 
+************************************************************
+Flash Image Information 
+
+Intel (R) Flash Programming Tool. Version:  11.6.29.3287
+Copyright (c) 2007 - 2017, Intel Corporation. All rights reserved.
+
+Reading HSFSTS register... Flash Descriptor: Valid 
+
+	--- Flash Devices Found ---
+	W25Q128FV	ID:0xEF4018	Size: 16384KB (131072Kb)
+
+	--- Flash Image Information --
+	Signature: VALID
+	Number of Flash Components: 1
+		Component 1 - 16384KB (131072Kb)
+	Regions:
+		DESC     - Base: 0x00000000, Limit: 0x00000FFF
+		BIOS     - Base: 0x00790000, Limit: 0x00FFFFFF
+		CSME     - Base: 0x00003000, Limit: 0x006CFFFF
+		GbE      - Base: 0x00001000, Limit: 0x00002FFF
+		PDR      - Not present
+		EC       - Base: 0x006D0000, Limit: 0x0078FFFF
+	Master Region Access:
+		CPU/BIOS - ID: 0x00, Read: 0xFFF, Write: 0xFFF
+		ME       - ID: 0x00, Read: 0xFFF, Write: 0xFFF
+		GbE      - ID: 0x00, Read: 0xFFF, Write: 0xFFF
+		EC       - ID: 0x00, Read: 0xFFF, Write: 0xFFF
+
+Total Accessable SPI Memory: 16384KB, Total Installed SPI Memory : 16384KB
+
+FPT Operation Successful.
+
+ 
+************************************************************
+Disable Legacy_Option_Roms
+
+PlatformConfig  -  Version 2.0.52
+Dell Manufacturing Configuration Utility based on SMBIOS Function calls.
+DELL CONFIDENTIAL INFORMATION - Disclosure to ODMs is subject to NDA
+
+Checking WMI Support ...
+WSMT Supported : Using WMI commands.
+
+Value = SET
+
+
+Returning Errorlevel 0 
+************************************************************

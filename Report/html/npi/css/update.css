@@ -1,0 +1,9 @@
+.sdiv {
+  width: 64%;
+  margin:5px 20px;
+  display: flex;
+}
+.sdiv>div {
+  width:30%;
+  float: left;
+}

@@ -1,0 +1,11 @@
+
+.btn{
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff;
+	border: none;
+	font-size: 16px;
+	text-decoration: none;
+	background-color: #CC6633;
+	position: relative;
+}

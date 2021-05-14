@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Upload_VIFR</title>
+<style type="text/css">
+.hm{
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff;
+	border: none;
+	font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+	font-size: 16px;
+	text-decoration: none;
+	background-color: #CC6633;
+	position: relative;
+	cursor: poiner;
+}
+.sub{
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff;
+	border: none;
+	font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+	font-size: 16px;
+	text-decoration: none;
+	background-color: #0077FF;
+	position: relative;
+	cursor: poiner;
+}
+.udr1{
+	margin:0px auto 30px 0px;
+	}
+	#inweek{
+	width:50px;
+	}
+body {
+	background-image: url(../../../images/beijin.jpg);
+	text-align:center;
+}
+.YS0 {color: #FFF;
+	font-weight: bold;
+	font-size: 24px;
+}
+.label_ra{
+	background:url(../../../images/label_1.png) no-repeat;
+	margin-left:12px;
+	padding-left:20px;	
+	}
+.label_ra_cgs{
+  background:url(../../../images/label_1.png) no-repeat;
+  margin: 0 auto;
+}
+	table{
+	border-top:#000000 1px solid;
+	border-left:#000000 1px solid;
+	border-right:#000000 1px solid;
+	}
+	tr{
+	border-bottom:#000000 1px solid;
+	}
+	#num_pot{
+		border-top:none;
+		}
+	#num_pot td{
+	color:#FFF;
+	
+	}
+	#num_pot div{
+	float:left;
+	display:none;
+	}
+	#label_div{
+		 margin:0 20px;
+		}
+		#label_div label{
+			color:#FFF;
+		}
+	#upfile{
+		color:#FFF;
+		
+	}
+	#dell_wk{
+		margin: 0 50px;
+		background:url(../../../images/FY21Calendar.jpg) no-repeat;
+		opacity:0.9;
+		width:1250px;
+		height:760px;
+		position:absolute;
+		z-index:-100;
+		left:150px;
+		top:130px;
+		}
+</style>
+</head>
+<script type="text/javascript" src="../../../js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../js/Upload_Report.js"></script>
+<body onload="load()">
+<div class="udr1" id="udr12" align="center">
+
+<table width="95%" bgcolor="#2D2D7D" style="color:#FFF" cellpadding="0">
+<caption>
+<h3><span class="YS0">TPR Report</span></h3>
+</caption>
+
+<tr id="num_pot">
+<td colspan="4" id="num_td">
+<div id="label_div" >
+<div id="vfir_txt" ><label class="label_ra" id="ra_vfir_txt">VFIR  Report txt</label></div>
+<div id="vfir_nb_txt" ><label class="label_ra" id="ra_vfir_nb_txt">VFIR  Report NB txt</label></div>
+<div id="vfir_tb_txt" ><label class="label_ra" id="ra_vfir_tb_txt">VFIR  Report TB txt</label></div>
+<div id="vfir_xls" ><label class="label_ra" id="ra_vfir_xls">VFIR  Report xls</label></div>
+<div id="ry_pot"><label class="label_ra" id="ra_ry_pot">Quality Yield Report</label></div>
+<div id="rr_pot"><label class="label_ra" id="ra_rr_pot">RRR Report</label></div>
+<div id="cd_pot"><label class="label_ra" id="ra_cd_pot">CID Report</label></div>
+</div>
+</td>
+</tr>
+<tr>
+<th>
+please choose tpr:
+  <select id="select" name="select" onchange="tprchange()">
+<option value="">Please Choose TPR</option>
+<option value="IGS" >IGS</option>
+<option value="RLC_SH" >RLC-SH</option>
+<option value="CEP" >CEP</option>
+<option value="CEB" >CEB</option>
+<option value="Regenersis_INDIA" >ICC-RGS</option>
+<option value="RLC_INDIA" >ICC-RLG</option>
+<option value="CSAT" >CSAT</option>
+<option value="CGS" >CGS</option>
+<option value="TSI" >TSI</option>
+</select>
+</th>
+<th>
+please chose year:
+<select id="inyear" name="inyear">
+<option value="">Please Chose Year</option>
+<option value="2017" >2017</option>
+<option value="2018" >2018</option>
+<option value="2019" >2019</option>
+<option value="2020" >2020</option>
+<option value="2021" >2021</option>
+</select>
+</th>
+<th>
+Current-DELL-Week:<input  id="inweek" name="inweek"/>
+</th>
+<th>
+<input type="file" id="upfile" name="upfile" multiple="multiple" onchange="chs_fe()"/> 
+</th>
+<th>
+<input type="button" id="submit" class="sub" value="upload" onclick="upload_file()"/>
+</th>
+<th>
+<input type="button" id="btn" value="home" class="hm" onclick="window.open('../../../index.php')"/>
+</th>
+</tr>
+</table>
+</div>
+<div class="udr2" id="udr22" align="center">
+<font color="#FFFFFF">
+<table  border="1" rules=none >
+<tr><td id="result" style="display:none;" cellpadding="10" ></td></tr>
+</table>
+</font>
+</div>
+<div id="dell_wk"></div>
+</body>
+</html>

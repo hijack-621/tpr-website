@@ -1,0 +1,12 @@
+node_modules/
+lecturedemo/
+vuedemo/
+.idea/
+.vscode/
+layuinimi/
+X-admin-2.2/
+phpMyAdmin4.8.5/
+error/
+exercise/
+lj/
+nginx.htaccess

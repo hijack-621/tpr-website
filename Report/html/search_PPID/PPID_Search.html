@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ppid_search</title>
+<style type="text/css">
+body {
+	background-image: url(../../../images/beijin.jpg);
+}
+.YS0 {	color: #FFF;
+	font-weight: bold;
+	font-size: 24px;
+}
+label{
+color:#FFF;
+}
+#bgtime{
+	margin:0 30px;
+	}
+	.btn{
+	height:20px;
+	display: inline-block;
+	padding: 0px 5px 2px;
+	color: #fff;
+	border: none;
+	font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+	font-size: 16px;
+	text-decoration: none;
+	background-color: #0077FF;
+	position: relative;
+	cursor: poiner;
+}
+</style>
+</head>
+<link href="../../../css/lyz.calendar.css" rel="stylesheet" type="text/css" />
+<link href="../../css/btn_css.css" rel="stylesheet" type="text/css" />
+<script src="../../../js/jquery-1.5.1.js"></script>
+
+<script src="../../../js/lyz.calendar.min.js"></script>
+<script src="../../js/search_ppid.js"></script>
+<body onload="load()" >
+<table width="750px" align="center" >
+<caption>
+<h3><span class="YS0">TPR PPID Search Test log</span></h3>
+</caption>
+<tr bgcolor="#2D2D7D"><th align="center" valign="middle" height="30px">
+<input type="text" maxlength="20" id="ppid" placeholder="please scan PPID"/>
+<input id="bgtime" placeholder="input begin time" style="width:170px;padding:2px 10px;border:1px solid #ccc;margin-right:10px;"/>-
+<input id="edtime" placeholder="input end time" style="width:170px;padding:2px 10px;border:1px solid #ccc;margin-right:10px;" />
+<button type="button" id="stn" class="btn">search</button>
+</th>
+</tr>
+<tr>
+<td align="center">
+<div id="wait-hint" style="display:none; color:#FFF" >please waiting<maruee scrollamount="8" width="30px" haspace=20>. . .</marquee></div>
+</td>
+</tr>
+<tr>
+<td style="display:none" id="rs" >
+<table border="1" rules=none align="center" cellpadding="10" style="margin-top:10px">
+<tr id="top"><td align="left">TPR Name:</td><td align="left" id="TPR" width="100"></td></tr>
+
+<tr id="r1"><td align="left">QC2 Test log:</td><td align="left" id="QC2"><a id="QC2i"></a></td></tr>
+
+<tr id="r2"><td align="left">QC2 Test Date:</td><td align="left" id="QC2date"></td></tr>
+
+<tr id="r3"><td align="left">QC3 Test log:</td><td align="left" id="QC3"><a id="QC3i"></a></td></tr>
+
+<tr id="r4"><td align="left">QC3 Test Date:</td><td align="left" id="QC3date"></td></tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

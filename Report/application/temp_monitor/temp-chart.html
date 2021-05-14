@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>温湿度折线图</title>
+<script src="../../../js/jquery-3.2.1.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jqplot.js"></script>
+    <script type="text/javascript">
+        function load(){
+			let geturl = window.location.search.substring(1);
+          let r=new Array();
+          let str_arr=geturl.split("&");
+          for(let i = 0; i < str_arr.length; i ++) {
+            r[i]=unescape(str_arr[i].split("=")[1]);
+          };
+		  let arr=new Array();
+		  arr=["#1：鞋柜区","#2：IT 机房","#3：OM Office","#4：清点区","#5：酒精柜区","#6：WUR","#7：修护 Office","#8：RMA电子仓","#9：BGA室","#10：CGS电子仓","#11：TNB Office","#12：植球室","#13：X-Ray","#14：安检门","#15：SOD车间",];
+		  document.getElementById("h-title").innerHTML=arr[r-1]+"  温湿度监控点";
+          linchart();
+        }
+        setInterval('linchart()',1800000);
+        function linchart() {
+            document.getElementById("chart-box").style.display="none";
+            document.getElementById("hint-box").style.display="inline";
+          let geturl = window.location.search.substring(1);
+          let r=new Array();
+          let str_arr=geturl.split("&");
+          for(let i = 0; i < str_arr.length; i ++) {
+            r[i]=unescape(str_arr[i].split("=")[1]);
+          };
+          $("#chart1").empty();
+          $.ajax({
+            type:'post',
+            dataType: 'json',
+            url: 'monitor_server.php',
+            data: {flag:4,set:r[0]},
+            success:function (msg) {
+              console.log(msg);
+              document.getElementById("hint-box").style.display="none";
+              document.getElementById("chart-box").style.display="inline";
+              x=new Array();
+              let y=0;
+              for(var i=0;i<msg[0][1].length;i++){
+                x[i]=msg[0][0][i].split(' ')[1].substr(0,2);
+              }
+              var temp_arr=new Array();
+              temp_arr.push(msg[1][1]);
+              temp_arr.push(msg[0][1]);
+              //jqplot
+              var data_max = 80; //Y轴最大刻度
+              var line_title = ["湿度","温度"]; //曲线名称
+              var y_label = "温/湿度"; //Y轴标题
+              var x_label = "时间"; //X轴标题
+              var title = "温湿度监控折线图"; //统计图标标题
+              //set bg_date
+              var bgday=new Date();
+              bgday.setHours(0);
+              bgday.setMinutes(0);
+              bgday.setSeconds(0);
+              bgday.setMilliseconds(0);
+
+              j.jqplot.diagram.base("chart1", temp_arr, line_title, title, x, x_label, y_label, data_max, 1);
+            },
+            error:function (msg) {
+                document.getElementById("chart-hint").innerHTML="数据无法显示";
+              console.log(msg);
+            }
+          })
+        }
+      function submit() {
+        let geturl = window.location.search.substring(1);
+        let r=new Array();
+        let str_arr=geturl.split("&");
+        for(let i = 0; i < str_arr.length; i ++) {
+          r[i]=unescape(str_arr[i].split("=")[1]);
+        };
+        let date=document.getElementById("test1").value;
+		if(date==null||date==undefined||date==""){
+			alert("请选择搜索的时间段");
+			return false;
+			}
+        let bgtime=date.split("~")[0].substr(0,19);
+        let edtime=date.split("~")[1].substr(1,20);
+        if (DateDiff(bgtime,edtime)>7){
+            alert("间隔天数过长，请重新选择");
+            return false;
+        }
+		alert("功能正在创建中。。。");
+		return false;
+        $.ajax({
+          type: 'post',
+          dataType: 'json',
+          url: 'monitor_server.php',
+          data: {flag: 3, set: r[0],bgtime:bgtime,edtime:edtime},
+          success: function (msg) {
+            console.log(msg);
+          },
+          error: function (msg) {
+            console.log(msg);
+          }
+        })
+      }
+        function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是xxxx-xx-xx格式  
+            var  aDate,  oDate1,  oDate2,  iDays
+            aDate  =  sDate1.split("-")
+            oDate1  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0])    //转换为xx-xx-xxxx格式  
+            aDate  =  sDate2.split("-")
+            oDate2  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0])
+            iDays  =  parseInt(Math.abs(oDate1  -  oDate2)  /  1000  /  60  /  60  /24)    //把相差的毫秒数转换为天数  
+            return  iDays
+        }
+    </script>
+    <style>
+        .bottom-box{
+            position: absolute;
+            width: 1450px;
+            margin-left: 35px;
+            bottom: 5px;
+            display: none;
+        }
+        .search-box{
+            margin-left: 5px;
+            margin-top: 35px;
+        }
+        .bottom-hint{
+            text-align: center;
+            position: absolute;
+            width: 260px;
+            bottom: 155px;
+            margin-left: 550px;
+        }
+    </style>
+</head>
+<body onload="load()">
+<div style="margin:0 auto">
+<h4 style="margin:5px" id="h-title"></h4>
+</div>
+<div class="search-box">
+    <button type="button" id="sure" onclick="submit()" class="btn btn-primary">sure</button>
+    <input type="text" id="test1"/>
+</div>
+
+<script src="laydate/laydate.js"></script>
+<script>
+  laydate.render({
+    elem: '#test1' //指定元素
+    ,type: 'datetime'
+    ,range: '~'
+  });
+</script>
+
+
+<div class="bottom-box" id="chart-box">
+    <div style="margin-top: 3px;margin-left: 2px;">
+        <button type="button" class="btn btn-primary" onclick="load()">reload</button>
+    </div>
+    <div style="width: 100%;height: 300px;">
+        <div id="chart1" style="width:1450px">
+        </div>
+    </div>
+</div>
+<div class="bottom-hint" id="hint-box">
+    <img src="wait.gif" style="display: block;float: left"><h4 style="margin: 0 auto" id="chart-hint">正在分析折线图......</h4>
+</div>
+</body>
+</html>

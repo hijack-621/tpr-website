@@ -1,0 +1,140 @@
+body {
+    background-image: url(../../../images/beijin.jpg) !important;
+    background-color: #6C9;
+    text-align:center;
+    font-family: 宋体!important;
+}
+body,td,th {
+    color: #000;
+}
+#title{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    color:#FFF;
+    margin-top: 111px!important;
+}
+.insearch{
+    margin-top:-1px;
+    border:0px;
+    border-bottom:#000000 1px solid;
+}
+.d_title{
+    text-align:center;
+    margin-left:auto ;
+    margin-right:auto ;
+    background:#2D2D7D;
+    width:1180px;
+    height:34px;
+    color:#FFF;
+    position: relative;
+
+
+}
+.d_data{
+    height:635px;
+    overflow:auto;
+}
+
+.btn{
+    margin-top:-8px;
+    height:20px;
+    margin-left:25px;
+    display: inline-block;
+    padding: 0px 5px 2px;
+    color: #fff;
+    border:none;
+    font-family: "Adobe 濠德板�濞撳湱绱為敓绲妕d R" ;
+    font-size:16px;
+    text-decoration: none;
+    background-color:#0077FF;
+    position: relative;
+    cursor: pointer;
+}
+.btn1{
+    margin-top:5px;
+    height:20px;
+    margin-left:30px;
+    display: inline-block;
+    padding: 0px 5px 2px;
+    color: #fff;
+    border:none;
+    font-family: "Adobe 濠德板�濞撳湱绱為敓绲妕d R";
+    font-size:16px;
+    text-decoration: none;
+    background-color:#0077FF;
+    position: absolute;
+    cursor: pointer;
+}
+.btn1p{
+    margin-top:5px;
+    height:20px;
+    margin-left:160px;
+    display: inline-block;
+    padding: 0px 5px 2px;
+    color: #fff;
+    border:none;
+    font-family: "Adobe 濠德板�濞撳湱绱為敓绲妕d R";
+    font-size:16px;
+    text-decoration: none;
+    background-color:#0077FF;
+    position: absolute;
+    cursor: pointer;
+}
+#t_data{
+    font-size:9px;
+    background-color:#FFF;
+    margin-top:30px;
+    border-top:#000000 1px solid;
+    border-left:#000000 1px solid;
+    color:#000;
+    visibility:hidden;
+
+}
+#t_data td{
+    border-right:#000000 1px solid;
+    border-bottom:#000000 1px solid;
+}
+#f_data{
+    font-size:9px;
+    background-color:#FFF;
+    margin-top:30px;
+    border-top:#000000 1px solid;
+    border-left:#000000 1px solid;
+    color:#000;
+}
+#f_data td{
+    border-right:#000000 1px solid;
+    border-bottom:#000000 1px solid;
+}
+a{
+    text-decoration:none;
+}
+#td1_color{
+    color:#FFF;
+    background-color:#C60;
+}
+.td_color{
+    color:#FFF;
+}
+.marg{
+    display: inline-block;
+    margin-top:5px;
+    margin-left: -305px;
+
+
+}
+.marg1{
+    margin-top:-1px;
+
+
+
+}
+table{
+    padding:0;
+
+
+}
+td {
+    margin:0 0 -1px -1px;
+}

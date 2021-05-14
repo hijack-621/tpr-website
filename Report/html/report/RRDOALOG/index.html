@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<link rel="shortcut icon" href="../../../../../../images/logo.ico" type="image/x-icon">
+<style>
+body {
+	background: #FFF!important;
+	
+}
+.YS01 {
+	width:266px!important;
+	height:55px;
+	line-height:55px;
+}
+.YS0 {
+	color: black;
+	font-weight: bold;
+	font-size: 24px;
+}
+a:link {
+	color: #FFF;
+	text-decoration: none;
+}
+a:visited {
+	color: #FFF;
+	text-decoration: none;
+}
+a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+.xmsel{
+    width: 210px;
+}
+
+</style>
+<link rel="stylesheet" href="../../../../TPRindex/css/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../layui/css/layui.css" type="text/css" media="screen" />
+<script type='text/javascript' src='../../../../js/jquery-3.2.1.js' ></script>
+<script type='text/javascript' src='../../../../js/xm-select.js' ></script>
+<script type='text/javascript' src='../../../../layui/layui.all.js' ></script>
+<script type='text/javascript' src='../../../../js/date.format.js' ></script>
+<script type='text/javascript' src='../../../../js/xlsx.core.min.js' ></script>
+<script type='text/javascript' src='../../../../js/csv2table.js' ></script>
+<link rel="shortcut icon" href="../../../../images/logo.ico" type="image/x-icon">
+<body>
+    <div id="header-wrap">
+        <header>
+            <hgroup>
+                <h1><a href="../../../index.php">Comppal</a></h1>
+                <h3>Just Another Styleshout Template</h3>
+            </hgroup>
+            <nav>
+                <div >
+                    <ul id="dh">
+                        <li><a href="../../../index.php">Home</a></li>
+                        <li><a href="../../../total_system_sop.html">Sop</a></li>
+                        <li><a href="#portfolio">Our Works</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+    
+        </header>
+    </div> 
+    
+    <div style='margin-top: 200px;width: 1150px;margin-left: auto;margin-right: auto;'>
+        <div class='layui-inline'>
+            <div class='xmsel' id='se1' >
+                
+            </div>
+        </div>
+        <div class='layui-inline layui-hide'>
+            <div class="xmsel" id='se2'>
+                
+            </div>
+        </div>
+        <div class="layui-inline">
+                    <div class="layui-input-inline" style="">
+                        <div class="layui-input-inline">
+                            <button class="layui-btn layui-btn-warm  data-add-btn" id='searchbtnse' >查找</button>
+                        </div>
+                    </div>
+        </div>
+           
+        
+        <table class='layui-hide' id='tab' lay-filter='tab'>
+           
+        </table>
+      
+    </div>
+
+
+</body>
+<script type="text/html" id="toolbarDemo">
+            <div class="" >
+                <button class="layui-btn " style='width:145px'><input style='width:70%' type='file' id='file' title='upload file' /></button>
+                <button class="layui-btn " onclick='test()' >保存上传 </button>
+                <button class="layui-btn " onclick='showall()' >查询全部数据 </button>
+                <!-- <div class="layui-inline">
+                    <div class="layui-input-inline" style="">
+                        <div class="layui-input-inline">
+                            <select class="layui-select athinput" name="search_condition">
+                                <option selected>请选择查询条件</option>
+                                <option  value="Dell_Model">Dell_Model</option>
+                               
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+               
+            </div>
+            
+           
+        </script>
+<script>
+    let tdata = [];//定义一个空数组，为读取到excel表格数据后赋予给tdata，然后使用data参数重新reload表格,文档：https://www.layui.com/doc/modules/table.html
+    let xmselect1 = {};
+    let xmselect2 = {};
+    $(function() { //document 准备好后时间函数
+         xmselect1 = xmSelect.render({//渲染select标签  文档：https://maplemei.gitee.io/xm-select/#/component/options
+            el:'#se1',//id为se1
+            language:'zn',
+           // autoRow:true,//开启多选时选项自动换行
+            height:'150px',
+            radio:true,//单选
+            clickClose:true,
+            theme: {
+		    color: '#5FB878',
+	        },
+            //tip:'请选择',//相当于placeholder
+            filterable: true,//搜索功能
+            searchTips:'输入excel列名',
+            model: {//隐藏选择按钮
+                icon: 'hidden',
+                label: {
+                    type: 'text'
+                }
+            },
+           
+            data:[ //option 选项数组
+               
+                {name:'Input_Date',value:'Input_Date',tips:'aaa'},
+                {name:'Emp_id',value:'Emp_id'},
+                {name:'Items',value:'Items'},
+                {name:'RMA_Date',value:'RMA_Date'},
+                {name:'DPS',value:'DPS'},
+                {name:'WEEK',value:'WEEK'},
+                {name:'Dell_Model',value:'Dell_Model',},
+                {name:'PPID',value:'PPID'},
+                {name:'Hold_Reason',value:'Hold_Reason'},
+                {name:'Key_Words',value:'Key_Words'},
+                {name:'Customer_Issue_Info',value:'Customer_Issue_Info'},
+                {name:'FA_Date',value:'FA_Date'},
+                {name:'Failure_Symptom',value:'Failure_Symptom'},
+                {name:'Repair_Location',value:'Repair_Location'},
+                {name:'Disposition',value:'Disposition'},
+                {name:'Duplicate_or_not',value:'Duplicate_or_not'},
+                {name:'FA',value:'FA'},
+                {name:'CA',value:'CA'},
+                {name:'Evidence',value:'Evidence'},
+                {name:'Catagory',value:'Catagory'},
+                {name:'Status',value:'Status'},
+                {name:'Input_Date1',value:'Input_Date1'},
+                {name:'Emp_id1',value:'Emp_id1'},
+                {name:'Update_Date',value:'Update_Date'},
+                {name:'PE',value:'PE'},
+                {name:'QA',value:'QA'}
+            ],
+            on:function(data){ //监听选择后回调
+            
+            $('#se2').parent().removeClass('layui-hide'); 
+            if(typeof data =='object'){
+                let field = data['arr'][0]['value'];
+                $.ajax({
+                url:'./php/Controller.php', 
+                type:'post',
+                data:{action:'rrdoalog/query_select_data',urldata:field},
+                dataType:'json',
+                success:function(msg){
+                    console.log(msg);
+                    if(msg.length>0){
+                        let se2data = [];
+                       
+                        for(i=0;i<msg.length;i++){
+                            let objdata = {};
+                            objdata.name=msg[i][field];
+                            objdata.value=msg[i][field];
+                            se2data.push(objdata);
+                        }
+                        console.log(se2data);
+                        xmselect2 = xmSelect.render({
+                            el:'#se2',
+                            language:'zn',
+                            height:'150px',
+                            theme: {
+		                    color: '#5FB878',
+	                        },
+                            filterable: true,//搜索功能
+                            searchTips:'输入搜索内容',
+                            data:se2data,
+                            
+
+                        });
+                        //console.log( $("div[class='scroll-body']")[1].childNodes);
+                       // $("div[class='scroll-body']")[1].childNodes
+                       for(j=0;j<$("div[class='scroll-body']")[1].childNodes.length;j++){ //为下拉框的每个option 增加 title属性，
+                        $("div[class='scroll-body']")[1].childNodes[j].children[1].title=$("div[class='scroll-body']")[1].childNodes[j].children[1].innerHTML; 
+                       
+                    }
+                      
+                        
+                    }
+                },
+                error:function(emsg){
+                    console.log(emsg);
+                } 
+                })
+                   // console.log(value);
+                }
+            },
+        });
+
+        layui.use(['form','table','upload','layer'],function(){
+        let table = layui.table;
+        let form = layui.form;
+        let upload = layui.upload;
+        let layer = layui.layer;
+        //form.render();
+       
+        table.render({
+            elem:'#tab',
+            //url:'' 默认会自动传递两个参数：?page=1&limit=30（该参数可通过 request 自定义）
+            data:tdata
+            ,id:'tab'
+            ,height:312
+            ,title:'Report'
+            ,even:'true'
+            ,toolbar: '#toolbarDemo'
+            ,defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }]
+            ,cols:[[
+                {field:'id',title:'id'},
+                {field:'Input_Date',title:'input_date',width:105,align:'center'},
+                {field:'Emp_id',title:'emp_id',width:110,align:'center'},
+                {field:'Items',title:'Items',width:85,align:'center'},
+                {field:'RMA_Date',title:'RMA_Date',width:105,align:'center'},
+                {field:'DPS',title:'RPS#',width:135,align:'center'},
+                {field:'WEEK',title:'WEEK',width:85,align:'center'},
+                {field:'Dell_Model',title:'Dell Model',width:160,align:'center'},
+                {field:'PPID',title:'PPID',width:225,align:'center'},
+                {field:'Hold_Reason',title:'Hold Reason',width:225,align:'center'},
+                {field:'Key_Words',title:'Key words',width:115,align:'center'},
+                {field:'Customer_Issue_Info',title:'Customers Issue Info',width:185,align:'center'},
+                {field:'FA_Date',title:'FA Date',width:110,align:'center'},
+                {field:'Failure_Symptom',title:'Failure Symptom',width:150,align:'center'},
+                {field:'Repair_Location',title:'Repair Location',width:150,align:'center'},
+                {field:'Disposition',title:'Disposition',width:105,align:'center'},
+                {field:'Duplicate_or_not',title:'Duplicate or not',width:145,align:'center'},
+                {field:'FA',title:'FA',width:125,align:'center'},
+                {field:'CA',title:'CA',width:125,align:'center'},
+                {field:'Evidence',title:'Evidence',width:125,align:'center'},
+                {field:'Catagory',title:'Catagory',width:115,align:'center'},
+                {field:'Status',title:'Status',width:85,align:'center'},
+                {field:'Input_Date1',title:'input date1',width:105,align:'center'},
+                {field:'Emp_id1',title:'emp_id1',width:110,align:'center'},
+                {field:'Update_Date',title:'Update Date',width:115,align:'center'},
+                {field:'PE',title:'PE',width:85,align:'center'},
+                {field:'QA',title:'QA',width:85,align:'center'}
+            ]]
+            ,text:{
+                none:'no data yet!'
+            }
+        })
+        var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        ,url: '/upload/' //上传接口
+        ,done: function(res){
+        //上传完毕回调
+        }
+        ,error: function(){
+        //请求异常回调
+        }
+    });
+        document.getElementById('file').addEventListener('change', function(e) {
+			var files = e.target.files;
+			//console.log(files)
+			if(files.length == 0) return;
+			var f = files[0];
+			console.log(f)
+			if(!/\.xlsx$/g.test(f.name)&&!/\.xls$/g.test(f.name)) {
+				alert('仅支持读取xls或者xlsx格式！');
+				return;
+			}
+			readWorkbookFromLocalFile(f, function(workbook) {
+				 let data = readWorkbook(workbook);
+                 tdata = data;
+                 table.reload('tab',{
+                     data:tdata
+                 });
+                 //test(tdata);
+                 //console.log(data);
+			});
+            
+		});
+        
+    })
+        
+		
+    document.getElementById('searchbtnse').onclick = function(){
+	//获取当前多选选中的值
+	var selectArr1 = xmselect1.getValue();
+    
+    try { //先尝试执行 有错误就捕获错误！！！
+        var selectArr2 = xmselect2.getValue();
+  } catch(e) {
+      console.log(e);
+  }
+  
+  console.log(selectArr1);  
+  console.log(selectArr2);
+    if(typeof selectArr2!=='undefined'&&JSON.stringify(selectArr2) !== '[]'){
+        let arr = [];
+        arr[0] = selectArr1;
+        arr[1] = selectArr2;
+        $.ajax({
+            url:'./php/Controller.php',
+               type:'post',
+               data:{action:'rrdoalog/query_excel_data',urldata:arr},
+               dataType:'json',
+               success:function(msg){
+                console.log(msg);
+                layui.use('table',function(){
+                 let table = layui.table;
+                  if(msg.length>0){
+                    tdata = msg
+                    table.reload('tab',{data:tdata,})
+                   
+                    }else{
+                        table.reload('tab',{data:tdata,})
+                    }
+                })
+              
+               },
+               error:function(emsg){
+                console.log(emsg);
+               }
+        })
+    }
+    else{
+        layer.msg('请选择查询字段和结果后再查询',{time:1600,icon:2});
+    }
+    
+	
+}
+	});
+	
+ // 读取本地excel文件
+    function readWorkbookFromLocalFile(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            if(callback) callback(workbook);
+        };
+        reader.readAsBinaryString(file);
+    }
+ function readWorkbook(workbook) {
+
+        var sheetNames = workbook.SheetNames; // 工作表名称集合
+        console.log(sheetNames);
+        var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第一张sheet
+        console.log(worksheet);
+        var csv = XLSX.utils.sheet_to_json(worksheet);//sheet_to_json/csv 转换成json或者csv，还可以是txt，html等其他格式！！！
+        return csv;
+
+        //console.log(csv);
+        //document.getElementById('result').innerHTML = csv2table(csv);
+       // let csv2table = new csv2table(); 
+        //$('#result').csv2table('./upfile/test.csv');
+    }
+    function test(){
+        layui.use(['layer','table'],function(){
+        let layer = layui.layer;
+        let table = layui.table;
+        let arr = tdata;
+        console.log(arr);
+        if(typeof arr !=='undefined'){
+           // console.log('aaa');
+           $.ajax({
+               url:'./php/Controller.php',
+               type:'post',
+               data:{action:'rrdoalog/insertdata',urldata:arr},
+               dataType:'json',
+               success:function(msg){
+                console.log(msg);
+                if(msg>0){
+                    let rdata = [];
+                    layer.msg('数据保存成功',{time:1400,icon:1,shandow:0.5},function(){
+                        table.reload('tab',{
+                        data:rdata,
+                          text:{
+                              none:'no data yet!'
+                          }
+                        })
+                    });
+                }
+               },
+               error:function(emsg){
+                console.log(emsg);
+               }
+           })
+        }
+
+        })
+      
+       
+    }
+    function showall(){
+        layui.use('table',function(){
+        let table = layui.table;
+        $.ajax({
+        url:'./php/Controller.php',
+               type:'post',
+               data:{action:'rrdoalog/showall'},
+               dataType:'json',
+               success:function(msg){
+                console.log(msg);
+                if(msg.length>0){
+                    tdata = msg;
+                    let rdata = [];
+                    table.reload('tab',{
+                        data:tdata,
+                        })
+                   
+                }else{
+                    table.reload('tab',{
+                        data:tdata,
+                          text:{
+                              none:' query no data '
+                          }
+                        })
+                }
+               },
+               error:function(emsg){
+                console.log(emsg);
+               }
+           
+       })
+        })
+      
+    }
+    
+</script>
+</html>

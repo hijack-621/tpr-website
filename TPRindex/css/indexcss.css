@@ -1,0 +1,243 @@
+﻿.Y7 {
+    font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+    color: #CCC;
+    font-size: 1px;
+    font-weight: normal;
+}
+.YS0 {	font-weight: bold;
+    color: #FFF;
+    font-size: 16px;
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+.YS01 {	font-weight: bold;
+    color: #FFF;
+    font-size: 16px;
+    font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+}
+.YS06 {
+    vertical-align: middle;
+    background: rgba(224, 224, 224, 0);
+    z-index: -222;
+    position: absolute;
+
+
+}
+#eee {
+
+    overflow:hidden;
+}
+
+body {
+    padding: 0;
+}
+table tr td{
+    padding: 0;
+}
+
+table{
+
+    border-collapse:collapse;
+    border-spacing:0;
+
+}
+.showno{
+    height:48px;width: 87px;background-color: 	#E6E6E6;position: absolute;margin-left: 135px;margin-top: -50px;overflow: hidden;z-index:2121;display: none;
+}
+
+.circledivtestlog{
+    position: absolute;
+    width:56px;
+    height:56px;
+    /*border: 2px solid #e4007e;*/
+    font-weight: bold;
+    font-size: 16px;
+    /* background-color: cornflowerblue;*/
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    z-index: 10000;
+
+}
+.circledivprogram{
+    position: absolute;
+    width:56px;
+    height:56px;
+    /*border: 2px solid #e4007e;*/
+    font-weight: bold;
+    font-size: 16px;
+    /* background-color: cornflowerblue;*/
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    z-index: 10000;
+
+}
+.circledivqualityreport{
+    position: absolute;
+    width:56px;
+    height:56px;
+    /*border: 2px solid #e4007e;*/
+    font-weight: bold;
+    font-size: 16px;
+    /* background-color: cornflowerblue;*/
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    z-index: 10000;
+
+}
+.circledivbios{
+    position: absolute;
+    width:56px;
+    height:56px;
+    /*border: 2px solid #e4007e;*/
+    font-weight: bold;
+    font-size: 16px;
+    /* background-color: cornflowerblue;*/
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    z-index: 10000;
+
+}
+.circlediveco{
+    position: absolute;
+    width:56px;
+    height:56px;
+    /*border: 2px solid #e4007e;*/
+    font-weight: bold;
+    font-size: 16px;
+    /* background-color: cornflowerblue;*/
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    z-index: 10000;
+
+}
+.YS061 {
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    font-size: 12px;
+    vertical-align: middle;
+    background-color: #CCC;
+}
+#eee2 {
+    position: absolute;
+    left: 975px;
+    top: 444px;
+    width: 30px;
+    height: 81px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+}
+html body{
+    overflow-x: hidden;
+}
+.getweektime{
+    width:240px;
+    height:360px;
+    background-color: #60c99c;
+    box-shadow: 4px 4px 8px 6px #9DDDCD;
+    position: relative;
+    margin: -393px 100px 100px 975px;
+    text-align: center;
+
+}
+
+.regard{/* 上右下左*/
+    position: absolute;
+    width: 175px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-family: Calibri;
+}
+.dellweek{/* 上右下左*/
+    position: absolute;
+    margin-top: 40px;
+    width: 177px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-family: Calibri ;
+}
+.tprstime{/* 上右下左*/
+    position: relative;
+    margin-left: 5px;
+
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-family: Calibri;
+}
+.tprstime{/* 上右下左*/
+    position: relative;
+    margin-left: 5px;
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: 17px;
+    color: white;
+    display: block;
+    font-family: Calibri;
+}
+.timezone{
+    color: white;
+    font-size: 16px;
+    font-family:Calibri ;
+    margin-left: 9px;
+    float: left;
+    font-weight: bold;
+}
+
+hr{
+    width: 99.9%;
+}
+hr.style0{
+    border: 1px dotted #fff;
+    margin-top: 35px;
+    position: absolute;
+
+
+}
+hr.style{
+   border: 1px dotted #fff;
+    margin-top: 70px;
+    position: absolute;
+
+}
+.nspan{
+    position: absolute;
+    bottom: 0;
+    left: 55%;
+    top: 13px;
+    transform: translateX(-50%);
+    z-index: 9999999;
+    color: white;
+    font-family: Calibri;
+    letter-spacing: 1px;
+	font-size:14px;
+}
+
+
+
+
+
+
+<!--
+
+.tanchuang_wrap{ width:33px; height:33px;position:absolute;left: 0px;top: 0px;z-index:100; display:none;}
+.lightbox{width:33px;z-index:101; height:33px;background-color:red;filter:alpha(Opacity=20);-moz-opacity:0.2;opacity: 0.2; position:absolute; top:0px; left:0px;}
+.tanchuang_neirong{width:30px;height:30px;border:2px solid #e4007e;background-color:#FFF;position:absolute;z-index:105;opacity: 1;
+    border-radius: 50%;}
+-->

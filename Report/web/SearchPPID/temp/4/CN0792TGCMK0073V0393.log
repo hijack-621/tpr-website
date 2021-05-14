@@ -1,0 +1,358 @@
+CN058YYDCMK0084IA01D 
+Test time:8/19/2019 2:42:25
+ZBZ00 ImageVer=1.0
+==================================================
+  
+========================TPM Status=======================
+
+TCG Version is:  2.0, Spec Level: 0, Revision: 1.16, Errata: 2016.265
+
+FW Version is:   7.2.0.1
+
+Command Passed
+  
+=====================Bios EC Version==================
+Bios version=1.7.7
+EC Version : 01.00.29  
+========================Me Information=======================
+
+Intel(R) MEInfo Version: 8.1.0.1252
+Copyright(C) 2005 - 2012, Intel Corporation. All rights reserved.
+
+
+Cannot locate hardware platform identification
+This program cannot be run on the current platform
+
+Error 9460: Unknown or unsupported hardware platform
+  
+========================MEMan Information=======================
+
+Intel(R) MEManuf Version: 8.1.0.1252
+Copyright(C) 2005 - 2012, Intel Corporation. All rights reserved.
+
+
+Cannot locate hardware platform identification
+This program cannot be run on the current platform
+
+Error 9278: Unknown or unsupported hardware platform
+
+Error 9321: MEManuf Operation Failed
+  
+========================CPU Information=======================
+
+For InfoType 0
+CPUInfo[0] = 0x16
+CPUInfo[1] = 0x756e6547
+CPUInfo[2] = 0x6c65746e
+CPUInfo[3] = 0x49656e69
+
+For InfoType 1
+CPUInfo[0] = 0x906ea
+CPUInfo[1] = 0x2100800
+CPUInfo[2] = 0x7ffafbbf
+CPUInfo[3] = 0xbfebfbff
+
+For InfoType 2
+CPUInfo[0] = 0x76036301
+CPUInfo[1] = 0xf0b5ff
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0xc30000
+
+For InfoType 3
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 4
+CPUInfo[0] = 0x1c004121
+CPUInfo[1] = 0x1c0003f
+CPUInfo[2] = 0x3f
+CPUInfo[3] = 0x0
+
+For InfoType 5
+CPUInfo[0] = 0x40
+CPUInfo[1] = 0x40
+CPUInfo[2] = 0x3
+CPUInfo[3] = 0x11142120
+
+For InfoType 6
+CPUInfo[0] = 0x27f7
+CPUInfo[1] = 0x2
+CPUInfo[2] = 0x9
+CPUInfo[3] = 0x0
+
+For InfoType 7
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x29c67af
+CPUInfo[2] = 0x40000000
+CPUInfo[3] = 0x9c002400
+
+For InfoType 8
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 9
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 10
+CPUInfo[0] = 0x7300404
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x603
+
+For InfoType 11
+CPUInfo[0] = 0x1
+CPUInfo[1] = 0x2
+CPUInfo[2] = 0x100
+CPUInfo[3] = 0x2
+
+For InfoType 12
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 13
+CPUInfo[0] = 0x1f
+CPUInfo[1] = 0x440
+CPUInfo[2] = 0x440
+CPUInfo[3] = 0x0
+
+For InfoType 14
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 15
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 16
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 17
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 18
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 19
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 20
+CPUInfo[0] = 0x1
+CPUInfo[1] = 0xf
+CPUInfo[2] = 0x7
+CPUInfo[3] = 0x0
+
+For InfoType 21
+CPUInfo[0] = 0x2
+CPUInfo[1] = 0xc0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 22
+CPUInfo[0] = 0x8fc
+CPUInfo[1] = 0xfa0
+CPUInfo[2] = 0x64
+CPUInfo[3] = 0x0
+
+For InfoType 80000000
+CPUInfo[0] = 0x80000008
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 80000001
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x121
+CPUInfo[3] = 0x2c100800
+
+For InfoType 80000002
+CPUInfo[0] = 0x65746e49
+CPUInfo[1] = 0x2952286c
+CPUInfo[2] = 0x726f4320
+CPUInfo[3] = 0x4d542865
+
+For InfoType 80000003
+CPUInfo[0] = 0x35692029
+CPUInfo[1] = 0x3033382d
+CPUInfo[2] = 0x43204830
+CPUInfo[3] = 0x40205550
+
+For InfoType 80000004
+CPUInfo[0] = 0x332e3220
+CPUInfo[1] = 0x7a484730
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 80000005
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+For InfoType 80000006
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x1006040
+CPUInfo[3] = 0x0
+
+For InfoType 80000007
+CPUInfo[0] = 0x0
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x100
+
+For InfoType 80000008
+CPUInfo[0] = 0x3027
+CPUInfo[1] = 0x0
+CPUInfo[2] = 0x0
+CPUInfo[3] = 0x0
+
+
+CPU String: GenuineIntel
+
+CPU Brand String: Intel(R) Core(TM) i5-8300H CPU @ 2.30GHz
+Cache Line Size = 64
+L2 Associativity = 6
+Cache Size = 256K
+Stepping ID = 10
+Model = 14
+Family = 6
+Extended model = 9
+CLFLUSH cache line size = 64
+Logical Processor Count = 16
+APIC Physical ID = 2
+
+The following features are supported:
+	SSE3
+	MONITOR/MWAIT
+	CPL Qualified Debug Store
+	Virtual Machine Extensions
+	Enhanced Intel SpeedStep Technology
+	Thermal Monitor 2
+	Supplemental Streaming SIMD Extensions 3
+	L1 Context ID
+	CMPXCHG16B Instruction
+	xTPR Update Control
+	Perf\Debug Capability MSR
+	SSE4.1 Extensions
+	SSE4.2 Extensions
+	PPOPCNT Instruction
+	x87 FPU On Chip
+	Virtual-8086 Mode Enhancement
+	Debugging Extensions
+	Page Size Extensions
+	Time Stamp Counter
+	RDMSR and WRMSR Support
+	Physical Address Extensions
+	Machine Check Exception
+	CMPXCHG8B Instruction
+	APIC On Chip
+	SYSENTER and SYSEXIT
+	Memory Type Range Registers
+	PTE Global Bit
+	Machine Check Architecture
+	Conditional Move/Compare Instruction
+	Page Attribute Table
+	36-bit Page Size Extension
+	CFLUSH Extension
+	Debug Store
+	Thermal Monitor and Clock Ctrl
+	MMX Technology
+	FXSAVE/FXRSTOR
+	SSE Extensions
+	SSE2 Extensions
+	Self Snoop
+	Multithreading Technology
+	Thermal Monitor
+	Pending Break Enable
+	LAHF/SAHF in 64-bit mode
+	LZCNT instruction
+	PREFETCH and PREFETCHW Instructions
+	SYSCALL/SYSRET in 64-bit mode
+	RDTSCP instruction
+	64 bit Technology
+  
+========================Thermal test=======================
+  
+========================Dock test Pass=======================
+  
+========================itpm test Pass=======================
+ITPM - Integrated Test Process Management V4.5.1.2 Test Report
+Date : 2019/01/01	Test Result : PASS
+Model :	BIOS Ver :1.8.1
+MAC :10-65-30-37-6B-72
+==============================================================================================================
+---------------------------------------------------------------------------------------------------------
+  NO.	Process ID   Item No       Item Name           Start Time     End Time      Use Time(ms)     Test Result
+---------------------------------------------------------------------------------------------------------
+*    0	    02        0001        Charge               03:47:47.890   03:47:52.084         4194            PASS *
+*    1	    03        0001        Fingerprint          03:47:47.890   03:47:55.524         7634            PASS *
+*    2	    03        0002        OA3                  03:47:55.529   03:47:56.185          656            PASS *
+*    3	    03        0003        Wireless Test        03:47:56.191   03:47:56.809          618            PASS *
+*    4	    03        0004        Bluetooth check      03:47:56.814   03:47:57.719          905            PASS *
+*    5	    03        0005        WWAN Test            03:47:57.723   03:47:58.473          750            PASS *
+*    6	    03        0006        TPFW                 03:47:58.478   03:48:00.153         1675            PASS *
+*    7	    03        0007        PAID Test            03:48:00.160   03:48:03.619         3459            PASS *
+*    8	    03        0008        CFGCHK               03:48:03.624   03:48:05.016         1392            PASS *
+*    9	    03        0009        SIM Card             03:48:05.021   03:48:05.556          535            PASS *
+*   10	    03        0010        4G VRAM              03:48:05.561   03:48:06.094          533            PASS *
+*   11	    03        0011        Fan Test             03:48:06.100   03:48:18.763        12663            PASS *
+*   12	    02        0002        DC_AC                03:47:52.088   03:52:47.505       295417            PASS *
+*   13	    01        0002        MP4 Test             03:48:05.677   03:53:14.042       308365            PASS *
+*   14	    01        0003        L/R Speak            03:53:14.045   03:53:21.188         7143            PASS *
+*   15	    01        0004        Micphone Test        03:53:21.199   03:53:25.201         4002            PASS *
+*   16	    02        0003        IE-Charger           03:52:47.511   03:53:27.355        39844            PASS *
+*   17	    01        0005        DMIC Test            03:53:25.208   03:53:36.080        10872            PASS *
+*   18	    01        0006        LED Test             03:53:36.085   03:53:43.255         7170            PASS *
+*   19	    01        0007        RGB test             03:53:43.258   03:53:53.953        10695            PASS *
+*   20	    01        0008        Lid Test             03:53:53.958   03:54:01.329         7371            PASS *
+*   21	    01        0009        Camera test          03:54:01.336   03:54:05.441         4105            PASS *
+*   22	    01        0010        IR-CAMERA            03:54:05.445   03:54:07.466         2021            PASS *
+*   23	    03        0012        USB3.0 1             03:48:18.771   03:54:09.329       350558            PASS *
+*   24	    03        0013        USB3.0 2             03:54:09.333   03:54:11.189         1856            PASS *
+*   25	    03        0014        USB_TYPC             03:54:11.192   03:54:13.052         1860            PASS *
+*   26	    01        0011        Touchpad             03:54:07.470   03:54:25.007        17537            PASS *
+*   27	    01        0012        SP Button            03:54:25.010   03:54:38.210        13200            PASS *
+*   28	    01        0013        Backlight K/B Test   03:54:38.214   03:54:40.233         2019            PASS *
+*   29	    01        0014        Brighness test       03:54:40.244   03:54:51.861        11617            PASS *
+*   30	    01        0015        Touch screen         03:54:51.865   03:54:57.307         5442            PASS *
+*   31	    01        0016        K/B Test             03:54:57.312   03:55:08.616        11304            PASS *
+*   32	    01        0017        Smart Card Test      03:55:08.620   03:55:09.657         1037            PASS *
+*   33	    01        0018        RFID Test            03:55:09.661   03:55:13.476         3815            PASS *
+*   34	    01        0019        SD 2.0               03:55:13.483   03:55:27.439        13956            PASS *
+*   35	    01        0020        HDMI Test            03:55:27.442   03:55:44.971        17529            PASS *
+*   36	    01        0021        TPC-HDMI             03:55:44.977   03:56:09.718        24741            PASS *
+*   37	    01        0022        CRT Test             03:56:09.720   03:56:23.717        13997            PASS *
+*   38	    01        0001        Apple MIC Test       03:56:39.608   03:56:43.134         3526            PASS *
+---------------------------------------------------------------------------------------------------------
+==============================================================================================================
+==============================================================================================================
+  
+=============================================================
+Full function test pass
+=============================================================

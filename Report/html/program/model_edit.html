@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="../../js/jquery-3.2.1.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../../../TPRindex/css/style.css"/>
+
+  
+  <title>Model Edit</title>
+  <style>
+body {
+	background-color: #eee;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	text-align: center;
+	
+}
+    a:hover{
+      color: #000;
+    }
+    table tbody {
+      display: block;
+      height: 520px;
+      overflow-y:auto;
+    }
+    table thead,tbody tr{
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+    table td{
+      overflow-x:auto;
+      width: 100px;
+    }
+    table th{
+
+    }
+  </style>
+  <script type="text/javascript">
+    function load() {
+        let geturl = window.location.search.substring(1);
+        let r=new Array();
+        let str_arr=geturl.split("&");
+        for(let i = 0; i < str_arr.length; i ++) {
+            r[i]=unescape(str_arr[i].split("=")[1]);
+        }
+        let id=r[0];
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: "Controller.php",
+            data: {action:'NPIController/getAllModel', urldata: id},
+            success: function (msg) {
+                //console.log(msg);
+                let tb=$("#tb-by");
+                for (let i=0;i<msg.length;i++) {
+                   let tr=createRow(msg[i]);
+                    tb.append(tr);
+                }
+            },
+            error: function (msg) {
+                console.log(msg);
+            }
+        })
+    }
+    function createRow(msg) {
+        let geturl = window.location.search.substring(1);
+        let r=new Array();
+        let str_arr=geturl.split("&");
+        for(let i = 0; i < str_arr.length; i ++) {
+            r[i]=unescape(str_arr[i].split("=")[1]);
+        }
+        let id=r[0];
+
+            let tr=$("<tr></tr>");
+            for (let val in msg){
+                let td=$("<td style='width: 100px'>"+msg[val]+"</td>");
+                tr.append(td);
+            }
+            //let td=$("<td><a href='javascript:void(0)' onclick='edit()'>edit</a>  <a href='javascript:void(0)' onclick='del()'>del</a></td>");
+            let td=$("<td></td>");
+            let editBtn=$("<a href='javascript:void(0);'>edit&nbsp;</a>");
+            editBtn.attr("dataid",id);
+            editBtn.click(edit);
+            let delBtn=$("<a href='javascript:void(0);'>del&nbsp;</a>");
+            //attr(属性名，属性值)
+            delBtn.attr("dataid",id);
+            delBtn.click(del);
+            td.append(editBtn);
+            td.append(delBtn);
+            tr.append(td);
+            return tr;
+    }
+function add() {
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+    let id=r[0];
+    let tb=$("#tb-by");
+    let tr=$("<tr></tr>");
+    for (let i=0;i<6;i++){
+        let td=$("<td style='width: 100px;'><input type='text' style='border:0px;border-bottom:#000000 1px solid;width: 70px;background-color: #EEE''/></td>");
+        tr.append(td);
+    }
+    let td=$("<td></td>");
+    let surebtn=$("<a href='javascript:void(0);'>sure&nbsp</a>");
+    surebtn.click(function () {
+        let thistr = $(this).parent().parent();
+        let input_filed = thistr.find("input");
+        var post_fields = new Array();
+        post_fields[0] = id;
+        for (let i = 0; i < input_filed.length; i++) {
+            post_fields[i + 1] = input_filed[i].value;
+        }
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            url:"Controller.php",
+            data:{action: 'NPIController/addAllModel',urldata:post_fields},
+            success:function(msg){
+                console.log(msg);
+                if(msg=='1111'){
+                    alert("success");
+                    post_fields.splice(0,1);
+                    var postAddrow=createRow(post_fields);
+                    thistr.replaceWith(postAddrow);
+                }else if (msg=='1011') {
+                    alert("this model already add");
+                }else if (msg=='1010'){
+                    alert("add fail");
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        })
+    });
+    let notbtn=$("<a href='javascript:void(0);'>not&nbsp</a>");
+    notbtn.click(function () {
+        $(this).parent().parent().remove();
+    });
+    td.append(surebtn);
+    td.append(notbtn);
+    tr.append(td);
+    tb.append(tr);
+    tr.children('td').eq(0).children('input').focus();
+}
+function edit() {
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+        let meBtn=$(this);
+        let meRow=$(this).parent().parent();
+        let editRow=$("<tr></tr>");
+    for(var i=0;i<6;i++){
+        if (i==0){
+            var editTd=$("<td style='width: 100px;'></td>");
+            var v=meRow.find('td:eq('+i+')').html();
+            editTd.html(v);
+            editRow.append(editTd);
+        } else {
+            var editTd=$("<td style='width: 100px;'><input type='text' style='border:0px;border-bottom:#000000 1px solid;width: 70px;background-color: #EEE'/></td>");
+            var v=meRow.find('td:eq('+i+')').html();
+            editTd.find('input').val(v);
+            editRow.append(editTd);
+        }
+
+    }
+    let opt_td=$("<td></td>");
+    let save=$("<a href='javascript:void(0);'>save&nbsp;</a>");
+    save.click(function() {
+        var currentRow = $(this).parent().parent();
+        var input_fields = currentRow.find("input");
+        var post_fields = new Array();
+
+        let model=currentRow.find("td").html();
+        post_fields[0] = r[0];
+        post_fields[1] = model;
+        for (var i = 0; i < input_fields.length; i++) {
+            post_fields[i + 2] = input_fields[i].value;
+        }
+        $.ajax({
+            type:"post",
+            dataType:"json",
+            url:"Controller.php",
+            data:{action: 'NPIController/editAllModel',urldata:post_fields},
+            success:function(msg){
+                console.log(msg);
+                if(msg=='1111'){
+                    alert("success");
+                    post_fields.splice(0,1);
+                    var postAddrow=createRow(post_fields);
+                    currentRow.replaceWith(postAddrow);
+                }else{
+                    alert("fail");
+                }
+            },
+            error:function(msg){
+                console.log(msg);
+            }
+        })
+    });
+
+    var cancel=$("<a href='javascript:void(0);'>cancel&nbsp;</a>");
+    cancel.click(function (){
+        var currentRow=$(this).parent().parent();
+        meRow.find('a:eq(0)').click(edit);
+        meRow.find('a:eq(1)').click(del);
+        currentRow.replaceWith(meRow);
+    });
+    opt_td.append(save);
+    opt_td.append(cancel);
+    editRow.append(opt_td);
+    meRow.replaceWith(editRow);
+}
+function del() {
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+    let data=new Array();
+    let meButton=$(this);
+    let model=$(this).parent().parent().find('td:eq(0)').html();
+    //let model=obj.parentNode.parentNode.childNodes[0].innerHTML;
+    data[0]=r[0];
+    data[1]=model;
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: "Controller.php",
+        data: {action:'NPIController/delAllModel', urldata: data},
+        success: function (msg) {
+            console.log(msg);
+            if (msg==1111){
+                window.location.reload();
+            } else if (msg==1010){
+                alert("del fail");
+            }
+        },
+        error: function (msg) {
+            console.log(msg);
+        }
+    })
+    //console.log(model);
+    //alert(model);
+}
+  </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body onload="load()">
+    <div id="header-wrap">
+        <header>
+            <hgroup>
+                <h1><a href="../../../index.php"></a></h1>
+    
+            </hgroup>
+            <nav style="margin-top: 24px">
+                <div >
+                    <ul id="dh">
+                        <li><a href="../../../index.php">Home</a></li>
+                        <li><a href="../../../total_system_sop.html">Sop</a></li>
+                        <li><a href="#">Our Works</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+    
+        </header>
+    </div>
+<h3 style='margin-top: 100px;' >Model Edit</h3>
+<div style="width: 1200px;margin-left:auto;margin-right: auto;">
+  <table class="table table-bordered" id="tb-body">
+    <thead>
+    <tr style='background-color:#F4987F'>
+      <th>model</th>
+      <th>oba_img</th>
+      <th>qc1_img</th>
+      <th>qc2_img</th>
+      <th>qc3_img</th>
+      <th>runin_img</th>
+      <th><button class="btn btn-primary" onclick="add()">add</button></th>
+    </tr>
+    </thead>
+    <tbody id="tb-by"></tbody>
+  </table>
+</div>
+</body>
+
+</html>

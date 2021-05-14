@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+
+	<link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>防潮柜温湿度系统</title>
+	<link rel="stylesheet" href="temp_test_css.css" />
+	<script src="./jquery-3.2.1.js"></script>
+	<link rel="stylesheet" href="./bootstrap.min.css" />
+	<script type="text/javascript" src="./bootstrap.min.js">
+	</script>
+
+	<script type="text/javascript">
+		//每隔0.3s加载now_data函数
+        setInterval('now_data()',300);
+        function load(){
+            let date=new Date();
+            let y=date.getFullYear();
+            let m=date.getMonth()+1;
+            let d=date.getDate();
+            document.getElementById("y").innerHTML=y;
+            document.getElementById("m").innerHTML=m;
+            document.getElementById("d").innerHTML=d;
+            now_data();
+        }
+        function now_data(){
+            //ajax请求http远程加载数据库数据
+
+            $.ajax({
+                type:'post',//pos请求方式
+                url:'monitor_server.php',//ajax请求地址
+                data:{flag:1},//发送给后端服务器的数据
+                dataType:'json',//期望后台返回的数据类型
+                success:function(msg) {
+                    //请求成功后的回掉函数，参数为返回的数据对象
+                    /*console.log(msg);*/
+					//如果有数据返回
+                    if (msg.length > 0) {
+                        //获得id为set1-temp的DOM标签并将返回的第一个关联数据对象的temp键值赋值给DOM
+                        document.getElementById('set1-temp').innerHTML = msg[0]['temp'];
+                        document.getElementById('set1-humi').innerHTML = msg[0]['humi'];
+                       /* if (msg[0]['temp'] < 15 || msg[0]['temp'] > 27) {
+                            //如果温度在15-27度之间，字体颜色为蓝色，否则红色
+                            document.getElementById('set1-temp').style.color = "red";
+                        } else {*/
+                            document.getElementById('set1-temp').style.color = "blue";
+                       /* }*/
+                        //如果湿度小于3%或者大于7%，则字体颜色变红，否则为红色
+                        if (msg[0]['humi'] < 3 || msg[0]['humi'] > 7) {
+                            document.getElementById('set1-humi').style.color = "red";
+                        } else {
+                            document.getElementById('set1-humi').style.color = "blue";
+                        }
+                        document.getElementById('set1-time').innerHTML = msg[0]['cord_time'];
+                        if (msg[0]['humi'] < 3 || msg[0]['humi'] > 7) {
+                            //如果温度和湿度不再正常返回，则将对应图片的边框呈现
+                            document.getElementById('fcg1').style.border = '2px solid red';
+                        }
+                        document.getElementById('set2-temp').innerHTML = msg[1]['temp'];
+                        document.getElementById('set2-humi').innerHTML = msg[1]['humi'];
+                       /* if (msg[1]['temp'] < 15 || msg[1]['temp'] > 27) {
+                            document.getElementById('set2-temp').style.color = "red";
+                        } else {*/
+                            document.getElementById('set2-temp').style.color = "blue";
+                     /*   }*/
+                        if (msg[1]['humi'] < 3 || msg[1]['humi'] > 7) {
+                            document.getElementById('set2-humi').style.color = "red";
+                        } else {
+                            document.getElementById('set2-humi').style.color = "blue";
+                        }
+                        document.getElementById('set2-time').innerHTML = msg[1]['cord_time'];
+                        if ( msg[1]['humi'] < 3 || msg[1]['humi'] > 7) {
+                            document.getElementById('fcg2').style.border = '2px solid red';
+                        }
+                        document.getElementById('set3-temp').innerHTML = msg[2]['temp'];
+                        document.getElementById('set3-humi').innerHTML = msg[2]['humi'];
+                       /* if (msg[2]['temp'] < 15 || msg[2]['temp'] > 27) {
+                            document.getElementById('set3-temp').style.color = "red";
+                        } else {*/
+                            document.getElementById('set3-temp').style.color = "blue";
+                      /*  }*/
+                        if (msg[2]['humi'] < 3 || msg[2]['humi'] > 7) {
+                            document.getElementById('set3-humi').style.color = "red";
+                        } else {
+                            document.getElementById('set3-humi').style.color = "blue";
+                        }
+                        document.getElementById('set3-time').innerHTML = msg[2]['cord_time'];
+                        if ( msg[2]['humi'] < 3 || msg[2]['humi'] > 7) {
+                            document.getElementById('fcg3').style.border = '2px solid red';
+                        }
+
+                    }
+
+                }
+            })
+        }
+        /* document.getElementById('set4-temp').innerHTML=msg[3]['temp'];
+                                document.getElementById('set4-humi').innerHTML=msg[3]['humi'];
+                                if(msg[3]['temp']<15||msg[3]['temp']>27){
+                                    document.getElementById('set4-temp').style.color="red";
+                                }else{
+                                    document.getElementById('set4-temp').style.color="blue";
+                                }
+                                if(msg[3]['humi']<30||msg[3]['humi']>70){
+                                    document.getElementById('set4-humi').style.color="red";
+                                }else{
+                                    document.getElementById('set4-humi').style.color="blue";
+                                }
+                                document.getElementById('set4-time').innerHTML=msg[3]['cord_time'] ;*/
+
+	</script>
+
+</head>
+<body style='overflow:scroll;overflow-x:hidden'>
+<div id="th-body">
+	<img src="pic1.png">
+</div>
+<div style="margin-top: 0;" id="datetime">
+		<span style="font-size: 3em; color: blue"> <script>
+                   setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();",1000);
+            </script>
+		</span>
+</div>
+<hr class="style1">
+<div id="unusualdiv">
+   <a href="http://compal.top/Report/application/temp_monitor/temp-monitor.html"><img name="img1" src="tip.png" style="margin-left: -14px"></a>
+</div>
+<div id="maindiv">
+	<div class="container2" id="fcg1">
+		<div class="cont_text">防潮柜①号</div>
+	</div>
+	<div class="container2" id="fcg2">
+		<div class="cont_text">防潮柜②号</div>
+	</div>
+	<div class="container2" id="fcg3">
+		<div class="cont_text">防潮柜③号</div>
+	</div>
+	<div class="container_textarea">
+		<span style="font-size: 1em; font-weight: bold">温度:&nbsp;</span><span
+			id="set1-temp" style="font-size: 1em; font-weight: bold">20</span><span
+			style="font-size: 1em; font-weight: bold">℃湿度:&nbsp;</span><span
+            id="set1-humi"><span style="font-size: 1em; font-weight: bold">45</span></span><span style="font-size: 1em ;font-weight: bold" >%</span>
+		<div class="title-text">
+			<div class="tag1" id="tag1">
+			</div>
+			<div class="time"><span id="set3-time" style="font-size:0.9em">08:00</span></div>
+		</div>
+		<hr class="style">
+	</div>
+	<div class="container_textarea1">
+		<span style="font-size: 1em; font-weight: bold">温度:&nbsp;</span><span
+			id="set2-temp" style="font-size: 1em; font-weight: bold">20</span><span
+			style="font-size: 1em; font-weight: bold">℃湿度:&nbsp;</span><span
+			id="set2-humi"><span style="font-size: 1em; font-weight: bold">45</span></span><span style="font-size: 1em ;font-weight: bold">%</span>
+		<div class="title-text">
+            <div class="tag2" id="tag2">
+            </div>
+			<div class="time"><span id="set2-time" style="font-size:0.9em">08:00</span></div>
+		</div>
+		<hr class="style">
+	</div>
+	<div class="container_textarea2">
+		<span style="font-size: 1em; font-weight: bold">温度:&nbsp;</span><span
+			id="set3-temp" style="font-size: 1em; font-weight: bold">20</span><span
+			style="font-size: 1em; font-weight: bold">℃湿度:&nbsp;</span><span
+			id="set3-humi"><span style="font-size: 1em; font-weight: bold">45</span></span><span style="font-size: 1em;font-weight: bold">%</span>
+		<div class="title-text">
+            <div class="tag3" id="tag3">
+            </div>
+			<div class="time"><span id="set1-time" style="font-size:0.9em">08:00</span></div>
+		</div>
+		<hr class="style">
+
+	</div>
+	<div class="container1">
+
+		<div class="cont_text">防潮柜④号</div>
+
+	</div>
+	<div class="container1">
+
+		<div class="cont_text">防潮柜⑤号</div>
+
+	</div>
+	<div class="container1">
+
+		<div class="cont_text">防潮柜⑥号</div>
+
+	</div>
+	<div class="container_textarea">
+		<span style="font-size: 1.1em; font-weight: bold">温度:&nbsp;</span><span
+			id="set4-temp"><span style="font-size: 1em; font-weight: bold">20℃</span></span> <span
+			style="font-size: 1.1em; font-weight: bold">湿度:&nbsp;</span><span
+			id="set4-humi"><span style="font-size: 1em; font-weight: bold">45%</span></span>
+		<div class="title-text">
+            <div class="tag4" id="tag4">
+
+            </div>
+            <div class="time"><span id="set4-time" style="font-size:0.9em">08:00</span></div>
+		</div>
+
+
+		<hr class="style">
+	</div>
+	<div class="container_textarea1">
+		<span style="font-size: 1.1em; font-weight: bold">温度:&nbsp;</span><span
+			id="set5-temp"><span style="font-size: 1em; font-weight: bold">20℃</span></span><span
+			style="font-size: 1.1em; font-weight: bold">湿度:&nbsp;</span><span
+			id="set5-humi"><span style="font-size: 1em; font-weight: bold">45%</span></span>
+		<div class="title-text">
+            <div class="tag5" id="tag5">
+
+            </div>
+            <div class="time"><span id="set5-time" style="font-size:0.9em">08:00</span></div>
+		</div>
+		<hr class="style">
+	</div>
+	<div class="container_textarea2">
+		<span style="font-size: 1.1em; font-weight: bold">温度:&nbsp;</span><span
+			id="set6-temp"><span style="font-size: 1em; font-weight: bold">20℃</span></span><span
+			style="font-size: 1.1em; font-weight: bold">湿度:&nbsp;</span><span
+			id="set6-humi"><span style="font-size: 1em; font-weight: bold">45%</span></span>
+		<div class="title-text">
+            <div class="tag6" id="tag6">
+
+            </div>
+            <div class="time"><span id="set6-time" style="font-size:0.9em">08:00</span></div>
+		</div>
+		<hr class="style">
+
+	</div>
+</div>
+</body>
+</html>

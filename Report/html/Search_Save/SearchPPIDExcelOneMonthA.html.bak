@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>TPR Testlog Report</title>
+<style>
+body{
+	text-align:center;
+}
+#data_body{
+	background-color:#CCC;
+	<!--display:none;-->
+	margin-top:30px;
+	border-top:#000000 1px solid;
+	border-left:#000000 1px solid;
+	color:#000;
+}
+#data_body td{
+	border-right:#000000 1px solid;
+	border-bottom:#000000 1px solid;
+}
+</style>
+</head>
+<link rel="stylesheet" href="../../../TPRindex/css/style1.css" type="text/css" media="screen" />
+<link href="../../../css/lyz.calendar.css" rel="stylesheet" type="text/css" />
+<script  type="text/javascript"  src="../../../js/jquery-1.5.1.js"></script>
+
+<script   type="text/javascript"  src="../../../js/lyz.calendar.min.js"></script>
+<script type="text/javascript">
+function load(){
+	$.ajax({
+		type:'post',
+		url:"../../server/Search_Save/SearchPPIDSearch.php",
+		dataType:'json',
+		data:{flag:1},
+		success:function(msg){
+		console.log(msg);
+		if(msg==0){
+				//alert('please login ');
+			//location.href='../../../login.php';
+			}
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+	}
+//$(function () {
+//	$('#bgtime').calendar({
+//		controlId: "divDate",
+//		})
+//	 $('#edtime').calendar({
+//
+//	 })
+//	})
+
+
+function savexls(){
+	var tpr=$('#projectName').val();
+	var model=0;
+	var pn=0;
+	var bgtime=$('#bgtime').val();
+	var edtime=$('#edtime').val();
+	if(bgtime==""||bgtime==null||edtime==""||edtime==null){
+		alert("please choose time");
+		return;
+	}
+	if(document.getElementById('r1').checked==true){
+		model=1;
+	}
+	if(document.getElementById('r2').checked==true){
+		pn=1;
+	}
+	$.ajax({
+		type:'post',
+		url:"../../server/Search_Save/SearchPPIDSearch.php",
+		dataType:'json',
+		data:{flag:3,model:model,pn:pn,bgtime:bgtime,edtime:edtime,tpr:tpr},
+		success:function(msg){
+
+			 alert("点击了保存");
+			   window.location.href="../../server/Search_Save/Testlog.csv";
+
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+}
+
+
+
+
+
+
+
+
+
+
+    function search(){
+		  $("#loadgif").show();
+	var model=0;
+	var pn=0;
+	var bgtime=$('#bgtime').val();
+	console.log(bgtime);
+	var edtime=$('#edtime').val();
+	console.log(bgtime);
+	console.log(edtime);
+	var tpr=$('#projectName').val();
+	if(bgtime==""||bgtime==null||edtime==""||edtime==null){
+		alert("please choose time");
+		return;
+	}
+	if(document.getElementById('r1').checked==true){
+		model=1;
+	}
+	if(document.getElementById('r2').checked==true){
+		pn=1;
+	}
+	$.ajax({
+		type:'post',
+		url:"../../server/Search_Save/SearchPPIDSearch.php",
+		dataType:'json',
+		data:{flag:2,model:model,pn:pn,bgtime:bgtime,edtime:edtime,tpr:tpr},
+		success:function(msg){
+			console.log(msg);
+			var tb=document.getElementById('data_body');
+			tb.align="center";
+
+			$("#data_body").empty();
+			for(var i=0;i<msg.length;i++){
+				if(msg.length>1){
+				var tr=document.createElement("tr");
+				if(i==0){
+				tr.style.backgroundColor="#F4987F";
+				}
+				for(var x=0;x<msg[i].length;x++){
+					var td=document.createElement("td");
+					if(x==0){
+						td.width="80px";
+						}else if(x==1){
+						td.width="240px";
+						}else if(x==2){
+						td.width="80px";
+						}else if(x==3){
+						td.width="120px";
+						}
+					td.innerHTML=msg[i][x];
+					tr.appendChild(td);
+				}
+				tb.appendChild(tr);
+				$("#loadgif").hide();
+				}else{
+					var tr=document.createElement("tr");
+					if(i==0){
+						tr.style.backgroundColor="#F4987F";
+						for(var x=0;x<msg[i].length;x++){
+							var td=document.createElement("td");
+							if(x==0){
+								td.width="80px";
+								}else if(x==1){
+								td.width="240px";
+								}else if(x==2){
+								td.width="80px";
+								}else if(x==3){
+								td.width="120px";
+								}
+							td.innerHTML=msg[i][x];
+							tr.appendChild(td);
+
+								 $("#loadgif").hide();
+						}
+						}
+					var tr_hit=document.createElement("tr");
+					//tr_hit.style.backgroundColor="#CCC";
+					var td=document.createElement("td");
+					td.setAttribute("colspan",msg[i].length);
+					td.innerHTML="no data";
+					td.style.backgroundColor="#60CC54";
+					tr_hit.appendChild(td);
+
+					tb.appendChild(tr);
+					tb.appendChild(tr_hit);
+					$("#loadgif").hide();
+				}
+
+				/*
+			}else{
+				alert("no data");
+				/*
+			var tr=document.createElement("tr");
+				if(i==0){
+				tr.style.backgroundColor="#F4987F";
+				}else{
+				var td=document.createElement("td");
+				td.setAttribute("colspan",msg[i].length);
+				td.innerHTML="no data";
+				td.style.backgroundColor="#60CC54";
+				tr.appendChild(td);
+				}
+				tb.appendChild(tr);
+				*/
+			}
+
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+}
+
+$(document).ready(function () { $("#loadgif").hide();});
+    </script>
+
+
+<body background="../../../images/beijin.jpg" onLoad="load()">
+<div id="header-wrap">
+    <header>
+        <hgroup>
+            <h1><a href="../../../index.php">Compal</a></h1>
+            <h3>Just Another Styleshout Template</h3>
+        </hgroup>
+        <nav>
+            <div >
+                <ul id="dh">
+                    <li><a href="../../../index.php">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Our Works</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+
+</div>
+<div class="text" style=" text-align:center;margin-top:120px;font-size:20px!important"><b><font color="black"  >TPR Testlog Report</font></b></div>
+ <div class="text" style="margin-top:30px;">
+<span>
+ <input style="margin-left:120px" id="r1" type="checkbox" value="Model" name="gender" ></input><label style="color:black">Model</label>
+<input id="r2" type="checkbox" value="PN" name="gender" /><label style="color:black">PN</label>
+<select  style="margin-left:20px;width:76px" id="projectName" name="projectName" size="1">
+
+  <option value="RLC_SH" selected>RLC-SH</option>
+  <option value="CEB">CEB</option>
+  <option value="CEP">CEP</option>
+  <option value="IGS">IGS</option>
+  <option value="CTS">CSAT</option>
+  <option value="TSI">TSI</option>
+</select>
+</span>
+
+<input type='date' id="bgtime" placeholder="input begin time" style="width:170px;padding:2px 10px;border:1px solid #ccc;margin-right:10px; margin-left:18px"/>-
+<input  type='date' id="edtime" placeholder="input end time" style="width:170px;padding:2px 10px;border:1px solid #ccc;margin-right:10px;" />
+
+ <button  onClick="search()" type="button" id="stn"  style="margin-left:12px" >search</button>
+
+  <button  onClick="savexls()" type="button" id="savetn"  style="margin-left:12px" >save</button>
+  <div style=" height:530px;overflow:auto;width:auto;margin-top:30px;">
+<table id="data_body" cellspacing="0"  style="margin-top:12px">
+</table>
+</div>
+<div id="loadgif" style="width:100%; height:100%; position:absolute; top:81px; left:11px;">
+　　<img alt="加载中..." src="../../../images/LOADING.gif"/>
+</div>
+</div>
+
+
+</div>
+
+
+
+</body>
+</html>

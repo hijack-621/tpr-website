@@ -1,0 +1,655 @@
+/*! hint1.css - v2.6.0 - 2019-04-27
+* http://kushagragour.in/lab/hint1/
+* Copyright (c) 2019 Kushagra Gour */
+
+/*-------------------------------------*\
+	hint1.css - A CSS tooltip library
+\*-------------------------------------*/
+/**
+ * hint1.css is a tooltip library made in pure CSS.
+ *
+ * Source: https://github.com/chinchang/hint1.css
+ * Demo: http://kushagragour.in/lab/hint1/
+ *
+ */
+/**
+ * source: hint1-core.scss
+ *
+ * Defines the basic styling for the tooltip.
+ * Each tooltip is made of 2 parts:
+ * 	1) body (:after)
+ * 	2) arrow (:before)
+ *
+ * Classes added:
+ * 	1) hint1
+ */
+[class*="hint1--"] {
+  position: relative;
+  display: inline-block;
+  /**
+	 * tooltip arrow
+	 */
+  /**
+	 * tooltip body
+	 */ }
+  [class*="hint1--"]:before, [class*="hint1--"]:after {
+    position: absolute;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000000;
+    pointer-events: none;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    transition: 0.3s ease;
+    -webkit-transition-delay: 0ms;
+    -moz-transition-delay: 0ms;
+    transition-delay: 0ms; }
+  [class*="hint1--"]:hover:before, [class*="hint1--"]:hover:after {
+    visibility: visible;
+    opacity: 1; }
+  [class*="hint1--"]:hover:before, [class*="hint1--"]:hover:after {
+    -webkit-transition-delay: 100ms;
+    -moz-transition-delay: 100ms;
+    transition-delay: 100ms; }
+  [class*="hint1--"]:before {
+    content: '';
+    position: absolute;
+    background: transparent;
+    border: 6px solid transparent;
+    z-index: 1000001; }
+  [class*="hint1--"]:after {
+    background: #383838;
+    text-align: center;
+    color: white;
+    padding: 8px 10px;
+    margin-left: 5px;
+    font-size: 12px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 12px;
+    width: 130px;
+    white-space: pre-wrap; }
+  [class*="hint1--"][aria-label]:after {
+    content: attr(aria-label); }
+  [class*="hint1--"][data-hint1]:after {
+    content: attr(data-hint1); }
+
+[aria-label='']:before, [aria-label='']:after,
+[data-hint1='']:before,
+[data-hint1='']:after {
+  display: none !important; }
+
+/**
+ * source: hint1-position.scss
+ *
+ * Defines the positoning logic for the tooltips.
+ *
+ * Classes added:
+ * 	1) hint1--top
+ * 	2) hint1--bottom
+ * 	3) hint1--left
+ * 	4) hint1--right
+ */
+/**
+ * set default color for tooltip arrows
+ */
+.hint1--top-left:before {
+  border-top-color: #383838; }
+
+.hint1--top-right:before {
+  border-top-color: #383838; }
+
+.hint1--top:before {
+  border-top-color: #383838; }
+
+.hint1--bottom-left:before {
+  border-bottom-color: #383838; }
+
+.hint1--bottom-right:before {
+  border-bottom-color: #383838; }
+
+.hint1--bottom:before {
+  border-bottom-color: #383838; }
+
+.hint1--left:before {
+  border-left-color: #383838; }
+
+.hint1--right:before {
+  border-right-color: #383838; }
+
+/**
+ * top tooltip
+ */
+.hint1--top:before {
+  margin-bottom: -11px; }
+
+.hint1--top:before, .hint1--top:after {
+  bottom: 100%;
+  left: 50%; }
+
+.hint1--top:before {
+  left: calc(50% - 6px); }
+
+.hint1--top:after {
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+.hint1--top:hover:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--top:hover:after {
+  -webkit-transform: translateX(-50%) translateY(-8px);
+  -moz-transform: translateX(-50%) translateY(-8px);
+  transform: translateX(-50%) translateY(-8px); }
+
+/**
+ * bottom tooltip
+ */
+.hint1--bottom:before {
+  margin-top: -11px; }
+
+.hint1--bottom:before, .hint1--bottom:after {
+  top: 100%;
+  left: 50%; }
+
+.hint1--bottom:before {
+  left: calc(50% - 6px); }
+
+.hint1--bottom:after {
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+.hint1--bottom:hover:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--bottom:hover:after {
+  -webkit-transform: translateX(-50%) translateY(8px);
+  -moz-transform: translateX(-50%) translateY(8px);
+  transform: translateX(-50%) translateY(8px); }
+
+/**
+ * right tooltip
+ */
+.hint1--right:before {
+  margin-left: -11px;
+  margin-bottom: -6px; }
+
+.hint1--right:after {
+  margin-bottom: -14px; }
+
+.hint1--right:before, .hint1--right:after {
+  left: 100%;
+  bottom: 50%; }
+
+.hint1--right:hover:before {
+  -webkit-transform: translateX(8px);
+  -moz-transform: translateX(8px);
+  transform: translateX(8px); }
+
+.hint1--right:hover:after {
+  -webkit-transform: translateX(8px);
+  -moz-transform: translateX(8px);
+  transform: translateX(8px); }
+
+/**
+ * left tooltip
+ */
+.hint1--left:before {
+  margin-right: -11px;
+  margin-bottom: -6px; }
+
+.hint1--left:after {
+  margin-bottom: -14px; }
+
+.hint1--left:before, .hint1--left:after {
+  right: 100%;
+  bottom: 50%; }
+
+.hint1--left:hover:before {
+  -webkit-transform: translateX(-8px);
+  -moz-transform: translateX(-8px);
+  transform: translateX(-8px); }
+
+.hint1--left:hover:after {
+  -webkit-transform: translateX(-8px);
+  -moz-transform: translateX(-8px);
+  transform: translateX(-8px); }
+
+/**
+ * top-left tooltip
+ */
+.hint1--top-left:before {
+  margin-bottom: -11px; }
+
+.hint1--top-left:before, .hint1--top-left:after {
+  bottom: 100%;
+  left: 50%; }
+
+.hint1--top-left:before {
+  left: calc(50% - 6px); }
+
+.hint1--top-left:after {
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  transform: translateX(-100%); }
+
+.hint1--top-left:after {
+  margin-left: 12px; }
+
+.hint1--top-left:hover:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--top-left:hover:after {
+  -webkit-transform: translateX(-100%) translateY(-8px);
+  -moz-transform: translateX(-100%) translateY(-8px);
+  transform: translateX(-100%) translateY(-8px); }
+
+/**
+ * top-right tooltip
+ */
+.hint1--top-right:before {
+  margin-bottom: -11px; }
+
+.hint1--top-right:before, .hint1--top-right:after {
+  bottom: 100%;
+  left: 50%; }
+
+.hint1--top-right:before {
+  left: calc(50% - 6px); }
+
+.hint1--top-right:after {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0); }
+
+.hint1--top-right:after {
+  margin-left: -12px; }
+
+.hint1--top-right:hover:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--top-right:hover:after {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+/**
+ * bottom-left tooltip
+ */
+.hint1--bottom-left:before {
+  margin-top: -11px; }
+
+.hint1--bottom-left:before, .hint1--bottom-left:after {
+  top: 100%;
+  left: 50%; }
+
+.hint1--bottom-left:before {
+  left: calc(50% - 6px); }
+
+.hint1--bottom-left:after {
+  -webkit-transform: translateX(-100%);
+  -moz-transform: translateX(-100%);
+  transform: translateX(-100%); }
+
+.hint1--bottom-left:after {
+  margin-left: 12px; }
+
+.hint1--bottom-left:hover:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--bottom-left:hover:after {
+  -webkit-transform: translateX(-100%) translateY(8px);
+  -moz-transform: translateX(-100%) translateY(8px);
+  transform: translateX(-100%) translateY(8px); }
+
+/**
+ * bottom-right tooltip
+ */
+.hint1--bottom-right:before {
+  margin-top: -11px; }
+
+.hint1--bottom-right:before, .hint1--bottom-right:after {
+  top: 100%;
+  left: 50%; }
+
+.hint1--bottom-right:before {
+  left: calc(50% - 6px); }
+
+.hint1--bottom-right:after {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0); }
+
+.hint1--bottom-right:after {
+  margin-left: -12px; }
+
+.hint1--bottom-right:hover:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--bottom-right:hover:after {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+/**
+ * source: hint1-sizes.scss
+ *
+ * Defines width restricted tooltips that can span
+ * across multiple lines.
+ *
+ * Classes added:
+ * 	1) hint1--small
+ * 	2) hint1--medium
+ * 	3) hint1--large
+ *
+ */
+.hint1--small:after,
+.hint1--medium:after,
+.hint1--large:after {
+  white-space: normal;
+  line-height: 1.4em;
+  word-wrap: break-word; }
+
+.hint1--small:after {
+  width: 80px; }
+
+.hint1--medium:after {
+  width: 150px; }
+
+.hint1--large:after {
+  width: 300px; }
+
+/**
+ * source: hint1-theme.scss
+ *
+ * Defines basic theme for tooltips.
+ *
+ */
+[class*="hint1--"] {
+  /**
+	 * tooltip body
+	 */ }
+  [class*="hint1--"]:after {
+    text-shadow: 0 -1px 0px black;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); }
+
+/**
+ * source: hint1-color-types.scss
+ *
+ * Contains tooltips of various types based on color differences.
+ *
+ * Classes added:
+ * 	1) hint1--error
+ * 	2) hint1--warning
+ * 	3) hint1--info
+ * 	4) hint1--success
+ *
+ */
+/**
+ * Error
+ */
+.hint1--error:after {
+  background-color: #b34e4d;
+  text-shadow: 0 -1px 0px #592726; }
+
+.hint1--error.hint1--top-left:before {
+  border-top-color: #b34e4d; }
+
+.hint1--error.hint1--top-right:before {
+  border-top-color: #b34e4d; }
+
+.hint1--error.hint1--top:before {
+  border-top-color: #b34e4d; }
+
+.hint1--error.hint1--bottom-left:before {
+  border-bottom-color: #b34e4d; }
+
+.hint1--error.hint1--bottom-right:before {
+  border-bottom-color: #b34e4d; }
+
+.hint1--error.hint1--bottom:before {
+  border-bottom-color: #b34e4d; }
+
+.hint1--error.hint1--left:before {
+  border-left-color: #b34e4d; }
+
+.hint1--error.hint1--right:before {
+  border-right-color: #b34e4d; }
+
+/**
+ * Warning
+ */
+.hint1--warning:after {
+  background-color: #c09854;
+  text-shadow: 0 -1px 0px #6c5328; }
+
+.hint1--warning.hint1--top-left:before {
+  border-top-color: #c09854; }
+
+.hint1--warning.hint1--top-right:before {
+  border-top-color: #c09854; }
+
+.hint1--warning.hint1--top:before {
+  border-top-color: #c09854; }
+
+.hint1--warning.hint1--bottom-left:before {
+  border-bottom-color: #c09854; }
+
+.hint1--warning.hint1--bottom-right:before {
+  border-bottom-color: #c09854; }
+
+.hint1--warning.hint1--bottom:before {
+  border-bottom-color: #c09854; }
+
+.hint1--warning.hint1--left:before {
+  border-left-color: #c09854; }
+
+.hint1--warning.hint1--right:before {
+  border-right-color: #c09854; }
+
+/**
+ * Info
+ */
+.hint1--info:after {
+  background-color: #3986ac;
+  text-shadow: 0 -1px 0px #1a3c4d; }
+
+.hint1--info.hint1--top-left:before {
+  border-top-color: #3986ac; }
+
+.hint1--info.hint1--top-right:before {
+  border-top-color: #3986ac; }
+
+.hint1--info.hint1--top:before {
+  border-top-color: #3986ac; }
+
+.hint1--info.hint1--bottom-left:before {
+  border-bottom-color: #3986ac; }
+
+.hint1--info.hint1--bottom-right:before {
+  border-bottom-color: #3986ac; }
+
+.hint1--info.hint1--bottom:before {
+  border-bottom-color: #3986ac; }
+
+.hint1--info.hint1--left:before {
+  border-left-color: #3986ac; }
+
+.hint1--info.hint1--right:before {
+  border-right-color: #3986ac; }
+
+/**
+ * Success
+ */
+.hint1--success:after {
+  background-color: #458746;
+  text-shadow: 0 -1px 0px #1a321a; }
+
+.hint1--success.hint1--top-left:before {
+  border-top-color: #458746; }
+
+.hint1--success.hint1--top-right:before {
+  border-top-color: #458746; }
+
+.hint1--success.hint1--top:before {
+  border-top-color: #458746; }
+
+.hint1--success.hint1--bottom-left:before {
+  border-bottom-color: #458746; }
+
+.hint1--success.hint1--bottom-right:before {
+  border-bottom-color: #458746; }
+
+.hint1--success.hint1--bottom:before {
+  border-bottom-color: #458746; }
+
+.hint1--success.hint1--left:before {
+  border-left-color: #458746; }
+
+.hint1--success.hint1--right:before {
+  border-right-color: #458746; }
+
+/**
+ * source: hint1-always.scss
+ *
+ * Defines a persisted tooltip which shows always.
+ *
+ * Classes added:
+ * 	1) hint1--always
+ *
+ */
+.hint1--always:after, .hint1--always:before {
+  opacity: 1;
+  visibility: visible; }
+
+.hint1--always.hint1--top:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--always.hint1--top:after {
+  -webkit-transform: translateX(-50%) translateY(-8px);
+  -moz-transform: translateX(-50%) translateY(-8px);
+  transform: translateX(-50%) translateY(-8px); }
+
+.hint1--always.hint1--top-left:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--always.hint1--top-left:after {
+  -webkit-transform: translateX(-100%) translateY(-8px);
+  -moz-transform: translateX(-100%) translateY(-8px);
+  transform: translateX(-100%) translateY(-8px); }
+
+.hint1--always.hint1--top-right:before {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--always.hint1--top-right:after {
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  transform: translateY(-8px); }
+
+.hint1--always.hint1--bottom:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--always.hint1--bottom:after {
+  -webkit-transform: translateX(-50%) translateY(8px);
+  -moz-transform: translateX(-50%) translateY(8px);
+  transform: translateX(-50%) translateY(8px); }
+
+.hint1--always.hint1--bottom-left:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--always.hint1--bottom-left:after {
+  -webkit-transform: translateX(-100%) translateY(8px);
+  -moz-transform: translateX(-100%) translateY(8px);
+  transform: translateX(-100%) translateY(8px); }
+
+.hint1--always.hint1--bottom-right:before {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--always.hint1--bottom-right:after {
+  -webkit-transform: translateY(8px);
+  -moz-transform: translateY(8px);
+  transform: translateY(8px); }
+
+.hint1--always.hint1--left:before {
+  -webkit-transform: translateX(-8px);
+  -moz-transform: translateX(-8px);
+  transform: translateX(-8px); }
+
+.hint1--always.hint1--left:after {
+  -webkit-transform: translateX(-8px);
+  -moz-transform: translateX(-8px);
+  transform: translateX(-8px); }
+
+.hint1--always.hint1--right:before {
+  -webkit-transform: translateX(8px);
+  -moz-transform: translateX(8px);
+  transform: translateX(8px); }
+
+.hint1--always.hint1--right:after {
+  -webkit-transform: translateX(8px);
+  -moz-transform: translateX(8px);
+  transform: translateX(8px); }
+
+/**
+ * source: hint1-rounded.scss
+ *
+ * Defines rounded corner tooltips.
+ *
+ * Classes added:
+ * 	1) hint1--rounded
+ *
+ */
+.hint1--rounded:after {
+  border-radius: 4px; }
+
+/**
+ * source: hint1-effects.scss
+ *
+ * Defines various transition effects for the tooltips.
+ *
+ * Classes added:
+ * 	1) hint1--no-animate
+ * 	2) hint1--bounce
+ *
+ */
+.hint1--no-animate:before, .hint1--no-animate:after {
+  -webkit-transition-duration: 0ms;
+  -moz-transition-duration: 0ms;
+  transition-duration: 0ms; }
+
+.hint1--bounce:before, .hint1--bounce:after {
+  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  -moz-transition: opacity 0.3s ease, visibility 0.3s ease, -moz-transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.71, 1.7, 0.77, 1.24); }
+
+.hint1--no-shadow:before, .hint1--no-shadow:after {
+  text-shadow: initial;
+  box-shadow: initial; }

@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="application/force-download; charset=utf-8">
+<title>Search_Report</title>
+<style type="text/css">
+.hm{
+	height:20px;
+	display: inline-block;
+	padding: 0px 5px 2px;
+	color: #fff;
+	border: none;
+	font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+	font-size: 16px;
+	text-decoration: none;
+	background-color: #CC6633;
+	position: relative;
+	cursor: poiner;
+}
+.sub{
+	height:20px;
+	display: inline-block;
+	padding: 0px 5px 2px;
+	color: #fff;
+	border: none;
+	font-family: "Adobe 婵犲痉鏉匡拷婵炴挸婀辩槐鐐烘晸缁插d R";
+	font-size: 16px;
+	text-decoration: none;
+	background-color: #0077FF;
+	position: relative;
+	cursor: poiner;
+}
+.a1{
+	margin:10px 0px 20px 0px;
+	}
+.a2{
+	
+	margin:0 auto;
+	overflow:auto;
+	height:300px;
+	width:80%;
+	text-align:center;
+	}
+body {
+	background-image: url(../../../images/beijin.jpg);
+	text-align:center;
+}
+.YS0 {color: black;
+	font-weight: bold;
+	font-size: 24px;
+}
+.a3{
+	color:#FFF;
+	}
+	
+	#num_pot td{
+		border-bottom:none;
+	}
+	#num_pot div{
+	float:left;
+	display:none;
+	}
+.label_ra{
+	background:url(../../../images/label_1.png) no-repeat;
+	margin-left:12px;
+	padding-left:20px;	
+	}
+	#label_div{
+	margin:0 30px;
+	}
+	#week_td{
+	color:#FFFFFF;
+	}
+		#a12 a{
+	 text-decoration:none;
+	color:#FFFFFF;
+	}
+	#a12 table{
+	background-color:#008000;
+	}
+	#a12 td{
+	color:#FFFFFF;
+	}
+	#a12{
+	display:none;
+	overflow:auto;
+	height:320px;
+	}
+	#dell_wk{
+		background:url(../../../images/FY21Calendar.jpg) no-repeat;
+		opacity:0.9;
+		width:1050px;
+		height:780px;
+		position:absolute;
+		z-index:-100;
+		margin-top:50px;
+		margin-left:50%;
+		transform:translateX(-50%);
+		}
+	#b_st{
+		display:none;
+		}
+		table tr td{
+			border:none;
+		}
+</style>
+</head>
+<link rel="stylesheet" href="../../../TPRindex/css/style.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-3.2.1.js"></script>
+<script src="../../js/Search_Report.js"></script>
+
+<body onload="load()">
+<div id="header-wrap">
+    <header>
+        <hgroup>
+            <h1><a href="../../../index.php"></a></h1>
+
+        </hgroup>
+        <nav style="margin-top: 24px">
+            <div >
+                <ul id="dh">
+                    <li><a href="../../../index.php">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Our Works</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+</div>
+<div style='margin-top:110px'>
+<div align="center" class="a1" id="a11">
+<table style='border-top:none;border-bottom:none'   width="80%" id='ftb' >
+<caption>
+<h2><span class="YS0">TPR Report</span></h2>
+</caption>
+<tr id="num_pot">
+<td colspan="4" >
+<div id="label_div" >
+<div id="vfir_txt" ><label class="label_ra" id="ra_vfir_txt">VFIR  Report txt</label></div>
+<div id="vfir_nb_txt" ><label class="label_ra" id="ra_vfir_nb_txt">VFIR  Report NB txt</label></div>
+<div id="vfir_tb_txt" ><label class="label_ra" id="ra_vfir_tb_txt">VFIR  Report TB txt</label></div>
+<div id="vfir_xls" ><label class="label_ra" id="ra_vfir_xls">VFIR  Report xls</label></div>
+<div id="ry_pot" ><label class="label_ra" id="ra_ry_pot">Quality Yield Report</label></div>
+<div id="rr_pot"><label class="label_ra" id="ra_rr_pot">RRR Report</label></div>
+<div id="cd_pot"><label class="label_ra" id="ra_cd_pot">CID Report</label></div>
+</div>
+</td>
+<tr>
+<tr>
+<td height="30px">
+<select id="select" onchange="tprchange()">
+<option value="">Please Chose TPR</option>
+<option value="IGS" >IGS</option>
+<option value="RLC_SH" >RLC-SH</option>
+<option value="CEP" >CEP</option>
+<option value="CEB" >CEB</option>
+<option value="Regenersis_INDIA" >ICC-RGS</option>
+<option value="RLC_INDIA" >ICC-RLG</option>
+<option value="CSAT" >CSAT</option>
+<option value="CGS" >CGS</option>
+<option value="TSI" >TSI</option>
+</select></td>
+<td><select id="select_y" >
+<option value="">Please Chose Year</option>
+<option value="2017" >2017</option>
+<option value="2018" >2018</option>
+<option value="2019" >2019</option>
+<option value="2020" >2020</option>
+<option value="2021" >2021</option>
+</select></td>
+<td id="week_td" style='color:black'>
+please input search week:
+<input type="number" min="1" max="52" id="in_week" />
+</td>
+<td> 
+<button type="button" id="search" class="sub" onclick="search()">search</button>
+</td>
+
+<td><button type="button" id="upload" class="sub" onClick="window.open('upload_VFIR.html','_bank')">upload</button>
+</td>
+<td><button type="button" id="back_home" class="hm" onClick="window.open('../../../index.php')">home</button></td>
+</tr>
+</table>
+</div>
+<div id="dele">
+<button id="b_st" onclick="de_file()">dele</button>
+</div>
+<div class="a2" id="a12" >
+<table cellpadding="5" rules=none width="80%" align="center" border="1"  id="text" style='margin-left:50%!important;transform:translateX(-50%)' >
+</table>
+</div>
+<div id="dell_wk"></div>
+</div>
+</body>
+</html>

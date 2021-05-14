@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signlayer</title>
+</head>
+<link rel="stylesheet" href="../../../layui/css/layui.css">
+<script type="text/javascript" src="../../js/jquery-3.2.1.js"></script>
+<style>
+    .layui-form-item label{
+        position: absolute;
+        line-height: 35px;
+    }
+    .layui-input::-webkit-input-placeholder{
+        text-align: center;
+    }
+    /*input placeholder文字居中！！！*/
+</style>
+<body>
+<div>
+    <div style="width: 500px;margin: 0 auto">
+    <strong><label style="line-height: 40px;position: absolute;left: 95px">请输入TPM</label></strong>
+    <label class="layui-icon layui-icon-password" for="password" style="position: absolute;line-height: 40px;left: 75px"></label>
+
+        <input class="layui-input" type="text" style="margin-top: 20px;margin-left: 50%;transform: translateX(-35%);width: 200px;" id="sgn" placeholder="请输入TPM">
+    </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+    function callbackdata() {
+        return $('#sgn').val();
+    }
+</script>
+</html>

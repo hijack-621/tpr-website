@@ -1,0 +1,892 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>temp monitor</title>
+
+<style type="text/css">
+
+#temp-body{
+ width: 980px;
+ height: 550px;
+ margin-top: 25px;
+ border: 2px #06439E solid;
+}
+#temp-body td{
+ width: 196px;
+ height: 110px;
+ padding: 0;
+ border: 2px #06439E solid;
+}
+#temp-body td a{
+ text-decoration:none;
+}
+ .box-body{
+  margin-top: 10px;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+ }
+ .box-title{
+  color: #000;
+  display: -webkit-flex;
+  display: flex;
+  height: 30%;
+  margin: 14px auto;
+  width: 90%;
+ }
+ .title-text{
+  font-size: 12px;
+  margin-left: 5px;
+ }
+.title-text p{
+ margin: 2px;
+}
+ .box-bottom{
+  margin: 0;
+ }
+.box-pla {
+
+ padding: 0;
+}
+.box-pla span{
+ color: #000;
+ margin-left: 5px;
+}
+ .box-data{
+  font-weight:bold;
+  margin-top: 2px;
+  margin-left: 5px;
+ }
+ .data-t{
+  color: #0C0C0C;
+ }
+ .tag{
+  width: 25px;
+  height: 25px;
+  background-color: #70AC28;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+ }
+ .container-box{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+ }
+ .div-title{
+  margin: 0 auto;
+  text-align:center
+ }
+ .div-body{
+  display: -webkit-flex;
+  display: flex;
+ }
+ .div-left{
+  width: 22%;
+ }
+ .div-table{
+  margin-left: 20px;
+  margin-right:10px;
+ }
+ .pace{
+	 font-weight:bold;
+ }
+</style>
+
+<script src="../../../js/jquery-3.2.1.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+</script>
+<script type="text/javascript">
+setInterval('now_data()',30000);
+function load(){
+	let date=new Date();
+		let y=date.getFullYear();
+		let m=date.getMonth()+1;
+		let d=date.getDate();
+		document.getElementById("y").innerHTML=y;
+		document.getElementById("m").innerHTML=m;
+		document.getElementById("d").innerHTML=d;
+	now_data();
+}
+function now_data(){
+	$.ajax({
+		type:'post',
+		url:'monitor_server.php',
+		data:{flag:1},
+		dataType:'json',
+		success:function(msg){
+			console.log(msg);
+			if(msg.length>0){
+				document.getElementById('set1-temp').innerHTML=msg[0]['temp'];
+				if(msg[0]['temp']<15||msg[0]['temp']>27){
+					document.getElementById('set1-temp').style.color="red";
+					}else{
+						document.getElementById('set1-temp').style.color="blue";
+						}
+				if(msg[0]['humi']<30||msg[0]['humi']>70){
+					document.getElementById('set1-humi').style.color="red";
+					}else{
+						document.getElementById('set1-humi').style.color="blue";
+						}
+			document.getElementById('set1-humi').innerHTML=msg[0]['humi'];
+			document.getElementById('set1-time').innerHTML=msg[0]['cord_time'].substring(5);
+			if(msg[0]['temp']<15||msg[0]['temp']>27||msg[0]['humi']<30||msg[0]['humi']>70){
+				document.getElementById('tag1').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag1').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set2-temp').innerHTML=msg[1]['temp'];
+			document.getElementById('set2-humi').innerHTML=msg[1]['humi'];
+
+			if(msg[1]['temp']<15||msg[1]['temp']>27){
+					document.getElementById('set2-temp').style.color="red";
+					}else{
+						document.getElementById('set2-temp').style.color="blue";
+						}
+				if(msg[1]['humi']<30||msg[1]['humi']>70){
+					document.getElementById('set2-humi').style.color="red";
+					}else{
+						document.getElementById('set2-humi').style.color="blue";
+						}
+
+			document.getElementById('set2-time').innerHTML=msg[1]['cord_time'].substring(5);
+			if(msg[1]['temp']<15||msg[1]['temp']>27||msg[1]['humi']<30||msg[1]['humi']>70){
+				document.getElementById('tag2').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag2').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set3-temp').innerHTML=msg[2]['temp'];
+			document.getElementById('set3-humi').innerHTML=msg[2]['humi'];
+			if(msg[2]['temp']<15||msg[2]['temp']>27){
+					document.getElementById('set3-temp').style.color="red";
+					}else{
+						document.getElementById('set3-temp').style.color="blue";
+						}
+				if(msg[2]['humi']<30||msg[2]['humi']>70){
+					document.getElementById('set3-humi').style.color="red";
+					}else{
+						document.getElementById('set3-humi').style.color="blue";
+						}
+
+			document.getElementById('set3-time').innerHTML=msg[2]['cord_time'].substring(5);
+			if(msg[2]['temp']<15||msg[2]['temp']>27||msg[2]['humi']<30||msg[2]['humi']>70){
+				document.getElementById('tag3').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag3').style.backgroundColor="#70AC28";
+					}
+
+
+			document.getElementById('set4-temp').innerHTML=msg[3]['temp'];
+			document.getElementById('set4-humi').innerHTML=msg[3]['humi'];
+			if(msg[3]['temp']<15||msg[3]['temp']>27){
+					document.getElementById('set4-temp').style.color="red";
+					}else{
+						document.getElementById('set4-temp').style.color="blue";
+						}
+				if(msg[3]['humi']<30||msg[3]['humi']>70){
+					document.getElementById('set4-humi').style.color="red";
+					}else{
+						document.getElementById('set4-humi').style.color="blue";
+						}
+			document.getElementById('set4-time').innerHTML=msg[3]['cord_time'].substring(5);
+			if(msg[3]['temp']<15||msg[3]['temp']>27||msg[3]['humi']<30||msg[3]['humi']>70){
+				document.getElementById('tag4').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag4').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set5-temp').innerHTML=msg[15]['temp'];
+			document.getElementById('set5-humi').innerHTML=msg[15]['humi'];
+			if(msg[15]['temp']<15||msg[15]['temp']>27){
+					document.getElementById('set5-temp').style.color="red";
+					}else{
+						document.getElementById('set5-temp').style.color="blue";
+						}
+				if(msg[15]['humi']<30||msg[15]['humi']>70){
+					document.getElementById('set5-humi').style.color="red";
+					}else{
+						document.getElementById('set5-humi').style.color="blue";
+						}
+			document.getElementById('set5-time').innerHTML=msg[15]['cord_time'].substring(5);
+			if(msg[15]['temp']<15||msg[15]['temp']>27||msg[15]['humi']<30||msg[15]['humi']>70){
+				document.getElementById('tag5').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag5').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set6-temp').innerHTML=msg[5]['temp'];
+			document.getElementById('set6-humi').innerHTML=msg[5]['humi'];
+			if(msg[5]['temp']<15||msg[5]['temp']>27){
+					document.getElementById('set6-temp').style.color="red";
+					}else{
+						document.getElementById('set6-temp').style.color="blue";
+						}
+				if(msg[5]['humi']<30||msg[5]['humi']>70){
+					document.getElementById('set6-humi').style.color="red";
+					}else{
+						document.getElementById('set6-humi').style.color="blue";
+						}
+			document.getElementById('set6-time').innerHTML=msg[5]['cord_time'].substring(5);
+			if(msg[5]['temp']<15||msg[5]['temp']>27||msg[5]['humi']<30||msg[5]['humi']>70){
+				document.getElementById('tag6').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag6').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set7-temp').innerHTML=msg[6]['temp'];
+			document.getElementById('set7-humi').innerHTML=msg[6]['humi'];
+			if(msg[6]['temp']<15||msg[6]['temp']>27){
+					document.getElementById('set7-temp').style.color="red";
+					}else{
+						document.getElementById('set7-temp').style.color="blue";
+						}
+				if(msg[6]['humi']<30||msg[6]['humi']>70){
+					document.getElementById('set7-humi').style.color="red";
+					}else{
+						document.getElementById('set7-humi').style.color="blue";
+						}
+			document.getElementById('set7-time').innerHTML=msg[6]['cord_time'].substring(5);
+			if(msg[6]['temp']<15||msg[6]['temp']>27||msg[6]['humi']<30||msg[6]['humi']>70){
+				document.getElementById('tag7').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag7').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set8-temp').innerHTML=msg[7]['temp'];
+			document.getElementById('set8-humi').innerHTML=msg[7]['humi'];
+			if(msg[7]['temp']<17||msg[7]['temp']>27){
+					document.getElementById('set8-temp').style.color="red";
+					}else{
+						document.getElementById('set8-temp').style.color="blue";
+						}
+				if(msg[7]['humi']<30||msg[7]['humi']>70){
+					document.getElementById('set8-humi').style.color="red";
+					}else{
+						document.getElementById('set8-humi').style.color="blue";
+						}
+			document.getElementById('set8-time').innerHTML=msg[7]['cord_time'].substring(5);
+			if(msg[7]['temp']<17||msg[7]['temp']>27||msg[7]['humi']<30||msg[7]['humi']>70){
+				document.getElementById('tag8').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag8').style.backgroundColor="#70AC28";
+					}
+
+
+			document.getElementById('set9-temp').innerHTML=msg[8]['temp'];
+			document.getElementById('set9-humi').innerHTML=msg[8]['humi'];
+			if(msg[8]['temp']<17||msg[8]['temp']>27){
+					document.getElementById('set9-temp').style.color="red";
+					}else{
+						document.getElementById('set9-temp').style.color="blue";
+						}
+				if(msg[8]['humi']<30||msg[8]['humi']>70){
+					document.getElementById('set9-humi').style.color="red";
+					}else{
+						document.getElementById('set9-humi').style.color="blue";
+						}
+			document.getElementById('set9-time').innerHTML=msg[8]['cord_time'].substring(5);
+			if(msg[8]['temp']<17||msg[8]['temp']>27||msg[8]['humi']<30||msg[8]['humi']>70){
+				document.getElementById('tag9').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag9').style.backgroundColor="#70AC28";
+					}
+
+
+			document.getElementById('set10-temp').innerHTML=msg[9]['temp'];
+			document.getElementById('set10-humi').innerHTML=msg[9]['humi'];
+
+			if(msg[9]['temp']<17||msg[9]['temp']>27){
+					document.getElementById('set10-temp').style.color="red";
+					}else{
+						document.getElementById('set10-temp').style.color="blue";
+						}
+				if(msg[9]['humi']<30||msg[9]['humi']>70){
+					document.getElementById('set10-humi').style.color="red";
+					}else{
+						document.getElementById('set10-humi').style.color="blue";
+						}
+			document.getElementById('set10-time').innerHTML=msg[9]['cord_time'].substring(5);
+			if(msg[9]['temp']<17||msg[9]['temp']>27||msg[9]['humi']<30||msg[9]['humi']>70){
+				document.getElementById('tag10').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag10').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set11-temp').innerHTML=msg[10]['temp'];
+			document.getElementById('set11-humi').innerHTML=msg[10]['humi'];
+			if(msg[10]['temp']<15||msg[10]['temp']>27){
+					document.getElementById('set11-temp').style.color="red";
+					}else{
+						document.getElementById('set11-temp').style.color="blue";
+						}
+				if(msg[10]['humi']<30||msg[10]['humi']>70){
+					document.getElementById('set11-humi').style.color="red";
+					}else{
+						document.getElementById('set11-humi').style.color="blue";
+						}
+			document.getElementById('set11-time').innerHTML=msg[10]['cord_time'].substring(5);
+			if(msg[10]['temp']<15||msg[10]['temp']>27||msg[10]['humi']<30||msg[10]['humi']>70){
+				document.getElementById('tag11').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag11').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set12-temp').innerHTML=msg[11]['temp'];
+			document.getElementById('set12-humi').innerHTML=msg[11]['humi'];
+			if(msg[11]['temp']<17||msg[11]['temp']>27){
+					document.getElementById('set12-temp').style.color="red";
+					}else{
+						document.getElementById('set12-temp').style.color="blue";
+						}
+				if(msg[11]['humi']<30||msg[11]['humi']>70){
+					document.getElementById('set12-humi').style.color="red";
+					}else{
+						document.getElementById('set12-humi').style.color="blue";
+						}
+			document.getElementById('set12-time').innerHTML=msg[11]['cord_time'].substring(5);
+			if(msg[11]['temp']<17||msg[11]['temp']>27||msg[11]['humi']<30||msg[11]['humi']>70){
+				document.getElementById('tag12').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag12').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set13-temp').innerHTML=msg[12]['temp'];
+			document.getElementById('set13-humi').innerHTML=msg[12]['humi'];
+			if(msg[12]['temp']<17||msg[12]['temp']>27){
+					document.getElementById('set13-temp').style.color="red";
+					}else{
+						document.getElementById('set13-temp').style.color="blue";
+						}
+				if(msg[12]['humi']<30||msg[12]['humi']>70){
+					document.getElementById('set13-humi').style.color="red";
+					}else{
+						document.getElementById('set13-humi').style.color="blue";
+						}
+			document.getElementById('set13-time').innerHTML=msg[12]['cord_time'].substring(5);
+			if(msg[12]['temp']<17||msg[12]['temp']>27||msg[12]['humi']<30||msg[12]['humi']>70){
+				document.getElementById('tag13').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag13').style.backgroundColor="#70AC28";
+					}
+
+			document.getElementById('set14-temp').innerHTML=msg[13]['temp'];
+			document.getElementById('set14-humi').innerHTML=msg[13]['humi'];
+			if(msg[13]['temp']<15||msg[13]['temp']>27){
+					document.getElementById('set14-temp').style.color="red";
+					}else{
+						document.getElementById('set14-temp').style.color="blue";
+						}
+				if(msg[13]['humi']<30||msg[13]['humi']>70){
+					document.getElementById('set14-humi').style.color="red";
+					}else{
+						document.getElementById('set14-humi').style.color="blue";
+						}
+			document.getElementById('set14-time').innerHTML=msg[13]['cord_time'].substring(5);
+			if(msg[13]['temp']<15||msg[13]['temp']>27||msg[13]['humi']<30||msg[13]['humi']>70){
+				document.getElementById('tag14').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag14').style.backgroundColor="#70AC28";
+					}
+
+
+
+			document.getElementById('set15-temp').innerHTML=msg[14]['temp'];
+			document.getElementById('set15-humi').innerHTML=msg[14]['humi'];
+			if(msg[14]['temp']<15||msg[14]['temp']>27){
+					document.getElementById('set15-temp').style.color="red";
+					}else{
+						document.getElementById('set15-temp').style.color="blue";
+						}
+				if(msg[14]['humi']<30||msg[14]['humi']>70){
+					document.getElementById('set15-humi').style.color="red";
+					}else{
+						document.getElementById('set15-humi').style.color="blue";
+						}
+			document.getElementById('set15-time').innerHTML=msg[14]['cord_time'].substring(5);
+			if(msg[14]['temp']<15||msg[14]['temp']>27||msg[14]['humi']<30||msg[14]['humi']>70){
+				document.getElementById('tag15').style.backgroundColor="red";
+				}else{
+					document.getElementById('tag15').style.backgroundColor="#70AC28";
+					}
+			}
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+	}
+</script>
+</head>
+<body onload="load()">
+<div class="container-box">
+
+ <div class="div-body">
+  <div class="div-left">
+
+   <div>
+    <img src="logo.png" alt="logo" style="margin-left:12px;margin-top:5px;"/>
+   </div>
+
+
+   <div class="div-title">
+    <span style="color: blue;font-size: 28px;">SOD车间温湿度</span><br>
+    <span style="color: blue;font-size: 28px;">监控系统</span>
+   </div>
+   <div style="margin-top:5px;">
+    <span style="margin-left:16px">当前日期：</span><span id="y" style="font-size:20px;font-weight:bold;"></span><span>年</span><span id="m" style="font-size:20px;font-weight:bold;"></span><span>月</span><span id="d" style="font-size:20px;font-weight:bold;"></span><span>日</span>
+    </div>
+
+   <div style="margin-top: 12px;">
+    <ol>
+     <li>
+      #8,#9,#10,#12,#13为重点监控区域
+     </li>
+     <li>
+      <span>车间标准温度：21±6℃</span><br/>
+      <span>MSD区域温度：22±5℃</span><br />
+      <span>湿度30%-70%</span><br>
+      <label><div style="width: 25px;height: 25px;background-color: red;border-radius: 50%;-moz-border-radius: 50%;"></div>异常</label>
+      <label style="margin-left: 25px"><div style="width: 25px;height: 25px;background-color: #70AC28;border-radius: 50%;-moz-border-radius: 50%;"></div>正常</label>
+      <label style="margin-left: 25px"><div style="width: 25px;height: 25px;background-color: yellow;border-radius: 50%;-moz-border-radius: 50%;"></div>預警</label>
+
+     </li>
+     <li>
+     查询&折线图功能--单击各区域名称（如："<label style="font-weight:bold;">#2：IT机房</label>"）
+     </li>
+     <li><a href="../temp_test/temp_test.html">防潮柜监测系统</a></li>
+    </ol>
+
+   </div>
+
+
+
+  </div>
+  <div class="div-table">
+   <table class="table table-bordered" id="temp-body" align="center">
+    <tr>
+     <td><a href="temp-chart.html?set=3"><div class="box-body">
+
+      <div class="box-bottom">
+       <div class="box-pla">
+        <span class="pace">#3：OM Office</span>
+       </div>
+       <div class="box-data">
+        <span class="data-t">温度：</span><span id="set3-temp">20℃</span>
+        <span class="data-t">湿度：</span><span id="set3-humi">45%</span>
+       </div>
+       <div style="margin-left: 5px;font-size: 12px;color: black">
+       </div>
+      </div>
+
+      <div class="box-title">
+       <div>
+        <div class="tag" id="tag3"></div>
+       </div>
+       <div class="title-text">
+       <span id="set3-time" style="font-size:14px">08:00</span>
+       </div>
+      </div>
+     </div></a></td>
+
+     <td>
+      <a href="temp-chart.html?set=4"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#4：清点区</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set4-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set4-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag4"></div>
+        </div>
+        <div class="title-text">
+         <span id="set4-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=5"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#5：酒精柜区</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set5-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set5-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag5"></div>
+        </div>
+        <div class="title-text">
+        <span id="set5-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=6"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#6：WUR</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set6-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set6-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag6"></div>
+        </div>
+        <div class="title-text">
+        <span id="set6-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=7"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#7：修护 Office</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set7-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set7-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag7"></div>
+        </div>
+        <div class="title-text">
+        <span id="set7-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+    </tr>
+    <tr>
+     <td>
+      <a href="temp-chart.html?set=2"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#2：IT 机房</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set2-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set2-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag2"></div>
+        </div>
+        <div class="title-text">
+         <span id="set2-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td colspan="3" rowspan="3" style="text-align: center;"><div><img src="temp1.png" width="100%" height="100%"/></div></td>
+
+     <td>
+      <a href="temp-chart.html?set=8"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace" style="color: #C06">#8：CGS电子仓</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set8-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set8-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag8"></div>
+        </div>
+        <div class="title-text">
+         <p >MSD区域温度:22±5℃</p>
+         <span>湿度：30%-70%</span><br /><span id="set8-time">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+    </tr>
+
+    <tr>
+
+     <td rowspan="2" style="vertical-align:middle;">
+      <a href="temp-chart.html?set=1" style="margin: 0 auto"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#1：鞋柜区</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set1-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set1-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag1"></div>
+        </div>
+        <div class="title-text">
+         <span id="set1-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=9"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace" style="color: #C06">#9：BGA室</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set9-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set9-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag9"></div>
+        </div>
+        <div class="title-text">
+         <p >MSD区域温度:22±5℃</p>
+         <span>湿度：30%-70%</span><br /><span id="set9-time">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+    </tr>
+
+    <tr>
+
+     <td>
+      <a href="temp-chart.html?set=10"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace" style="color: #C06">#10：RMA电子仓</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set10-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set10-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag10"></div>
+        </div>
+        <div class="title-text">
+         <p >MSD区域温度:22±5℃</p>
+         <span>湿度：30%-70%</span><br /><span id="set10-time">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+    </tr>
+
+    <tr>
+
+     <td>
+      <a href="temp-chart.html?set=15"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#15：SOD车间</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set15-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set15-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag15"></div>
+        </div>
+        <div class="title-text">
+         <span id="set15-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=14"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#14：安检门</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set14-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set14-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag14"></div>
+        </div>
+        <div class="title-text">
+         <span id="set14-time" style="font-size:14px;">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=13"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace" style="color: #C06">#13：X-Ray</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set13-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set13-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag13"></div>
+        </div>
+        <div class="title-text">
+         <p >MSD区域温度:22±5℃</p>
+         <span>湿度：30%-70%</span><br /><span id="set13-time">08:00</span>
+        </div>
+       </div>
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=12"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace" style="color: #C06">#12：植球室</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set12-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set12-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag12"></div>
+        </div>
+        <div class="title-text">
+         <p >MSD区域温度:22±5℃</p>
+         <span>湿度：30%-70%</span><br /><span id="set12-time">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+
+     <td>
+      <a href="temp-chart.html?set=11"><div class="box-body">
+
+       <div class="box-bottom">
+        <div class="box-pla">
+         <span class="pace">#11：TNB Office</span>
+        </div>
+        <div class="box-data">
+         <span class="data-t">温度：</span><span id="set11-temp">20℃</span>
+         <span class="data-t">湿度：</span><span id="set11-humi">45%</span>
+        </div>
+       </div>
+
+       <div class="box-title">
+        <div>
+         <div class="tag" id="tag11"></div>
+        </div>
+        <div class="title-text">
+         <span id="set11-time" style="font-size:14px">08:00</span>
+        </div>
+       </div>
+
+      </div></a>
+     </td>
+    </tr>
+   </table>
+  </div>
+  <div >
+
+ </div>
+</div>
+</body>
+</html>

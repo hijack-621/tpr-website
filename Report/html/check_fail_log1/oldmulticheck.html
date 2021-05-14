@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Multi-TestLog Issue FACA</title>
+</head>
+<style type="text/css">
+    body{
+        background-image: url(../../../images/beijin.jpg);
+        background-color: #6C9;
+        text-align:center;
+        padding: 0;
+        margin: 0;
+    }
+    .blueframe{
+        transition: all 0.30s ease-in-out;
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        border: #FFF 2px solid;
+        border-radius: 3px;
+        outline: none;
+    }
+    .blueframe:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        -moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    }
+    input::-ms-input-placeholder{
+        text-align: center;
+    }
+    input::-webkit-input-placeholder{
+        text-align: center;
+    }
+    option{
+        text-align: center;
+    }
+    #d_body{
+        margin:120px 0 0 30px;
+    }
+    #t_body{
+        color:#000;
+        margin-top:30px;
+        border-top:#000 1px solid;
+        border-left:#000 1px solid;
+    }
+    #t_body td{
+        border-right:#000 1px solid;
+        border-bottom:#000 1px solid;
+        background-color:#FFF;
+    }
+    body,td,th {
+        color: #000;
+    }
+    #sub{
+        margin-left:30px;
+        display: inline-block;
+        padding: 5px 10px 6px;
+        color: #fff;
+        border:none;
+        font-size:16px;
+        text-decoration: none;
+        background-color:#0077FF;
+        position: relative;
+        cursor: pointer;
+    }
+</style>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/jquery.searchableSelect.css" type="text/css">
+<script src="../../../js/jquery-3.2.1.js"></script>
+<script src="../../../js/jquery.searchableSelect.js"></script>
+<script type="text/javascript">
+
+    function load() {
+        let flag = 'showselect';
+        let tprflag = 'gettpr';
+        let facflag = 'getfac';
+
+        $.ajax({
+            type:'post',
+            url:'../../server/servlet/check_fail_log/multicheck.php',
+            dataType:'json',
+            data:{flag:flag},
+            complete:function(){
+                //console.log(1111);
+            },
+            success:function (info) {
+                console.log(info);
+                console.log(info.length);
+                let mtime = [];
+                let mtimedepn=[];
+                let mtemp = [];
+                let mtempdepn = [];
+                let mfail = [];
+                let mfaildepn = [];
+                if(info.length>0){
+                    if( info.length==1&& info[0][0] !='CGS'){
+                        console.log('not  cgs');
+                        for(let i = 1;i<info[0].length;i++) {
+                            mtime.push(info[0][i]['Test_time']);
+                            mtemp.push(info[0][i]['Model']);
+                            mfail.push(info[0][i]['Fail_Item']);
+                        }
+                        //console.log(mtime);
+                            for(let j=0;j<mtemp.length;j++){
+                                if(mtempdepn.indexOf(mtemp[j]) == -1 ) {
+                                    mtempdepn.push(mtemp[j]);
+
+                                }
+                            }
+                        for(let j=0;j<mfail.length;j++){
+                            if(mfaildepn.indexOf(mfail[j]) == -1 ) {
+                                mfaildepn.push(mfail[j]);
+
+                            }
+                        }
+                            for(let j=0;j<mtime.length;j++){
+                                if(mtimedepn.indexOf(mtime[j]) == -1 ) {
+                                    mtimedepn.push(mtime[j]);
+
+                                }
+                            }
+
+                        for(let x=0;x<mtimedepn.length;x++){
+                            /*let mopns =document.createElement('option');
+                            mopns.value = mfaildepn[x];
+                            mopns.text =  mfaildepn[x];
+                            ofail.options.add(mopns);//!select  动态添加options*/
+                            $('#fatime').append("<option value='" + mtimedepn[x] + "'>" + mtimedepn[x] + "</option>");
+                        }
+                            for(let x=0;x<mtempdepn.length;x++){
+                                /* let mopns =document.createElement('option');
+                                 mopns.value = mtempdepn[x];
+                                 mopns.text =  mtempdepn[x];
+                                 omodel.options.add(mopns);//!select  动态添加options*/
+                                $('#model').append("<option value='" + mtempdepn[x] + "'>" + mtempdepn[x] + "</option>");
+
+                            }
+                            for(let x=0;x<mfaildepn.length;x++){
+                                /*let mopns =document.createElement('option');
+                                mopns.value = mfaildepn[x];
+                                mopns.text =  mfaildepn[x];
+                                ofail.options.add(mopns);//!select  动态添加options*/
+                                $('#failitem').append("<option value='" + mfaildepn[x] + "'>" + mfaildepn[x] + "</option>");
+                            }
+
+
+                    }else{
+                        console.log('cgs');
+                        for(let x= 0;x<info.length;x++){
+                            for(let y=1;y<info[x].length;y++){
+                                mtime.push(info[x][y]['Test_time']);
+                                mtemp.push(info[x][y]['Model']);
+                                mfail.push(info[x][y]['Fail_Item']);
+                            }
+                        }
+                        for(let j=0;j<mtemp.length;j++){
+                            if(mtempdepn.indexOf(mtemp[j]) == -1 ) {
+                                mtempdepn.push(mtemp[j]);
+
+                            }
+                        }
+                        for(let j=0;j<mfail.length;j++){
+                            if(mfaildepn.indexOf(mfail[j]) == -1 ) {
+                                mfaildepn.push(mfail[j]);
+
+                            }
+                        }
+                        for(let j=0;j<mtime.length;j++){
+                            if(mtimedepn.indexOf(mtime[j]) == -1 ) {
+                                mtimedepn.push(mtime[j]);
+
+                            }
+                        }
+                        for(let x=0;x<mtimedepn.length;x++){
+
+                            /* let mopns =document.createElement('option');
+                             mopns.value = mtempdepn[x];
+                             mopns.text =  mtempdepn[x];
+                             omodel.options.add(mopns);//!select  动态添加options*/
+                            $('#fatime').append("<option value='" + mtimedepn[x] + "'>" + mtimedepn[x] + "</option>");
+
+                        }
+                        for(let x=0;x<mtempdepn.length;x++){
+                            /* let mopns =document.createElement('option');
+                             mopns.value = mtempdepn[x];
+                             mopns.text =  mtempdepn[x];
+                             omodel.options.add(mopns);//!select  动态添加options*/
+                            $('#model').append("<option value='" + mtempdepn[x] + "'>" + mtempdepn[x] + "</option>");
+
+                        }
+                        for(let x=0;x<mfaildepn.length;x++){
+                            /*let mopns =document.createElement('option');
+                            mopns.value = mfaildepn[x];
+                            mopns.text =  mfaildepn[x];
+                            ofail.options.add(mopns);//!select  动态添加options*/
+                            $('#failitem').append("<option value='" + mfaildepn[x] + "'>" + mfaildepn[x] + "</option>");
+                        }
+
+                    }
+
+                }else{
+                    alert('no faca to maintain')
+                }
+
+                $(function () {
+                    $('#fatime').searchableSelect();
+                    $('#model').searchableSelect();
+                    $('#failitem').searchableSelect();
+
+                });
+
+                },
+            error:function (info) {
+                console.log(info);
+            }
+        });
+        $.ajax({
+            type:'post',
+            url:'../../server/servlet/check_fail_log/multicheck.php',
+            dataType:'json',
+            data:{flag:tprflag},
+            success:function (info) {
+                console.log(info);
+                if(info !== 'CGS'){
+                    $('#c_ck').attr('disabled','disabled');
+                }
+            },
+            error:function (info) {
+                console.log(info);
+            },
+        });
+
+    $('#failitem').change(function () {
+        let vtime =$('#fatime').val();
+        let vmodel = $('#model').val();
+        let vfail = $('#failitem').val();
+        console.log(vtime);
+        console.log(vmodel);
+        console.log(vfail);
+        $.ajax({
+            type:'post',
+            url:'../../server/servlet/check_fail_log/multicheck.php',
+            dataType:'json',
+            data:{flag:facflag,vtime:vtime,vmodel:vmodel,vfail:vfail},
+            success:function (info) {
+                console.log(info);
+                if(info !== null){
+                    $('#fa').html(info[0]['TPR_FA']);
+                    $('#action').html(info[0]['Action']);
+                    $('#updatetime').html(info[0]['update_time']);
+                }
+            },
+            error:function (info) {
+                console.log(info);
+            }
+        })
+    })
+    }
+
+    function submit() {
+        let flag = 'update';
+        let flagc = 'getfac';
+        let vtime =$('#fatime').val();
+        let vmodel = $('#model').val();
+        let vfail = $('#failitem').val();
+        let vfa = $('#fa').val();
+        let vaction = $('#action').val();
+        let vck = $('#c_ck').val();
+        
+        if(document.getElementById('c_ck').disabled==true){
+            var fa=$('#fa').val();
+            var action=$('#action').val();
+            var c_check="";
+            if((fa==""||fa==null)||(action==""||action==null)){
+                alert("please input TPR　FA and Action");
+                return;
+            }
+
+        }else{
+            var c_check=$('#c_ck').val();
+            var fa=$('#fa').val();
+            var action=$('#action').val();
+            if(c_check==""||c_check==null){
+                alert("please input COMPAL check  ");
+                return;
+            }
+        }
+        $.ajax({
+            type:'post',
+            url:'../../server/servlet/check_fail_log/multicheck.php',
+            dataType: 'json',
+            data:{flag:flag,vtime:vtime,vmodel:vmodel,vfail:vfail,vfa:vfa,vaction:vaction,vck:vck},
+            success:function (info) {
+                console.log(info);
+                if(info == 'success'){
+                    alert('edit success');
+                }
+            },
+            error:function (info) {
+                console.log(info);
+            }
+        })
+
+
+    }
+
+</script>
+<body onload="load()">
+<div style="color: #FFF;text-align: center;margin-top: 5px;" ><h3 style="font-size: 23px">Multi-TestLog Issue FACA </h3></div>
+<div style="margin-top: 40px;width: 1100px;height: 45px;background-color: #2D2D7D;margin-left:  auto;margin-right: auto;text-align: center;vertical-align: middle">
+<div class="col col-md-3" style="float: left;margin-left: 85px;margin-top: 8px;">
+    <select id="fatime"  style="width: 200px;text-align: center;"  >
+        <option  value="-1" style="text-align: center" >Choose Fail-Date</option>
+    </select>
+</div>
+<div class="col col-md-3" style="float: left;margin-left: 70px;display: inline-block;margin-top: 8px;">
+    <select id="model"  style="width: 200px;text-align: center;"  >
+        <option  value="-1" style="text-align: center" >Choose Model</option>
+    </select>
+
+    </div>
+<div class="col col-md-3" style="float: left;margin-left: 70px;display: inline-block;margin-top: 8px"  id="fm" o >
+
+        <select id="failitem"  style="width: 200px;text-align: center"  >
+            <option style="text-align: center" value="-1" >Choose Fail-Item</option>
+        </select>
+
+
+</div>
+
+</div>
+<div id="d_body">
+    <table id="t_body" align="center" cellspacing="0" style="border: 2px black solid">
+
+        <tr >
+            <td colspan="1" style="vertical-align: middle;text-align: center" >
+                TPR FA:
+            </td>
+            <td colspan="2" ><textarea rows="3" cols="62" id="fa" style="resize:none;"></textarea></td>
+            <td  id="updatetime" rowspan="2" colspan="1" style="width: 130px;height: 170px;background-color: #fff;text-align: center"></td>
+        </tr>
+        <tr >
+            <td colspan="1" style="vertical-align: middle;text-align: center" >
+                Action:
+            </td>
+            <td colspan="2" ><textarea rows="3" cols="62" id="action" style="resize:none;"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="1" style="vertical-align: middle;text-align: center" >
+                Compal Check:
+            </td>
+            <td colspan="3" ><textarea rows="3" cols="80" id="c_ck" style="resize:none;"></textarea></td>
+        </tr>
+        <tr>
+            <td style="text-align:center" colspan="4" ><input id="sub" type="button" onclick="submit()" value="Sure" /></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>

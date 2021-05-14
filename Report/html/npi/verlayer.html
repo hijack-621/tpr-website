@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signlayer</title>
+</head>
+<link rel="stylesheet" href="./css/layui.css">
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="./layui.js"></script>
+<style>
+    .layui-form-item label{
+        position: absolute;
+        line-height: 35px;
+    }
+    .layui-input::-webkit-input-placeholder{
+        text-align: center;
+    }
+    .layui-layer-iframe .layui-layer-iframe .layui-layer-content {
+        height: 63px !important;
+    }
+    .vercss{
+        /* text-align: center; */
+        margin-left: 42px;
+        padding-left:30px;
+    }
+    /*input placeholder文字居中！！！*/
+</style>
+<body>
+<div>
+    <div style="width: 500px;margin: 0 auto;overflow: hidden;">
+        <div class="layui-tab layui-tab-card" style="margin-top: 35px;">
+            <ul class="layui-tab-title" id='model'>
+              <!-- <li class="layui-this">网站设置</li>
+              <li>用户管理</li>
+              <li>权限分配</li>
+              <li>商品管理</li>
+              <li>订单管理</li> -->
+            </ul>
+            <div class="layui-tab-content" style="height: 100px;" id='content'>
+              <!-- <div class="layui-tab-item layui-show">
+                  <div style="width: 50%;float: left;">
+                      <label>N_ver:</label>
+                     <div style="margin-top: -16px;text-align: center;">QC1:1.1.1</div>
+                     <div  style="text-align: center;">QC2:1.1.2</div>
+                  </div>
+                  <div style="width: 50%;float: left;">
+                    <label>O_ver:</label>
+                    <div style="margin-top: -16px;text-align: center;">QC1:1.1.0</div>
+                     <div  style="text-align: center;">QC2:1.1.0</div>
+                  </div>
+              </div>
+              <div class="layui-tab-item">2</div>
+              <div class="layui-tab-item">3</div>
+              <div class="layui-tab-item">4</div>
+              <div class="layui-tab-item">5</div> -->
+              
+            </div>
+          </div>
+    </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+layui.use('element',function(){
+    var element = layui.element;
+    element.init();
+})
+$(document).ready(function(){
+    let param = window.location.search.substring(1);
+    //console.log(param);
+    let r=new Array();
+    let str_arr=param.split("&");
+    for(let i = 0; i < str_arr.length; i ++) { //吧url所带参数放入数组r
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+    //console.log(r)
+    // let id = r[0],
+    // flag  = r[1];
+    if(r.length>=2){
+        $.ajax({
+            url:'Controller.php',
+            type:'post',
+            data:{action:'NPIController/layergetver',urldata:r},
+            dataType:'json',
+            beforeSend:function(){
+                // layui.use('layer',function(){
+                //     layer  = layui.layer;
+                //     layer.msg('查询中，请稍后！！！',{time:150})
+                // })
+            },
+            success:function(msg){
+                console.log(msg);
+                if(msg.length>0){
+
+                    for(let i=0;i<msg.length;i++){
+                       
+                        if(i==0){
+                            let modelhtml = '<li class="layui-this">'+msg[i]['model']+'</li>'
+                            let  content = 
+                            '<div class="layui-tab-item layui-show">'+
+                            '<div style="width: 50%;float: left;">' +
+                            '<label>N_ver:</label>' +
+                            '<div style="margin-top: -16px;margin-left:42px;padding-left:30px">QC1:'+msg[i]['nqc1_img']+'</div>' +
+                            '<div  class="vercss">QC2:'+msg[i]['nqc2_img']+'</div>' +
+                            '<div  class="vercss">QC3:'+msg[i]['nqc3_img']+'</div>' +
+                            '<div  class="vercss">RUNIN:'+msg[i]['nrunin_img']+'</div>' +
+                            '<div  class="vercss">OBA:'+msg[i]['noba_img']+'</div>' +
+                            '</div>' +
+                            '<div style="width: 50%;float: left;">' +
+                            '<label>O_ver:</label>' +
+                            '<div style="margin-top: -16px;margin-left:42px;padding-left:30px">QC1:'+msg[i]['qc1_img']+'</div>' +
+                            '<div  class="vercss">QC2:'+msg[i]['qc2_img']+'</div>' +
+                            '<div  class="vercss">QC3:'+msg[i]['qc3_img']+'</div>' +
+                            '<div  class="vercss">RUNIN:'+msg[i]['runin_img']+'</div>' +
+                            '<div  class="vercss">OBA:'+msg[i]['oba_img']+'</div>' +
+                            '</div>'+
+                            '</div>';
+                            
+                            
+                            
+                            // '<div style="width: 50%;float: left;"><label>N_ver:</label><div style="margin-top: -16px;text-align: center;">QC1:1.1.1</div><div  style="text-align: center;">QC2:1.1.2</div></div><div style="width: 50%;float: left;"><label>O_ver:</label><div style="margin-top: -16px;text-align: center;">QC1:1.1.0</div><div  style="text-align: center;">QC2:1.1.0</div></div>'
+                        $('#model').append(modelhtml);
+                        $('#content').append(content);
+                        }else{
+                            let    modelhtml = '<li>'+msg[i]['model']+'</li>'
+                            let  content = 
+                            '<div class="layui-tab-item">'+
+                            '<div style="width: 50%;float: left;">' +
+                            '<label>N_ver:</label>' +
+                            '<div style="margin-top: -16px;margin-left:42px;padding-left:30px">QC1:'+msg[i]['nqc1_img']+'</div>' +
+                            '<div  class="vercss">QC2:'+msg[i]['nqc2_img']+'</div>' +
+                            '<div  class="vercss">QC3:'+msg[i]['nqc3_img']+'</div>' +
+                            '<div  class="vercss">RUNIN:'+msg[i]['nrunin_img']+'</div>' +
+                            '<div  class="vercss">OBA:'+msg[i]['noba_img']+'</div>' +
+                            '</div>' +
+                            '<div style="width: 50%;float: left;">' +
+                            '<label>O_ver:</label>' +
+                            '<div style="margin-top: -16px;margin-left:42px;padding-left:30px">QC1:'+msg[i]['qc1_img']+'</div>' +
+                            '<div  class="vercss">QC2:'+msg[i]['qc2_img']+'</div>' +
+                            '<div  class="vercss">QC3:'+msg[i]['qc3_img']+'</div>' +
+                            '<div class="vercss">RUNIN:'+msg[i]['runin_img']+'</div>' +
+                            '<div class="vercss">OBA:'+msg[i]['oba_img']+'</div>' +
+                            '</div>'+
+                            '</div>';
+                         $('#model').append(modelhtml);
+                         $('#content').append(content);
+                        }
+                        
+                    }
+
+                }
+
+            },
+            error:function(emsg){
+                console.log(emsg);
+            }
+        })
+    }
+})
+
+
+    function callbackdata() {
+        return $('#sgn').val();
+    }
+</script>
+</html>

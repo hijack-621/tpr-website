@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<input type="file" id="excel-file">
+</body>
+<link rel="stylesheet" href="../../../../TPRindex/css/style.css" type="text/css" media="screen" />
+<script type='text/javascript' src='../../../../js/jquery-3.2.1.js' ></script>
+<script type='text/javascript' src='../../../../../layui/layui.all.js' ></script>
+<script type='text/javascript' src='../../../../js/date.format.js' ></script>
+<script type='text/javascript' src='../../../../js/xlsx.core.min.js' ></script>
+<script type='text/javascript' src='../../../../js/csv2table.js' ></script>
+<link rel="shortcut icon" href="../../../../images/logo.ico" type="image/x-icon">
+<script>
+    $('#excel-file').change(function (e) {
+        var files = e.target.files;
+        var fileReader = new FileReader();
+        let zmarr = generateBig_1();
+        //console.log(zmarr); 
+        fileReader.onload = function (ev) {
+            try {
+                var data = ev.target.result,
+                    workbook = XLSX.read(data, {
+                        type: 'binary'
+                    }), // 以二进制流方式读取得到整份excel表格对象
+                    persons = []; // 存储获取到的数据
+            } catch (e) {
+                console.log('文件类型不正确');
+                return;
+            }
+
+            // 遍历每张表读取
+            for (var sheet in workbook.Sheets) {
+                if (workbook.Sheets.hasOwnProperty(sheet)) {
+                    var fromTo = workbook.Sheets[sheet]['!ref'];
+                    console.log(fromTo);//列序号A-Z
+                    var datas = workbook.Sheets[sheet];
+                    console.log(datas);
+                    //let len = Object.keys(datas).length;
+                    console.log(len);
+                    // 处理不规范的数据
+                    for (var nums in datas) {
+                        console.log(nums);
+                        var num = nums.replace(/[^0-9]/ig, "");
+                        console.log(num);
+                        var row_data = new Array();
+                        row_data[0] = "A" + String(num);
+                        row_data[1] = "B" + String(num);
+                        row_data[2] = "C" + String(num);
+                        row_data[3] = "D" + String(num);
+                        row_data[4] = "E" + String(num);
+                        row_data[5] = "F" + String(num);
+                        row_data[6] = "G" + String(num);
+                        row_data[7] = "H" + String(num);
+                        row_data[8] = "I" + String(num);
+                        row_data[9] = "J" + String(num);
+                        row_data[10] = "K" + String(num);
+                        row_data[11] = "L" + String(num);
+                        row_data[12] = "M" + String(num);
+                        
+                        var arry_row = new Array();
+                        var count = 0;
+                        for (var i of row_data) {
+                            if (datas[i]) {
+                                arry_row[count] = datas[i];
+                                count += 1;
+                            }
+                        }
+                        // 找到正确数据的列名
+                        if (arry_row.indexOf("单位") < 0 || arry_row.indexOf("数量") < 0) {
+                            for (var i = 0; i < row_data.length; i++) {
+                                delete datas[row_data[i]];
+                            }
+                        }
+                        else {
+                            // 修改读取范围
+                            datas["!ref"] = row_data[0] + ":" + datas['!ref'].split(':')[1];
+                            break;
+                        }
+
+                    }
+                    persons = persons.concat(XLSX.utils.sheet_to_json(datas));
+                    break; // 只读了第一张表
+                }
+            }
+            console.log(persons);
+        };
+        // 以二进制方式打开文件
+        fileReader.readAsBinaryString(files[0]);
+    });
+
+
+    function generateBig_1(){
+    var str = [];
+    for(var i=65;i<91;i++){
+        str.push(String.fromCharCode(i));
+    }
+    return str;
+}
+</script>
+
+</html>

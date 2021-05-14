@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>TPR Testlog Report</title>
+<style>
+body{
+	text-align:center;
+	background-color: #09F;
+	background-image: url(../../../images/beijin.jpg);
+}
+#data_body{
+	background-color:#CCC;
+	<!--display:none;-->
+	margin-top:30px;
+	border-top:#000000 1px solid;
+	border-left:#000000 1px solid;
+	color:#000;
+}
+#data_body td{
+	border-right:#000000 1px solid;
+	border-bottom:#000000 1px solid;
+}
+</style>
+</head>
+<link rel="stylesheet" href="../../../TPRindex/css/style.css" type="text/css" media="screen" />
+<link href="../../../css/lyz.calendar.css" rel="stylesheet" type="text/css" />
+<script  type="text/javascript"  src="../../../js/jquery-1.5.1.js"></script>
+
+<script   type="text/javascript"  src="../../../js/lyz.calendar.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	$('#bgtime').calendar({
+		controlId: "divDate",
+		})
+	 $('#edtime').calendar({
+
+	 })
+	})
+
+
+
+function summary(){
+	
+	 
+	$.ajax({
+		
+		type:'post',
+		url:"../../server/Test_Report/TPR_Test_Report.php",
+		dataType:'json',
+		data:{flag:4 },
+		success:function(msg){
+			
+			 //alert(msg);
+			//alert(msg.length);
+			var tb=document.getElementById('data_body');
+			tb.align="center";
+			tb.style.fontSize='9px';
+			$("#data_body").empty();
+			for(var i=0;i<msg.length;i++){
+
+
+
+				if(msg.length>2){
+				var tr=document.createElement("tr");
+				if(i==0){
+					 tr.style.background="#f4987f";
+					
+				}
+				
+				
+				
+				for(var x=0;x<msg[i].length;x++){
+					var td=document.createElement("td");
+					//td.width="30px";
+					td.innerHTML=msg[i][x];
+
+
+					if(x==0){
+					td.width="90px";
+				}else if(x==1){
+						td.width="70px";
+				}else if(x==2){
+					td.width="50px";
+				}else if(x==3){
+					td.width="70px";
+
+				}else if(x==4){
+					td.width="70px";
+
+				}else if(x==5){
+
+					td.width="70px";
+				}else if(x==6){
+
+					td.width="70px";
+				}else if(x==7){
+
+					td.width="200px";
+				}else if(x==8){
+
+					td.width="80px";
+				}else if(x==9){
+
+					td.width="70px";
+				}else if(x==10){
+
+					td.width="120px";
+				}
+
+					tr.appendChild(td);
+				}
+				tb.appendChild(tr);
+
+			} else{
+
+
+ 
+    var tr=document.createElement("tr");
+		if(i==0){
+					 tr.style.background="#f4987f";
+					
+				}
+				
+
+    for(var x=0;x<msg[i].length;x++){
+    	var td=document.createElement("td");
+
+
+
+					if(x==0){
+					td.width="220px";
+				}else if(x==1){
+						td.width="70px";
+				}else if(x==2){
+					td.width="50px";
+				}else if(x==3){
+					td.width="70px";
+
+				}else if(x==4){
+					td.width="70px";
+
+				}else if(x==5){
+
+					td.width="70px";
+				}else if(x==6){
+
+					td.width="70px";
+				}else if(x==7){
+
+					td.width="200px";
+				}else if(x==8){
+
+					td.width="80px";
+				}else if(x==9){
+
+					td.width="70px";
+				}else if(x==10){
+
+					td.width="120px";
+				}
+		td.innerHTML=msg[i][x];
+		/* td.setAttribute("colspan",msg[i].length);
+		td.innerHTML="no data"; */
+		tr.appendChild(td);
+
+    }
+
+    tb.appendChild(tr);
+
+var Time =bgtime+"~"+edtime;
+var TPR =tpr;
+
+    var arrayObj = new Array();
+    arrayObj.push("/","/",0,0,"QC3","/","/","/","/","/","/");　
+    //alert(arrayObj);
+
+    var tr1=document.createElement("tr");
+
+    for(var x=0;x<arrayObj.length;x++){
+    	var td=document.createElement("td");
+
+
+    	td.width="30px";
+		td.innerHTML= arrayObj[x];
+
+		tr1.appendChild(td);
+
+    }
+    tb.appendChild(tr1);
+
+
+			}}
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+}
+
+    function search(){
+
+	var bgtime=$('#bgtime').val();
+	var edtime=$('#edtime').val();
+	var tpr=$('#projectName').val();
+	if(bgtime==""||bgtime==null||edtime==""||edtime==null){
+		alert("please choose time");
+		return;
+	}
+
+	$.ajax({
+		type:'post',
+		url:"../../server/Test_Report/TPR_Test_Report.php",
+		dataType:'json',
+		data:{flag:2,bgtime:bgtime,edtime:edtime,tpr:tpr},
+		success:function(msg){
+			console.log(msg);
+			//alert(msg.length);
+			var tb=document.getElementById('data_body');
+			tb.align="center";
+			tb.style.fontSize='9px';
+			$("#data_body").empty();
+			for(var i=0;i<msg.length;i++){
+
+
+
+				if(msg.length>2){
+				var tr=document.createElement("tr");
+				if(i==0){
+					 tr.style.background="#f4987f";
+					
+				}
+				
+				
+				
+				for(var x=0;x<msg[i].length;x++){
+					var td=document.createElement("td");
+					//td.width="30px";
+					td.innerHTML=msg[i][x];
+
+
+					if(x==0){
+					td.width="90px";
+				}else if(x==1){
+						td.width="70px";
+				}else if(x==2){
+					td.width="50px";
+				}else if(x==3){
+					td.width="70px";
+
+				}else if(x==4){
+					td.width="70px";
+
+				}else if(x==5){
+
+					td.width="70px";
+				}else if(x==6){
+
+					td.width="70px";
+				}else if(x==7){
+
+					td.width="200px";
+				}else if(x==8){
+
+					td.width="80px";
+				}else if(x==9){
+
+					td.width="70px";
+				}else if(x==10){
+
+					td.width="120px";
+				}
+
+					tr.appendChild(td);
+				}
+				tb.appendChild(tr);
+
+			} else{
+
+
+
+
+
+/* msg.put(0,0,0,0,"QC3","/","/","/","/","/","/");
+
+
+
+   alert(msg);
+   alert(msg.length); */
+    var tr=document.createElement("tr");
+		if(i==0){
+					 tr.style.background="#f4987f";
+					
+				}
+				
+
+    for(var x=0;x<msg[i].length;x++){
+    	var td=document.createElement("td");
+
+
+
+					if(x==0){
+					td.width="220px";
+				}else if(x==1){
+						td.width="70px";
+				}else if(x==2){
+					td.width="50px";
+				}else if(x==3){
+					td.width="70px";
+
+				}else if(x==4){
+					td.width="70px";
+
+				}else if(x==5){
+
+					td.width="70px";
+				}else if(x==6){
+
+					td.width="70px";
+				}else if(x==7){
+
+					td.width="200px";
+				}else if(x==8){
+
+					td.width="80px";
+				}else if(x==9){
+
+					td.width="70px";
+				}else if(x==10){
+
+					td.width="120px";
+				}
+		td.innerHTML=msg[i][x];
+		/* td.setAttribute("colspan",msg[i].length);
+		td.innerHTML="no data"; */
+		tr.appendChild(td);
+
+    }
+
+    tb.appendChild(tr);
+
+var Time =bgtime+"~"+edtime;
+var TPR =tpr;
+
+    var arrayObj = new Array();
+    arrayObj.push(Time,TPR,0,0,"QC3","/","/","/","/","/","/");　
+    //alert(arrayObj);
+
+    var tr1=document.createElement("tr");
+
+    for(var x=0;x<arrayObj.length;x++){
+    	var td=document.createElement("td");
+
+
+    	td.width="30px";
+		td.innerHTML= arrayObj[x];
+
+		tr1.appendChild(td);
+
+    }
+    tb.appendChild(tr1);
+
+
+			}}
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+}
+
+    </script>
+
+
+<body>
+<div id="header-wrap">
+    <header>
+        <hgroup>
+            <h1><a href="../../../index.php">Compal</a></h1>
+            <h3>Just Another Styleshout Template</h3>
+        </hgroup>
+        <nav>
+            <div >
+                <ul id="dh">
+                    <li><a href="../../../index.php">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Our Works</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+
+</div>
+<div class="text" style=" text-align:center;margin-top:120px"><b><font color="black">TPR Check Report</font></b></div>
+ <div class="text" style="margin-top:10px; 	 >
+<span style="font-size:18px;"><script>
+	 </script></span><span  >
+
+     <select  style="margin-left:20px; border:2px width:76px" id="projectName" name="projectName" size="1">
+
+  <option value="RLC_SH" selected>RLC-SH</option>
+  <option value="CEB">CEB</option>
+  <option value="CEP">CEP</option>
+  <option value="IGS">IGS</option>
+</select>
+</span>
+
+
+<input id="bgtime" placeholder="input begin time" style="width:170px;padding:2px 10px;border:1px solid #ccc;margin-right:10px; margin-left:18px"/>-
+<input id="edtime" placeholder="input end time" style="width:170px;padding:2px 10px;border:1px solid #ccc;margin-right:10px;" />
+
+ <button  onClick="search()" type="button" id="stn"  style="margin-left:12px" >search</button>
+  <button  onClick="summary()" type="button" id="stnsummaty"  style="margin-left:12px" >summary</button>
+
+  <!-- <button  onClick="savexls()" type="button" id="savetn"  style="margin-left:12px" >save</button>-->
+<table id="data_body" cellspacing="0"  style="margin-top:12px">
+
+</table>
+</div>
+</div>
+
+
+
+</body>
+</html>

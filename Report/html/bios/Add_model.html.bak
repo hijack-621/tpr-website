@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>add model</title>
+
+<style type="text/css">
+.navbar{display:none}
+</style>
+<link rel="shortcut icon" href="./img/logo.ico" type="image/x-icon">
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<script type="text/javascript">
+function add(){
+	var model=document.getElementById("Model").value;
+	var new_ver=document.getElementById("New_ver").value;
+	var new_sysver=document.getElementById("New_sysver").value;
+
+	if(model==""||model==null){
+		alert("into model");
+		return;
+	}else if(new_ver==""||new_ver==null){
+		alert("into new_ver");
+		return;
+	}else if(new_sysver==""||new_sysver==null){
+		alert("into new_sysver");
+		return;
+	}
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"BIOS_server.php",
+		data:{flag:'add_model',model:model,new_ver:new_ver,new_sysver:new_sysver},
+		success:function(msg){
+			console.log(msg);
+			if(msg=='10000'){
+				location.href='#';
+			}else if(msg==1){
+				alert("success");
+			}else if(msg==0){
+				alert("fail");
+			}else if(msg==102){
+				alert("already add");
+			}
+		},
+		error:function(msg){
+			console.log(msg);
+			}
+		})
+}
+
+</script>
+<style type="text/css">
+body {
+	background-image: url(../../../images/beijin.jpg);
+}
+</style>
+</head>
+
+<body onload="load()">
+
+<nav class="nav" style="margin-left:30px;">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link active" href="Show.html">home</a>
+		</li>
+		
+	</ul>
+</nav>
+
+<div class="container" style="margin-top:30px;">
+<div class="row">
+<div class="col col-md-4">
+<div class="col">
+	<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Model</span>
+    </div>
+    <input type="text" id="Model" class="form-control" placeholder="AADxx_xx_xx&AAMxx_xx_xx">
+    </div>
+</div>
+</div>
+<div class="col col-md-4">
+<div class="col">
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">New ver</span>
+    </div>
+    <input type="text" id="New_ver" class="form-control" placeholder="Axx">
+    </div>
+</div>
+</div>
+<div class="col col-md-4">
+<div class="col">
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">New sysver</span>
+    </div>
+    <input type="text" id="New_sysver" class="form-control" placeholder="1.xx.x">
+    </div>
+</div>
+</div>
+
+</div>
+<div class="row">
+<button type="button" id="submit" onclick="add()" class="btn">ADD</button>
+</div>
+</div>
+</body>
+
+</html>

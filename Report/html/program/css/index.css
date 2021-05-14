@@ -1,0 +1,240 @@
+@media  screen and (min-width:1600px){
+    /*媒体查询，当设备屏幕大于1600px时，执行此处css样式*/
+    .container{
+        width:1366px;
+    }
+    .row{
+        width: 1160px;
+    }
+}
+html{
+    overflow-y: hidden;
+}
+a{
+    cursor: pointer;
+    text-decoration: none!important;
+
+
+}
+a i:hover{
+    text-decoration: none!important;
+    background-color: rgba(0,0,0,0);
+
+}
+.col-md-2{
+    padding-right:5px;
+    height: 190px;
+    position: relative;
+}
+.col-md-2 a{
+    display: flex;
+    position: relative;
+
+    width: 100%;
+    height:100%;
+    background-color: pink;
+    text-decoration: none !important;
+    line-height: 150px;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+#row0 div:last-child{
+    padding-right: 0px;
+}
+.col-md-2 a p{
+    position: absolute;
+    bottom:0;
+    transform: translateY(25%);
+    width: 100%;
+    font-size: 18px;
+    color: #fff;
+}
+
+#row2{
+    margin-right: -15px;
+
+ }
+
+#row2 div[class^='col']{
+    padding-left: 0;
+    height:400px;
+
+    position: relative;
+
+}
+#row2 div:nth-child(1){
+    position: relative;
+}
+#row2 div[class='col-md-4']{
+    padding-right:5px;
+}
+#row2 div a:nth-child(1) {
+    display: flex;
+    width: 100%!important;
+    height:60%;
+    text-align: center;
+    text-decoration: none!important;
+    line-height: 155px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+
+}
+#row2 div a p{
+    position:absolute;
+    bottom:0;
+    transform:translateY(15%);
+    font-size:16px;
+    color: #fff;
+    width: 100%;
+
+}
+#row2 div a:nth-child(2){
+    display: flex;
+    flex: 1;
+    width: 100%;
+    text-align: center;
+    text-decoration: none!important;
+    line-height: 160px;
+    position: relative;
+    padding-top: 5px;
+}
+#a2{
+    padding-top: 5px;
+    height: 40%;
+    width: 100%;
+}
+#a2 div[class='row']{
+    margin :0 0 0 0 ;
+    width: 100%;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+
+}
+#a2 div[class='row'] div[class='col-md-6']{
+    width: 50%;
+    height: 100%;
+    line-height: 100%;
+    padding-right: 5px;
+
+
+}
+#row3{
+    height: 100%;
+    position: absolute;
+}
+
+#row3 div:nth-child(1){
+    padding-right: 5px;
+    position: relative;
+}
+#row3 div:nth-child(1) a{
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding-right: 5px;
+}
+#a2 div[class='row'] div[class='col-md-6']:nth-child(1) a {
+    background-color: #01AAED;
+
+
+}
+#a2 div[class='row'] div[class='col-md-6']:nth-child(1) a p  {
+   top:20%;
+
+
+}
+#a2 div[class='row'] div[class='col-md-6']:nth-child(2) a i  {
+    line-height: 50%;
+    transform:translateY(65%);
+
+
+}
+#a2 div[class='row'] div[class='col-md-6']:nth-child(2) a p  {
+    top:50%;
+
+
+}
+#a2 div[class='row'] div[class='col-md-6']:nth-child(2){
+    background-color: pink;
+
+
+}
+#d3{
+    padding-right: 0!important;
+}
+
+.d{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.d4{
+    width: 100%;
+    height: 40%;
+    text-align: center;
+}
+.d4 i{
+    display: inline-block;
+    transform: translateY(10%);
+    color: whitesmoke;
+
+}
+.d6{
+    width: 100%;
+    height: 60%;
+    background-color: #7c8ce4;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: center!important;
+    overflow: hidden;
+
+}
+
+.da1{
+    text-align: center!important;
+    left:50%!important;
+    transform: translateX(-50%);
+}
+.da2 span{
+    text-align: center!important;
+    left:50%!important;
+    transform: translateX(100%);
+}
+.da1 a{
+    height: 30px;
+    width: 100%;
+    line-height: 30px!important;
+}
+.da2{
+    position: relative;
+    text-align: center;
+    margin-top: 5px;
+    display: flex;
+
+}
+.da2::before{
+    content:'' ;
+    display: block;
+    width:102px;
+    height: 44px;
+    font-size: 18px;
+    color: #fff;
+    font-family: Calibri;
+    margin-top: 10px;
+   margin-left: 50%;
+    transform: translateX(-85%);
+
+}
+.da2 .da2span{
+    position: absolute;
+    margin:3px 10px 0 0;
+    flex: 1;
+}
+
+
+

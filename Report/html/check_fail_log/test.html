@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    let arr = [1,2,3];
+    arr.splice(1,1);
+    console.log(arr);
+
+
+    let tpr = [];
+    let cj = {};
+    let tmp1 = [];
+    if(info.length>0){
+        let tmp = $('#tpr').find('option').attr('value');
+        for(let x = 0;x<info.length;x++) {
+            if (info[x]['TPR'] != tmp && tpr.indexOf(info[x]['TPR']) == -1) {
+                // console.log(info[x]['TPR']);
+                tpr.push(info[x]['TPR']);
+                $('#tpr').append("<option value='" + info[x]['TPR'] + "'>" + info[x]['TPR'] + "</option>");
+            }
+            for(let x1 =0;x1<tpr.length;x1++){
+                if(info[x]['TPR'] ==tpr[x1]){
+                    //console.log(111);
+                    tmp1.push(info[x]);
+
+                    cj[tpr[x1]] = tmp1;
+                    //console.log(1);
+
+                }
+
+            }
+
+
+        }
+
+
+        //console.log(cj);
+        for(let x2 in cj){
+            console.log(cj[x2]);
+            for(let x3=0;x3<cj[x2].length;x3++){
+                if(cj[x2][x3]['TPR']!=x2){
+                    cj[x2].splice(x3,1);
+                    //   console.log(cj[x2]);
+                }
+
+            }
+        }
+
+        console.log(cj);
+</script>
+<body>
+
+</body>
+</html>

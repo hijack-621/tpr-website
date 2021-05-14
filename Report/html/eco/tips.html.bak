@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tip page</title>
+<script src="../../js/PDF.js"></script>
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../js/jquery.media.js"></script>
+
+
+</head>
+<link rel="shortcut icon" href="./img/logo.ico" type="image/x-icon">
+<script type="text/javascript">
+    $(function() {
+        $('a.media').media({width:1000, height:850,});
+    });
+</script>
+<body>
+<div class="panel-body" style="width: 1000px;margin: 0 auto">
+    <a class="media" href="newtip.pdf" ></a>
+</div>
+</body>
+</html>

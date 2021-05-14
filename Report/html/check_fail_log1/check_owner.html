@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style type="text/css">
+body{
+	text-align:center;
+	background-image: url(../../../images/beijin.jpg);
+	background-color: #0C9;
+}
+#title{
+	color:#FFF;
+}
+#d_body{
+	margin:30px 0px 0px 30px;
+}
+#t_body{
+	color:#000;
+	margin-top:30px;
+	border-top:#000 1px solid;
+	border-left:#000 1px solid;
+}
+#t_body td{
+	border-right:#000 1px solid;
+	border-bottom:#000 1px solid;
+	background-color:#CCC;
+}
+#sub{
+	margin-left:30px;
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff;
+	border:none;
+	font-family: "Adobe 濠德板�濞撳湱绱為敓绲妕d R";
+	font-size:16px;
+	text-decoration: none;
+	background-color:#0077FF;
+	position: relative;
+	cursor: pointer;
+}
+body,td,th {
+	color: #000;
+}
+</style>
+<script src="../../../js/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+function submit(){
+	var flag="3";
+	var data_arr=window.location.search;
+	data_arr=data_arr.substring(1,data_arr.length);
+	 var arr=data_arr.split("&line");
+	var ppid=arr[1];
+	 var tpr=arr[0];
+	 var station=arr[2];
+	var fail=arr[5];
+	//检查输入框是否可用
+	if(document.getElementById('c_ck').disabled==true){
+		var fa=$('#fa').val();
+		var action=$('#action').val();
+		var c_check="";
+		if((fa==""||fa==null)||(action==""||action==null)){
+			alert("please input TPR　FA and Action");
+			return;
+		}
+		
+	}else{
+		var c_check=$('#c_ck').val();
+		var fa=$('#fa').val();
+		var action=$('#action').val();
+		if((fa==""||fa==null)&&(action!=""||action!=null)||(c_check==""||c_check==null)){
+			alert("please input all data ");
+			return;
+		}
+		var is_null=c_check.split(" ").join("");
+        if(is_null.length == 0){
+            alert("Compal Check not null");
+			return;
+        }
+	}
+	$.ajax({
+		type:'post',
+		url:'../../server/servlet/check_fail_log/check_server.php',
+		dataType:'json',
+		data:{flag:flag,ppid:ppid,station:station,fa:fa,c_check:c_check,action:action,tpr:tpr,fail:fail},
+		beforSend:function(msg){
+			$("#sub").attr("disabled", true);
+		},
+		success:function(msg){
+			console.log( msg);
+			$("#sub").attr("disabled", false);
+			if(msg>0 && msg !== '0450' ){
+				alert("sueecss");
+				//window.opener.location.reload();
+				window.close();
+			}else if(msg=='0'){
+				alert("edit fail");
+			}else if(msg=='0450'){
+				alert("compal check not null");
+			}
+		},
+		error:function(msg){
+			console.log(msg);
+			alert("edit fail");
+			$("#sub").attr("disabled", false);
+		}
+	})
+}
+function load(){
+	var data_arr=window.location.search;
+	data_arr=data_arr.substring(1,data_arr.length);
+	 var arr=data_arr.split("&line");
+	 var ppid=arr[1];
+	 var tpr=arr[0];
+	 var station=arr[2];
+	 var owner=arr[3];
+	 var check=arr[4];
+	 var fail=decodeURI(arr[5]);
+	 //console.log(fail);
+	 document.getElementById('tpr').innerHTML=tpr;
+	 document.getElementById('ppid').innerHTML=ppid;
+	 document.getElementById('st').innerHTML=station;
+	 document.getElementById('C_on').innerHTML=owner;
+	 document.getElementById('tpr_on').innerHTML=check;
+	 //alert(arr);
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:'../../server/servlet/check_fail_log/check_server.php',
+		data:{flag:2,ppid:ppid,tpr:tpr,station:station,fail:fail},
+		success:function(msg){
+			console.log(msg);
+			if(msg==1){
+				document.getElementById('c_ck').disabled="true";
+				document.getElementById('c_ck').innerHTML="Unable to enter";
+			}else if(msg==2){
+				
+			}
+
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	});
+	$.ajax({
+		type:'post',
+		url:'../../server/servlet/check_fail_log/check_server.php',
+		dataType:'json',
+		data:{flag:1,ppid:ppid,station:station,tpr:tpr,fail:fail},
+		success:function(msg){
+			console.log(msg);
+			if(msg.length==0){
+				
+			}else if(msg.length==1){
+				
+				document.getElementById("c_ck").innerHTML=msg[0]['Compal_check'];
+				document.getElementById("fa").innerHTML=msg[0]['TPR_FA'];
+				document.getElementById("tpr_time").innerHTML=msg[0]['update_Time'];
+				document.getElementById("action").innerHTML=msg[0]['Action'];
+			}
+		},
+		error:function(msg){
+			console.log(msg);
+		}
+	})
+}
+</script>
+</head>
+
+<body onload="load()">
+<div id="title"><h3>TestLog Issue FACA</h3></div>
+<div id="d_st">
+</div>
+<div id="d_body">
+<table id="t_body" align="center" cellspacing="0">
+<tr>
+<td width="101" height="35">
+TPR:
+</td>
+<td width="143" id="tpr">
+</td>
+<td width="147">TPR Owner:</td>
+<td width="148" id="tpr_on"></td>
+</tr>
+<tr>
+<td height="40">Station:</td>
+<td id="st"></td>
+<td>Compal Owner:</td>
+<td id="C_on"></td>
+</tr>
+<tr>
+<td height="38" colspan="1">PPID:
+</td>
+<td colspan="3" id="ppid"></td>
+</tr>
+<tr >
+<td colspan="1" >
+TPR FA:
+</td>
+<td colspan="2" ><textarea rows="3" cols="60" id="fa" style="resize:none;"></textarea></td>
+<td rowspan="2" colspan="1" id="tpr_time"></td>
+</tr>
+<tr >
+<td colspan="1" >
+Action:
+</td>
+<td colspan="2" ><textarea rows="3" cols="60" id="action" style="resize:none;"></textarea></td>
+</tr>
+<tr>
+<td colspan="1" >
+Compal Check:
+</td>
+<td colspan="3" ><textarea rows="3" cols="80" id="c_ck" style="resize:none;"></textarea></td>
+</tr>
+<tr>
+<td style="text-align:center" colspan="4" ><input id="sub" type="button" onclick="submit()" value="ok" /></td>
+</tr>
+</table>
+</div>
+<div id="submit">
+
+</div>
+</body>
+</html>

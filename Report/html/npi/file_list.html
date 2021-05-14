@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <script src="./js/jquery-3.2.1.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:480px;margin:90px auto">
+        <label for=""><input type="submit" value='补传文件' onclick="upload()"></label>
+        <table class="table table-bordered table-bordered ">
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>File name</td>
+                    <td>Edit</td>
+                </tr>
+            </thead>
+            <tbody id="ftb">
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    let id = window.location.search.substring(1).split('?')[0];
+    let batch = window.location.search.substring(1).split('?')[1];
+    //console.log(id, batch);
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: "Controller.php",
+        data: {
+            action: 'NPIController/getfile',
+            id: id,
+        },
+        success: function(msg) {
+            console.log(msg);
+            if (msg.length > 0) {
+                let fstr = ``;
+                msg.forEach((v, key) => {
+                    fstr += `
+                            <tr>
+                                <td>${key+1}</td>
+                                <td><a href="${v[1]}" download="${v[0]}">${v[0]}</a></td>
+                                <td></td>
+                            </tr>
+                    `
+                });
+                $('#ftb').append(fstr);
+            }
+        },
+        error: function(msg) {
+
+        }
+    })
+
+    function upload() {
+        let trs = document.querySelectorAll('tbody>tr');
+        //console.log(trs);
+        let str = `<tr>
+                                <td>${trs.length+1}</td>
+                                <td><input type="file" id="makeup" multiple/></td>
+                                <td><button type="button" onclick="add()" class="btn btn-primary">upload</button></td>     
+                    </tr>`
+        $('#ftb').append(str);
+    }
+
+    function add() {
+        let files = $('#makeup')[0].files;
+        let fdata = new FormData();
+        Array.apply(null, files).forEach(file => {
+            fdata.append('file[]', file);
+        })
+        fdata.append("action", 'NPIController/makeupfile');
+        fdata.append("id", id);
+        fdata.append("batch", batch);
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: "Controller.php",
+            contentType: false,
+            processData: false,
+            data: fdata,
+            success: function(data) {
+                // console.log(data);
+                if (data == 1111) {
+                    // let btn = `<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" data-placement="bottom" title="success"></button>`;
+                    // var first=document.body.firstChild;//得到页面的第一个元素。    
+                    // //document.body.insertBefore(btn,first);//在得到的第一个元素之前插入。
+                    // console.log(first)
+                    // let e = new MouseEvent('click');
+                    // btn.dispatch(e);
+                    alert('success');
+
+                }
+            },
+            error: function(msg) {
+                console.log(msg);
+            }
+
+        })
+    }
+</script>
+
+</html>

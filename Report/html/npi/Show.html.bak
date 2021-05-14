@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>ECO System Show</title>
+
+<style type="text/css">
+    body{
+	text-align: center;
+	background-image: url(../../../images/beijin.jpg);
+    }
+.navbar{display:none}
+    h3{
+        margin: auto;
+    }
+	.search-bar{
+		width: 100%;
+		height: 50px;
+		margin-bottom: 12px;
+	}
+	.div-tpr{
+		float:left;
+	}
+	.div-model{
+		float:left;
+		margin-left: 12px;
+	}
+	.div-btn{
+		float:left;
+		margin-left: 12px;
+	}
+</style>
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+
+</head>
+
+<body onload="load()">
+<nav class="nav" style="margin-left:30px;margin-top:110px">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link active" href="#" style="background-color: #cc6633">home</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="Create.html">Create</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="javascript:void(0);" onclick="show_close()">show close</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="javascript:void(0);" onclick="show_all()">show all</a>
+		</li>
+	</ul>
+</nav>
+<div class="container" style="margin-top:30px;">
+	<div class="search-bar">
+		<div class="div-tpr">
+			<select class="form-control" id="shbar-tpr">
+				<option value="">choose tpr</option>
+			</select>
+		</div>
+		<div class="div-model">
+			<select class="form-control" id="shbar-model">
+				<option value="">choose model</option>
+			</select>
+		</div>
+		<div class="div-btn">
+			<button type="button" class="btn btn-primary" onclick="search()">
+				Search
+			</button>
+		</div>
+	</div>
+<table class="table table-bordered table-hover table-condensed" id="tb-data">
+<thead style="background-color:#F4987F">
+<td>TPR</td>
+<td>Type</td>
+<td>Description/Version</td>
+<td>Sop Path</td>
+<td>Station/FTP Path</td>
+<td>Bgtime</td>
+<td>Edtime</td>
+<td style="background-color: #C60">Status</td>
+<td>Del Data</td>
+</thead>
+<tbody id="bk-data" style="background-color:#FFF">
+
+</tbody>
+</table>
+</div>
+
+</body>
+<script type="text/javascript">
+function load(){
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"Controller.php",
+		data:{action:'NPIController/getUnclose'},
+		success:function(msg){
+			//console.log(msg);
+			if(msg=='10000'){
+				location.href='#';
+			}
+			show_data(msg);
+			
+		},
+		error:function(msg){
+			console.log(msg);
+			}
+		})
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        url:"Controller.php",
+        data:{action:'NPIController/getTPR'},
+        success:function(msg){
+            //console.log(msg);
+           let selections=document.getElementById('shbar-tpr');
+            if(msg.length>0){
+                for(var i=0;i<msg.length;i++){
+                    var option=document.createElement("option");
+                    option.value=msg[i];
+                    option.text=msg[i];
+                    selections.options.add(option);
+                }
+            }
+        },
+        error:function(msg){
+            console.log(msg);
+        }
+    })
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        url:"Controller.php",
+        data:{action:'NPIController/getSHModel'},
+        success:function(msg){
+            //console.log(msg);
+            let selections=document.getElementById('shbar-model');
+            if(msg.length>0){
+                for(var i=0;i<msg.length;i++){
+                    var option=document.createElement("option");
+                    option.value=msg[i];
+                    option.text=msg[i];
+                    selections.options.add(option);
+                }
+            }
+        },
+        error:function(msg){
+            console.log(msg);
+        }
+    })
+}
+function search() {
+    let tpr=document.getElementById('shbar-tpr').value;
+    let model=document.getElementById('shbar-model').value;
+    let search=new Object();
+    if (tpr!=null&&tpr!=""){
+        search['tpr']=tpr;
+	}
+	if (model!=null&&model!=""){
+	    search['model']=model;
+	}
+	if (tpr==null&&model==null||tpr==""&&model==""){
+	    alert("choose tpr or model ");
+	    return false;
+	}
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        url:"Controller.php",
+        data:{action:'NPIController/getSearch',urldata:search},
+        success:function(msg){
+            console.log(msg);
+            if (msg==1010){
+                alert("Users do not have permission to query");
+                return;
+			}
+            show_data(msg);
+        },
+        error:function(msg){
+            console.log(msg);
+        }
+    })
+}
+function show_all(){
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        url:"Controller.php",
+        data:{action:'NPIController/getAll'},
+        success:function(msg){
+            console.log(msg);
+            if(msg=='10000'){
+                location.href='#';
+            }
+            show_data(msg);
+        },
+        error:function(msg){
+            console.log(msg);
+        }
+    })
+}
+function show_close(){
+    $.ajax({
+        type:'post',
+        dataType:'json',
+        url:"Controller.php",
+        data:{action:'NPIController/getclose'},
+        success:function(msg){
+            console.log(msg);
+            if(msg=='10000'){
+                location.href='#';
+            }
+            show_data(msg);
+        },
+        error:function(msg){
+            console.log(msg);
+        }
+    })
+}
+function show_data(msg){
+	var tb=document.getElementById('bk-data');
+	$('#bk-data').empty();
+	for(x in msg){
+		for(i=0;i<msg[x].length;i++){
+			var tr=document.createElement("tr");
+			tr.id=msg[x][i]["id"];
+			if(i==0){
+				 var tpr_td=document.createElement("td"),
+					 type_td=document.createElement("td"),
+					 type_a=document.createElement("a"),
+					 desc_td=document.createElement("td"),
+					 desc_a=document.createElement("a"),
+					 sop_td=document.createElement("td"),
+					 sop_a=document.createElement("a"),
+					 st_td=document.createElement("td"),
+					 st_a=document.createElement("a"),
+					 bg_td=document.createElement("td"),
+					 ed_td=document.createElement("td"),
+					 sta_td=document.createElement("td"),
+					 del_td=document.createElement("td"),
+					 del_btn=document.createElement("button");
+
+                tpr_td.innerHTML=msg[x][i]['tpr'];
+                tpr_td.setAttribute("rowspan",msg[x].length);
+                type_a.innerHTML=msg[x][i]['sort'];
+                desc_a.innerHTML=msg[x][i]['reason'];
+                sop_a.innerHTML=msg[x][i]['sop_path'];
+                st_a.innerHTML=msg[x][i]['station'];
+                bg_td.innerHTML=msg[x][i]['bgtime'];
+                ed_td.innerHTML=msg[x][i]['edtime'];
+
+                type_a.setAttribute("href","Step.html?"+"id="+msg[x][i]['id']);
+                type_a.setAttribute("target","_bank");
+                desc_a.setAttribute("href","model_edit.html?"+"id="+msg[x][i]['id']);
+                desc_a.setAttribute("target","_bank");
+                sop_a.setAttribute("href","path_edit.html?"+"id="+msg[x][i]['id']+"&step=1");
+                sop_a.setAttribute("target","_bank");
+                st_a.setAttribute("href","station_path.html?"+"id="+msg[x][i]['id']);
+                st_a.setAttribute("target","_bank");
+
+                del_btn.innerHTML="Del";
+                del_btn.type="button";
+                del_btn.setAttribute("class","btn btn-danger");
+                del_btn.setAttribute("onclick","delData(this)");
+                
+                if (msg[x][i]['status']==1){
+                    sta_td.innerHTML='Close';
+                    sta_td.style.backgroundColor="green";
+				} else if (msg[x][i]['status']==5){
+                    sta_td.innerHTML='Close';
+                    sta_td.style.backgroundColor="red";
+				} else{
+                    sta_td.innerHTML='Beging';
+                    sta_td.style.backgroundColor="yellow";
+				}
+                type_td.appendChild(type_a);
+                desc_td.appendChild(desc_a);
+                sop_td.appendChild(sop_a);
+                st_td.appendChild(st_a);
+                del_td.appendChild(del_btn);
+                tr.appendChild(tpr_td);
+                tr.appendChild(type_td);
+                tr.appendChild(desc_td);
+                tr.appendChild(sop_td);
+                tr.appendChild(st_td);
+                tr.appendChild(bg_td);
+                tr.appendChild(ed_td);
+                tr.appendChild(sta_td);
+                tr.appendChild(del_td);
+			}else{
+				 var type_td=document.createElement("td"),
+                     type_a=document.createElement("a"),
+                     desc_td=document.createElement("td"),
+                     desc_a=document.createElement("a"),
+                     sop_td=document.createElement("td"),
+                     sop_a=document.createElement("a"),
+                     st_td=document.createElement("td"),
+                     st_a=document.createElement("a"),
+                     bg_td=document.createElement("td"),
+                     ed_td=document.createElement("td"),
+                     sta_td=document.createElement("td"),
+                     del_td=document.createElement("td"),
+                     del_btn=document.createElement("button");
+
+                type_a.innerHTML=msg[x][i]['sort'];
+                desc_a.innerHTML=msg[x][i]['reason'];
+                sop_a.innerHTML=msg[x][i]['sop_path'];
+                st_a.innerHTML=msg[x][i]['station'];
+                bg_td.innerHTML=msg[x][i]['bgtime'];
+                ed_td.innerHTML=msg[x][i]['edtime'];
+
+                type_a.setAttribute("href","Step.html?"+"id="+msg[x][i]['id']);
+                type_a.setAttribute("target","_bank");
+                desc_a.setAttribute("href","model_edit.html?"+"id="+msg[x][i]['id']);
+                desc_a.setAttribute("target","_bank");
+                sop_a.setAttribute("href","path_edit.html?"+"id="+msg[x][i]['id']);
+                sop_a.setAttribute("target","_bank");
+                st_a.setAttribute("href","station_path.html?"+"id="+msg[x][i]['id']);
+                st_a.setAttribute("target","_bank");
+
+                del_btn.innerHTML="Del";
+                del_btn.type="button";
+                del_btn.setAttribute("class","btn btn-danger");
+                del_btn.setAttribute("onclick","delData(this)");
+
+                if (msg[x][i]['status']==1){
+                    sta_td.innerHTML='Close';
+                    sta_td.style.backgroundColor="green";
+                } else if (msg[x][i]['status']==5){
+                    sta_td.innerHTML='Close';
+                    sta_td.style.backgroundColor="red";
+                } else{
+                    sta_td.innerHTML='Beging';
+                    sta_td.style.backgroundColor="yellow";
+                }
+                type_td.appendChild(type_a);
+                desc_td.appendChild(desc_a);
+                sop_td.appendChild(sop_a);
+                st_td.appendChild(st_a);
+                del_td.appendChild(del_btn);
+                tr.appendChild(type_td);
+                tr.appendChild(desc_td);
+                tr.appendChild(sop_td);
+                tr.appendChild(st_td);
+                tr.appendChild(bg_td);
+                tr.appendChild(ed_td);
+                tr.appendChild(sta_td);
+                tr.appendChild(del_td);
+			}
+			tb.appendChild(tr);
+		}
+	}
+}
+function fileselect(){
+	var file_obj=document.getElementById('sop-file').files[0];
+	if(file_obj!=null){
+		
+	if(file_obj.size>1024*1024){
+		var fileSize=(Math.round(file_obj.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+	}else {
+		var fileSize = (Math.round(file_obj.size * 100 / 1024) / 100).toString() + 'KB';
+	}
+	}else{
+		var fileSize=null;
+	}
+	//document.getElementById('file-type').innerHTML=file_obj.type;
+	document.getElementById('file-size').innerHTML=fileSize;
+}
+function progressHander(e){
+	if(e.lengthComputable){
+		if(e.total>1024*1024){
+			var uploading=(Math.round(e.loaded * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+		}else{
+			var uploading = (Math.round(e.loaded * 100 / 1024) / 100).toString() + 'KB';
+		}
+		document.getElementById('file-up').innerHTML=uploading;
+		var persent=(e.loaded/e.total*100).toFixed(1);
+		document.getElementById('probar').innerHTML=persent+"%";
+		var probar=Math.floor(e.loaded/e.total*100)+'%';
+        document.getElementById('probar').style.width=probar;
+		//console.log(e.loaded+'----'+e.total);
+	}
+}
+function delData(obj){
+    var d=confirm('are you sure delete data and file ?');
+    if(d==true){
+        var tr=obj.parentNode.parentNode;
+        var id=tr.id;
+        $.ajax({
+            type:'post',
+            dataType:'json',
+            url:" Controller.php",
+            data:{action:'NPIController/delData',urldata:id},
+            success:function(msg){
+                console.log(msg);
+                if(msg==1111){
+                    alert("delete success");
+                    window.location.reload();
+                }else if(msg==1011){
+                    alert("delete error")
+                }else if(msg==1020){
+                    alert('permission denied')
+                }else if (msg==1010){
+                    alert('delete file error');
+				}
+            },
+            error:function(msg){
+                console.log(msg);
+                alert("error")
+            }
+        })
+    }
+}
+</script>
+</html>

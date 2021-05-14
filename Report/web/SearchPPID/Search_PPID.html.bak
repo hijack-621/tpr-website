@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Search PPID</title>
+
+<style type="text/css">
+body{
+	background-image: url(../../../images/bg.png)!important;
+}
+h3{ 
+	margin:auto;
+}
+</style>
+<link rel="stylesheet" href="../../../TPRindex/css/style.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.5.1.js"></script>
+<script src="../../../js/lyz.calendar.min.js"></script>
+<link rel="stylesheet" href="../../../css/lyz.calendar.css"/>
+<script type="../../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<script type="text/javascript">
+$(function () {
+//	$('#bgtime').calendar({
+//		controlId: "divDate",
+//		})
+//	 $('#edtime').calendar({ 
+//	 
+//	 })
+	})
+function search(){
+	var tpr=document.getElementById('TPR').value,
+	ppid=document.getElementById('ppid').value,
+	bgtime=document.getElementById('bgtime').value,
+	edtime=document.getElementById('edtime').value;
+	if(ppid==""||ppid==undefined||ppid.length<20){
+		alert("please scan PPID");
+		return;
+		}else if(tpr==""||tpr==undefined){
+					alert("please choose TPR");
+					return;
+				}
+	$.ajax({
+		type:"post",
+		dataType:"json",
+		url:"server.php",
+		data:{tpr:tpr,ppid:ppid,bgtime:bgtime,edtime:edtime},
+	success:function(msg){
+		console.log(msg);
+		$("#testlog").empty();
+		var tb=document.getElementById("testlog");
+		if(msg=='0000'){
+			alert("copy file error");
+			return;
+		}else
+		if(msg.length!=0){
+			
+			for(var i=0;i<msg.length;i++){
+				var tr=document.createElement("tr");
+				
+				var testlog=document.createElement("td"),
+				station=document.createElement("td"),
+				date=document.createElement("td"),
+				a=document.createElement("a");
+				
+				testlog.innerHTML="Testlog";
+				a.innerHTML=msg[i]['Station'];
+				a.href="temp/"+msg[i]["Id"]+"/"+msg[i]["PPID"]+".log";
+				a.download="temp/"+msg[i]["Id"]+"/"+msg[i]["PPID"]+".log";
+				date.innerHTML=msg[i]['Date'];
+				
+				station.appendChild(a);
+				
+				tr.appendChild(testlog);
+				tr.appendChild(station);
+				tr.appendChild(date);
+				tb.appendChild(tr);
+			}
+		}else{
+			var tr=document.createElement("tr");
+			
+			var td=document.createElement("td");
+			
+			td.innerHTML="no file";
+			td.colspan="3";
+			
+			tr.appendChild(td);
+			tb.appendChild(tr);
+		}
+	},
+	error:function(msg){
+		console.log(msg);
+	}
+	})
+}
+</script>
+</head>
+
+<body>
+<div id="header-wrap">
+    <header>
+        <hgroup>
+            <h1><a href="../../../index.php">Compal</a></h1>
+            <h3>Just Another Styleshout Template</h3>
+        </hgroup>
+        <nav>
+            <div >
+                <ul id="dh">
+                    <li><a href="../../../index.php">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Our Works</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+
+</div>
+<div class="container" style="text-align:center">
+<div class="row" style="margin-top:130px!important">
+<h3 style="color:black;margin-left:auto;margin-right:auto">TPR PPID Search Test log</h3>
+</div>
+<div class="row" style="margin-top:30px;width:auto;">
+<div style="height:50px;text-align:center;width:900px;background-color:smokewhite;margin:auto;">
+<div class="row" style="text-align:center;margin:auto;margin-left:60px;margin-top:10px;width:900px;height:30px">
+<select id="TPR" style="margin-left:15px;">
+<option value="RLC_SH">RLC-SH</option>
+<option value="IGS">IGS</option>
+<option value="CEP">CEP</option>
+<option value="CEB">CEB</option>
+<option value="CTS">CSAT</option>
+<option value="CGS">CGS</option>
+<option value="TSI">TSI</option>
+</select>
+<input type="text" maxlength="20" id="ppid" style="width:200px;margin-left:10px;margin-right:10px" placeholder="please scan PPID"></input>
+<input id="bgtime" placeholder="input begin time" style="width:188px;padding:2px 10px;border:1px solid #ccc;margin-right:10px;"/>-
+<input id="edtime" placeholder="input end time" style="width:188px;padding:2px 10px;border:1px solid #ccc;margin-right:10px;margin-left:10px" />
+<button type="button" id="stn" class="btn" style='background-color:pink' onclick="search()">search</button>
+</div>
+</div>
+</div>
+<div class="row" style="margin-top:30px;">
+<div class="col col-md-1"></div>
+<div class="col col-md-6" style="margin:auto;">
+<table id="testlog" class="table table-bordered" rules=none align="center" cellpadding="10" style="margin-top:10px;background-color:#CCC;">
+<!-- 
+<tr id="top"><td>TPR Name:</td><td id="TPR"></td></tr>
+
+<tr id="r1"><td style="width:140px">QC2 Test log:</td><td id="QC2"><a id="QC2i"></a></td></tr>
+
+<tr id="r2"><td >QC2 Test Date:</td><td  id="QC2date"></td></tr>
+
+<tr id="r3"><td >QC3 Test log:</td><td id="QC3"><a id="QC3i"></a></td></tr>
+
+<tr id="r4"><td >QC3 Test Date:</td><td id="QC3date"></td></tr>
+ -->
+</table>
+</div>
+<div class="col col-md-1"></div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

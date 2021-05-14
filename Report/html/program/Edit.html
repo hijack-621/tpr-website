@@ -1,0 +1,487 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Program System Edit</title>
+
+<style type="text/css">
+    #hidebox {
+        display:none;
+        width:160px;
+        height:56px;
+        position: absolute;
+        top:40%;
+        left:40%;
+        line-height:56px;
+        color:#fff;
+        padding-left:60px;
+        font-size:15px;
+        background: #000 url(../../../../images/wait.gif) no-repeat 10px 50%;
+        opacity: 0.7;
+        z-index:9999;
+        -moz-border-radius:20px;
+        -webkit-border-radius:20px;
+        border-radius:20px;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+    }
+	
+	
+</style>
+
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../js/jquery.cookie.js"></script>
+<script type="../../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<!-- <link rel="stylesheet" href="../../css/fileinput.min.css"/>
+<script type="text/javascript" src="../../js/fileinput.min.js"></script> -->
+<link rel="stylesheet" href="../../../TPRindex/css/style.css"/>
+<script type="text/javascript">
+function load(){
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+	if(r[1]!=4&&r[1]!=1){
+        document.getElementById("upload").innerHTML="";
+	}
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"Controller.php",
+		data:{action:'NPIController/getEditData',urldata:r},
+		success:function(msg){
+			console.log(msg);
+			document.getElementById("Owner").innerHTML=msg['owner'];
+            document.getElementById("bgtime").innerHTML=msg['bgtime'];
+			if (msg['status']==0) {
+                document.getElementById("status").innerHTML="Start";
+                document.getElementById("Owner_btn").removeAttribute("disabled");
+            }else {
+                document.getElementById("status").innerHTML="Close";
+            }
+            document.getElementById("remark").innerHTML=msg['remark'];
+		},
+		error:function(msg){
+		console.log(msg);	
+		}
+		})
+}
+function show_score(){
+	var dit=document.getElementById("btn-edit"),
+	 ore=document.getElementById("btn-score"),
+	 tb_edit=document.getElementById("tb-edit"),
+	 tb_score=document.getElementById("tb-score");
+	dit.style.boxShadow="0px 8px 8px 4px";
+	dit.style.backgroundColor="#F2F2F2";
+	ore.style.backgroundColor="#1CBBFF";
+	ore.style.boxShadow="0px 0px 0px 0px";
+	dit.style.top="0px";
+	ore.style.top="10px";
+	
+	tb_score.style.display="inline";
+	tb_edit.style.display="none";
+}
+function show_edit(){
+	var dit=document.getElementById("btn-edit");
+	 var ore=document.getElementById("btn-score");
+	 var tb_edit=document.getElementById("tb-edit");
+	 tb_score=document.getElementById("tb-score");
+	ore.style.boxShadow="0px 8px 8px 4px";
+	ore.style.backgroundColor="#F2F2F2";
+	dit.style.backgroundColor="#1CBBFF";
+	dit.style.boxShadow="0px 0px 0px 0px";
+	ore.style.top="0px";
+	dit.style.top="10px";
+	
+	tb_score.style.display="none";
+	tb_edit.style.display="inline";
+	
+}
+function go_home(){
+	window.open("Show.html","_self");
+}
+function Owner(){
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+	var remark=$("#remark").val();
+	var statu=document.getElementsByName('status');
+	
+	for(var i=0;i<statu.length;i++){
+		if(statu[i].checked==true){
+			status=statu[i].value;
+		}
+	}
+	 k = remark.split(" ").join("");
+	 //alert(k.length)
+	if(remark==""||remark==undefined||k.length==0){
+		alert("input remark");
+		 return;
+	}
+	let urldata=new Array();
+	urldata[0]=r[0];
+	urldata[1]=r[1];
+	urldata[2]=remark;
+	urldata[3]=status;
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"Controller.php",
+		data:{action:'NPIController/EditNPI',urldata:urldata},
+		success:function(msg){
+			console.log(msg);
+			if (msg=='1010'){
+			    alert("this step is locked");
+            } else if(msg=='1023'){
+			    alert("this step already closed");
+            }else if(msg=='1020'){
+			    alert("this user not close");
+            }else if (msg=='1144'){
+			    alert("change fail");
+            } else if (msg=='1147'){
+			    alert("close fail");
+            } else if (msg=='1143'){
+			    alert("close fail");
+            }else if (msg=='1133'){
+			    alert("change success");
+
+            } else if (msg=='1146'){
+			    alert("need upload file");
+            } else if (msg=='1111'){
+                //alert("close success");
+		// 		if(r[1]==2){
+		// 		let randomcookiename = 'cookie'+r[0];
+		// 		console.log(randomcookiename);
+		// 		LockButton('#Owner_btn', 60*60*24*3,randomcookiename);
+		// 		 //读取cookie
+		// if ($.cookie(randomcookiename) != undefined && !isNaN($.cookie(randomcookiename))) {  //读取到了cookie值
+		// 		var djsendtime = $.cookie(randomcookiename);
+		// 		var now = new Date().getTime();  //当前时间戳
+		// 		var locksecends = parseInt((djsendtime - now) / 1000);
+		// 		if (locksecends <= 0) {
+		// 			$.cookie(randomcookiename, null);
+		// 		} else {
+		// 			LockButton('#Owner_btn', locksecends);
+		// 		}
+    	// 	}
+		// 		}
+                //Send_Mail();
+            }
+		},
+		error:function(msg){
+			console.log(msg);
+			}
+		})
+}
+var LockButton = function (btnObjId, locksecends,randomcookiename) {
+    //1.获取当前系统时间
+    //2.获取 locksecends 后的系统时间
+    //3.用cookie保存到期时间
+    //4.每次加载后获取cookie中保存的时间
+    //5.用到期时间减去当前时间获取倒计时
+    var djsendtime = $.cookie(randomcookiename);
+    if (djsendtime == null || djsendtime == undefined || djsendtime == 'undefined' || djsendtime == 'null') {
+        var now = new Date().getTime();  //当前时间戳
+        var endtime = locksecends * 1000 + now;  //结束时间戳
+        $.cookie(randomcookiename, endtime);  //将结束时间保存到cookie
+    }
+    //$(btnObjId).addClass('disabled').attr('disabled', 'disabled').text('(' + locksecends + ')秒后重新获取');
+    $('body').off('click', '#btnSendSMS');
+    var timer = setInterval(function () {
+        locksecends--;
+        //$(btnObjId).text('(' + locksecends + ')秒后重新获取');
+        if (locksecends <= 0) {
+        //倒计时结束清除cookie值
+            $.cookie(randomcookiename, null);
+           // $(btnObjId).removeClass('disabled').removeAttr('disabled').text('重新获取');
+            //$('body').on('click', btnObjId);
+            //clearInterval(timer);
+        }
+    }, 1000);
+};
+function Score(){
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+	var score=document.getElementById('in-score').value;
+	var remark=document.getElementById('sc_mark').value;
+	var check=document.getElementsByName('score_ra');
+	for(var i=0;i<check.length;i++){
+		if(check[i].checked==true){
+			var days=check[i].value;
+			
+		}
+	}
+
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"Controller.php",
+		data:{action:"Edit_score",score:score,remark:remark,days:days,dataid:r},
+	success:function(msg){
+		console.log(msg);
+	},
+	error:function(msg){
+		console.log(msg);
+		}
+	})
+}
+function Send_Mail(){
+    show_dialog();
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let mail_msg=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+    mail_msg[0]="E";
+    mail_msg[1]=r[0];
+	mail_msg[2]=r[1];
+	mail_msg[3]='Normal';
+	console.log(mail_msg);
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"Controller.php",
+		data:{action:'NPIController/SendMail',urldata:mail_msg},
+		success:function(msg){
+			console.log(msg);
+            hidden_dialog();
+			if(msg=='1111'){
+                alert("edit success");
+				window.open("Step.html?"+"id="+r[0],"_self");
+			}else{
+				alert('error');
+			}
+		},
+		error:function(msg){
+			console.log(msg);
+            hidden_dialog();
+		}
+		})
+}
+function upload(){
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+    window.open("path_edit.php?"+"id="+r[0]+"&step="+r[1]);
+}
+function show_dialog(){
+    document.getElementById("hidebox").style.display="block";
+}
+function hidden_dialog(){
+    document.getElementById("hidebox").style.display="none";
+}
+</script>
+<style type="text/css">
+
+</style>
+</head>
+
+<body onLoad="load()">
+
+<div id="hidebox" onClick="hide();" class="loading">Send mail……</div>
+<div id="header-wrap">
+	<header>
+		<hgroup>
+			<h1><a href="../../../index.php"></a></h1>
+
+		</hgroup>
+		<nav style="margin-top: 24px">
+			<div >
+				<ul id="dh">
+					<li><a href="../../../index.php">Home</a></li>
+					<li><a href="../../../total_system_sop.html">Sop</a></li>
+					<li><a href="#">Our Works</a></li>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Contact Us</a></li>
+				</ul>
+			</div>
+		</nav>
+
+	</header>
+</div>
+<div class="container" style="margin-top:100px">
+
+<div class="row">
+
+<div class="col col-md-1" style="width:100%;height:auto;margin-top: 50px;">
+<button onClick="go_home()" id="home" class="btn" style="background-color: #CC6600;position: absolute;margin-left:-100px;">home</button>
+</div>
+
+<div class="col col-md-10" style="width:100%;height:auto;margin-top: 50px;">
+
+<div name="title" class="row">
+<div class="row" style="width:25%"></div>
+<div class="col" style="text-align:center;position: relative;width:25%;height:45px;background-color:#1CBBFF;top:10px;" id="btn-edit" onClick="show_edit()">
+Edit
+</div>
+<div class="col" style="text-align:center;position: relative;width:25%;height:45px;background-color:#F2F2F2;box-shadow:0px 8px 8px 4px #888888;" id="btn-score" onClick="show_score()">
+<label >Score</label>
+</div>
+<div class="row" style="width:25%"></div>
+
+</div>
+
+<div class="row" style="text-align:center">
+<div class="col col-md-1" style="width:100%;height:auto;"></div>
+
+<div class="col col-md-10" style="display:inline;margin-top:18px;" name="table-edit" id="tb-edit">
+<table class="table table-bordered" id="table-edit" style="width:75%;margin:auto;background-color: #fff;" >
+<tr>
+<td>Owner</td>
+<td colspan="3" id="Owner"></td>
+</tr>
+    <tr>
+        <td >
+            start time
+        </td>
+        <td id="bgtime" colspan="2">
+
+        </td>
+    </tr>
+<tr>
+<td >Status</td>
+<td id="status" colspan="3"></td>
+</tr>
+
+<tr>
+<td>
+remark
+</td>
+<td colspan="3">
+<textarea rows="3" cols="40" id="remark" style="resize: none;"></textarea>
+</td>
+</tr>
+
+<tr>
+<td>
+<label>upload file:</label>
+</td>
+<td colspan="3">
+<a href="javascript:void(0);" onClick="upload()" id="upload">
+    upload file
+</a>
+</td>
+</tr>
+
+<tr>
+<td colspan="4">
+
+<div class="row">
+<div class="col col-md-6"><span>Status</span></div>
+<div class="col col-md-6">
+<div class="row">
+<label><input type="radio" name="status" id="status_1" value="1"/>finish</label>
+<label><input type="radio" name="status" id="status_0" value="0" checked="checked"/>continue</label>
+
+</div>
+<div class="row">
+
+</div>
+
+</div>
+</div>
+</td>
+</tr>
+
+<tr>
+<td colspan="4">
+<button typ="button" class="btn btn-primary" onClick="Owner()" id="Owner_btn" disabled="disabled">Sure</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="col col-md-10" style="display:none;margin-top:18px;" name="table-score" id="tb-score">
+<table class="table table-bordered" id="table-score" style="width:75%;margin:auto" >
+<tr>
+<td colspan="4">Score</td>
+</tr>
+
+<tr>
+<td style="width:25%">Approw</td>
+<td style="width:25%" id="Checker"></td>
+<td style="width:25%">Date</td>
+<td style="width:25%" id="ck_date"></td>
+</tr>
+
+<tr>
+<td>Rate</td>
+<td>10</td>
+<td>Score</td>
+<td id="Score">
+</td>
+</tr>
+
+<tr>
+<td>Check</td>
+<td colspan="3">
+<label><input type="radio" name="score_ra" value="1" checked="checked"/>0-1 day</label>
+<label><input type="radio" name="score_ra" value="3"/>1-3 day</label>
+<label><input type="radio" name="score_ra" value="5"/>3-5 day</label>
+<label><input type="radio" name="score_ra" value="0"/>over 5 day</label>
+
+</td>
+</tr>
+
+<tr>
+<td>Score</td>
+<td colspan="3">
+<input type="number" min="0" max="10" class="number" id="in-score"/>
+</td>
+</tr>
+
+<tr>
+<td>Remark</td>
+<td colspan="3">
+<textarea rows="3" cols="40" id="sc_mark" style="resize: none;">
+</textarea>
+</td>
+</tr>
+<tr>
+<td colspan="4">
+<button typ="button" class="btn btn-primary" onClick="Score()" disabled="disabled">Sure</button>
+</td>
+</tr>
+
+<tr>
+<td>Singer</td>
+<td colspan="3">Date</td>
+</tr>
+
+<tr>
+<td id="ck_owner"></td>
+<td colspan="3" id="Date"></td>
+</tr>
+
+<tr>
+<td id="ck_checker"></td>
+<td colspan="3" id="s-Date"></td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+<div class="col col-md-1" style="width:100%;height:auto;"></div>
+</div>
+
+</div>
+</body>
+
+</html>

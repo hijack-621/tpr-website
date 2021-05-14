@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NPI SOP file edit</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+body {
+	background-image: url(../../../images/beijin.jpg);
+}
+</style>
+</head>
+<script>
+function load() {
+    let geturl = window.location.search.substring(1);
+    let r=new Array();
+    let str_arr=geturl.split("&");
+    for(let i = 0; i < str_arr.length; i ++) {
+        r[i]=unescape(str_arr[i].split("=")[1]);
+    }
+    let id=r[0];
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        url: "Controller.php",
+        data: {action:'NPIController/getStation', urldata: id},
+        success: function (msg) {
+            console.log(msg);
+            let tb=$("#sop-table");
+            for (let i=0;i<msg.length;i++){
+                let data_tr=create_row(msg[i]);
+                tb.append(data_tr);
+            }
+        },
+        error: function (msg) {
+            console.log(msg);
+        }
+    })
+}
+</script>
+<body onload="load()">
+<div class="container">
+  <div style="margin: 30px auto;" align="center">
+    <h3 style="color: #fff">NPI SOP file edit</h3>
+  </div>
+  <table class="table table-bordered" id="sop-table" style="background-color:#FFF">
+    <thead>
+    <td>
+      station
+    </td>
+    <td>
+      path
+    </td>
+    <td>
+      <button type="button" class="btn" onclick="addrow()">add</button>
+    </td>
+    </thead>
+  </table>
+
+</div>
+<script type="text/javascript">
+  function addrow() {
+      let geturl = window.location.search.substring(1);
+      let r=new Array();
+      let str_arr=geturl.split("&");
+      for(let i = 0; i < str_arr.length; i ++) {
+          r[i]=unescape(str_arr[i].split("=")[1]);
+      }
+      let id=r[0];
+      let tb=$("#sop-table");
+      let addrow=$("<tr></tr>");
+      for (let i=0;i<2;i++){
+          let td=$("<td><input type='text' style='border:0px;border-bottom:#000000 1px solid;'/></td>");
+          addrow.append(td);
+      }
+      let col_td=$("<td></td>");
+      let surebtn=$("<a href='javascript:void(0);'>sure&nbsp</a>");
+      surebtn.click(function () {
+          let thistr=$(this).parent().parent();
+          let input_filed=thistr.find("input");
+          var post_fields=new Array();
+          post_fields[0]=id;
+          for (let i=0;i<input_filed.length;i++){
+              post_fields[i+1]=input_filed[i].value;
+          }
+          $.ajax({
+              type:'post',
+              dataType:"json",
+              url:'Controller.php',
+              data: {action: 'NPIController/addStation', urldata:post_fields},
+              success:function (msg) {
+                  console.log(msg);
+                  if (msg=="ok"){
+                      alert("success");
+                      let postAddrow=create_row(post_fields);
+                      thistr.replaceWith(postAddrow);
+                  }else{
+                      alert("fail");
+                  }
+              },
+              error:function (msg) {
+                  console.log(msg);
+              }
+          })
+      });
+      let notbtn=$("<a href='javascript:void(0);'>not&nbsp</a>");
+      notbtn.click(function () {
+          $(this).parent().parent().remove();
+      });
+      col_td.append(surebtn);
+      col_td.append(notbtn);
+      addrow.append(col_td);
+      tb.append(addrow);
+  }
+  function create_row(msg_arr){
+      let col_tr=$("<tr></tr>");
+      for (let k in msg_arr){
+          if ("0"!=k){
+              //console.log(msg_arr[k]);
+              let col_td=$("<td>"+msg_arr[k]+"</td>");
+              col_tr.append(col_td);
+          }
+      }
+      let delBtn=$("<a href='javascript:void(0);'>Del&nbsp;</a>");
+      //attr(属性名，属性值)
+      delBtn.attr("dataid",msg_arr['0']);
+      delBtn.click(delHandler);
+      let editBtn=$("<a href='javascript:void(0);'>Edit&nbsp;</a>");
+      editBtn.click(editHandler);
+      editBtn.attr("dataid",msg_arr['0']);
+      let col_td=$("<td></td>");
+      col_td.append(editBtn);
+      col_td.append(delBtn);
+      col_tr.append(col_td);
+      return col_tr;
+  }
+  function delHandler(){
+      let geturl = window.location.search.substring(1);
+      let r=new Array();
+      let str_arr=geturl.split("&");
+      for(let i = 0; i < str_arr.length; i ++) {
+          r[i]=unescape(str_arr[i].split("=")[1]);
+      }
+      let id=r[0];
+      let meButton=$(this);
+      let station=$(this).parent().parent().find('td:eq(0)').html();
+      //alert(data_id);
+      let urldata=new Array();
+      urldata[0]=id;
+      urldata[1]=station;
+      $.ajax({
+          type:"post",
+          dataType:"json",
+          url:"Controller.php",
+          data:{action: 'NPIController/delStation',urldata:urldata},
+          success:function(msg){
+              console.log(msg);
+              if(msg=="ok"){
+                  $(meButton).parent().parent().remove();
+              }else{
+                  alert("fail");
+              }
+
+          },
+          error:function(msg){
+              console.log(msg);
+          }
+
+      })
+  }
+  function editHandler(){
+      let geturl = window.location.search.substring(1);
+      let r=new Array();
+      let str_arr=geturl.split("&");
+      for(let i = 0; i < str_arr.length; i ++) {
+          r[i]=unescape(str_arr[i].split("=")[1]);
+      }
+      let id=r[0];
+          meButton=$(this),
+          meRow=$(this).parent().parent(),
+          editRow=$("<tr></tr>");
+      for(var i=0;i<2;i++){
+          var editTd=$("<td><input type='text' style='border:0px;border-bottom:#000000 1px solid;'/></td>");
+          var v=meRow.find('td:eq('+i+')').html();
+          editTd.find('input').val(v);
+          editRow.append(editTd);
+      }
+      var opt_td=$("<td></td>");
+      var save=$("<a href='javascript:void(0);'>Save&nbsp;</a>");
+
+      save.click(function(){
+          var currentRow=$(this).parent().parent();
+          var input_fields=currentRow.find("input");
+          var post_fields=new Array();
+          post_fields[0]=id;
+          for(var i=0;i<input_fields.length;i++){
+              post_fields[i+1]=input_fields[i].value;
+          }
+          $.ajax({
+              type:"post",
+              dataType:"json",
+              url:"Controller.php",
+              data:{action: 'NPIController/editStation',urldata:post_fields},
+              success:function(msg){
+                  console.log(msg);
+                  if(msg=='ok'){
+                      alert("success");
+                      var postAddrow=create_row(post_fields);
+                      currentRow.replaceWith(postAddrow);
+                  }else{
+                      alert("fail");
+                  }
+              },
+              error:function(msg){
+                  console.log(msg);
+              }
+          })
+      });
+      var cancel=$("<a href='javascript:void(0);'>cancel&nbsp;</a>");
+      cancel.click(function (){
+          var currentRow=$(this).parent().parent();
+          meRow.find('a:eq(0)').click(delHandler);
+          meRow.find('a:eq(1)').click(editHandler);
+          currentRow.replaceWith(meRow);
+      });
+      opt_td.append(save);
+      opt_td.append(cancel);
+      editRow.append(opt_td);
+      meRow.replaceWith(editRow);
+
+  }
+</script>
+</body>
+</html>
